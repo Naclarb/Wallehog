@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../application/records_controller.dart';
 import '../domain/pig_growth.dart';
@@ -22,22 +23,28 @@ class PigGrowthPanel extends StatelessWidget {
             style: AppType.heading,
           ),
           const SizedBox(height: 8),
-          Text(pigBond(growth.choices), textAlign: TextAlign.center),
+          Text(
+            tr(context, pigBond(growth.choices)),
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 12),
           Text(
-            '已经做了 ${growth.choices} 次好选择',
+            tr(context, '已经做了 {0} 次好选择', [growth.choices]),
             style: const TextStyle(color: mutedInk),
           ),
           const SizedBox(height: 10),
           LinearProgressIndicator(
             value: growth.fraction,
-            semanticsLabel: '小猪成长进度',
+            semanticsLabel: tr(context, '小猪成长进度'),
           ),
           const SizedBox(height: 8),
           Text(
             growth.nextThreshold == null
-                ? 'Lv.5 已满级，继续收藏你的小确幸'
-                : '再有 ${growth.remaining} 次好选择，遇见 Lv.${growth.level + 1}',
+                ? tr(context, 'Lv.5 已满级，继续收藏你的小确幸')
+                : tr(context, '再有 {0} 次好选择，遇见 Lv.{1}', [
+                    growth.remaining,
+                    growth.level + 1,
+                  ]),
             key: const Key('pigGrowthProgress'),
             textAlign: TextAlign.center,
           ),

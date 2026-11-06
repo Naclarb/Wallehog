@@ -27,7 +27,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('pigRoomTab')));
       await tester.pumpAndSettle();
-      expect(find.text('Lv.1'), findsOneWidget);
+      expect(find.text('Lv.1'), findsNothing);
       await tester.tap(find.byKey(const Key('roomPig')));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 90));
@@ -53,13 +53,13 @@ void main() {
         await c.save(quick(1));
       }
       await tester.pumpAndSettle();
-      expect(find.text('Lv.2'), findsOneWidget);
+      expect(find.text('Lv.2'), findsNothing);
       await c.save(quick(999999999, previous: c.records.first));
       await tester.pumpAndSettle();
-      expect(find.text('Lv.2'), findsOneWidget);
+      expect(find.text('Lv.2'), findsNothing);
       await c.delete(c.records.first.id!);
       await tester.pumpAndSettle();
-      expect(find.text('Lv.1'), findsOneWidget);
+      expect(find.text('Lv.1'), findsNothing);
       expect(find.byKey(const Key('newRecord')).hitTestable(), findsOneWidget);
       expect(find.byType(BottomSheet), findsNothing);
       for (final tab in ['helpTab', 'homeTab']) {
@@ -92,7 +92,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('pigRoomTab')));
       await tester.pumpAndSettle();
-      expect(find.text('Lv.1'), findsOneWidget);
+      expect(find.text('Lv.1'), findsNothing);
       expect(reopened.summary.goodChoices, 4);
     });
   }

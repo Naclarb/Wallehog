@@ -11,10 +11,22 @@ Updated: 2026-11-06.
 - The follow-up implements icon-only binding, an image picker limited to existing wishes, a crossed-circle unbound tile, and wish-editor inputs without redundant placeholder text. Current [Flutter preview](screenshots/wish-binding-icons.png) was visually checked. Figma is only partially updated; the user authorized code-first completion after quota exhaustion. Analysis is clean and all 200 tests pass for this iteration.
 - This is a local checkpoint on `codex/wish-binding-review`, not completed delivery. Design annotations and explicit review completion are pending; no APK build, device acceptance, or ordinary-app installation has been performed. The main working tree has concurrent language-switch work, which was preserved and excluded from this checkpoint. No remote is configured, so no push was performed.
 
+## Interface language
+
+- Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
+- The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
+- Delivery branch: `codex/language-switch`, feature commit `d5faaba`. Integration target is not established; wish-binding work remains unfinished in the shared working tree. Local integration is pending target confirmation and the other task's completion. No remote is configured.
+
+## Home pig label adjustment
+
+- Removed the level label beneath the home pig while preserving its position, tap response, and growth rules.
+- This adjustment is included in the ordinary-app language delivery. The earlier Figma quota block was bypassed with the user's authorized local preview workflow.
+- Latest analysis and growth/coin-flow checks pass. Five older `pig_room_test.dart` cases still expect the removed level label; the full-suite limitation is recorded in the language verification.
+
 ## Product and current work
 
-- The user has declared the MVP complete. The current follow-up is the wish binding fix described above. The public README still labels distribution as Pre-alpha; MVP completion does not change that release label.
-- The local application version is `0.5.0+5` in `pubspec.yaml`. This repository setup creates no new application version or device installation.
+- The user has declared the MVP complete. The latest feature delivery adds English language switching; the public distribution label remains Pre-alpha.
+- The local application version remains `0.5.0+5` in `pubspec.yaml`; the language update was delivered in place without publishing a release.
 - Product decisions and implementation evidence remain in the documents linked from the [index](README.md). Their historical validation results have not been rerun in this task.
 
 ## Layout review
@@ -33,5 +45,6 @@ Updated: 2026-11-06.
 
 - The user selected the `Figma` connection and requested review of all primary pages inside Codex before physical-device acceptance.
 - [Review file](https://www.figma.com/design/CE0fcYnBBxRVcE1ORXw08P), page `01 · 全部主要页面 · 待批注`, contains 17 editable 390 × 844 phone frames: home and empty state, compact/expanded entry, record editing and failure, wish creation/editing, swipe/delete/clear states, help, backup preview/confirmation, recovery, and legacy record editing. Frame numbers identify feedback targets.
-- This is a source-based layout reference with fictional data, not a running Flutter prototype or pixel-identical capture. Existing wish assets are retained; the pig uses a simplified source-based vector reference. Representative compositions were visually checked, with icon contrast and alignment corrected. That earlier layout review did not change application code.
+- This is a source-based layout reference with fictional data, not a running Flutter prototype or pixel-identical capture. Existing wish assets are retained; the pig uses a simplified source-based vector reference. Representative compositions were visually checked, with icon contrast and alignment corrected. Application code is unchanged.
 - User annotations and explicit completion of design review are pending. Use the ordinary Design file's **Comment** tool, not paid annotations or Dev Mode. In the Codex browser, the file showed **Free** and the **Comments** panel opened without an upgrade prompt. The Figma connector does not expose comment retrieval; the browser comments panel can be inspected instead. No APK build, installation, or physical-device acceptance has been performed for this review.
+- The focused home-pig widget test passed: no level label, pig retained, and tap response available.

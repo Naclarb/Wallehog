@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import '../../app/design_tokens.dart';
@@ -36,7 +37,7 @@ class _RecentSavingsState extends State<RecentSavings> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Tooltip(
-                  message: '记录',
+                  message: tr(context, '记录'),
                   child: Icon(
                     Icons.receipt_long_rounded,
                     size: 20,
@@ -50,7 +51,7 @@ class _RecentSavingsState extends State<RecentSavings> {
         if (records.isEmpty)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            child: const Text('暂无记录', style: AppType.caption),
+            child: Text(tr(context, '暂无记录'), style: AppType.caption),
           ),
         for (final record in records)
           _SwipeRecord(
@@ -112,8 +113,8 @@ class _RecentSavingsState extends State<RecentSavings> {
                   Flexible(
                     child: Text(
                       record.savedMinor == 0
-                          ? '一次好选择'
-                          : '+¥${formatMoney(record.savedMinor)}',
+                          ? tr(context, '一次好选择')
+                          : '+${currencySymbol(context)}${formatMoney(record.savedMinor)}',
                       style: AppType.recordAmount.copyWith(
                         color: moneyColor(context),
                       ),
@@ -181,8 +182,8 @@ class _SwipeRecordState extends State<_SwipeRecord> {
       return Semantics(
         customSemanticsActions: widget.enabled
             ? {
-                const CustomSemanticsAction(label: '编辑记录'): _edit,
-                const CustomSemanticsAction(label: '删除记录'): _delete,
+                CustomSemanticsAction(label: tr(context, '编辑记录')): _edit,
+                CustomSemanticsAction(label: tr(context, '删除记录')): _delete,
               }
             : null,
         child: ClipRRect(
@@ -200,9 +201,9 @@ class _SwipeRecordState extends State<_SwipeRecord> {
                       child: InkWell(
                         key: ValueKey('deleteSaving_${widget.id}'),
                         onTap: _delete,
-                        child: const Center(
+                        child: Center(
                           child: Tooltip(
-                            message: '删除记录',
+                            message: tr(context, '删除记录'),
                             child: Icon(
                               Icons.delete_outline_rounded,
                               color: deepPink,

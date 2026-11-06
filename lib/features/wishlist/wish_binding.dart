@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/design_tokens.dart';
+import '../../app/app_strings.dart';
 import '../../domain/wishlist_goal.dart';
 
 class WishBindingButton extends StatelessWidget {
@@ -19,13 +20,13 @@ class WishBindingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final goal = goals.where((goal) => goal.id == goalId).firstOrNull;
     return Semantics(
-      label: '绑定心愿，${goal?.name ?? '未绑定'}',
+      label: '${tr(context, '绑定心愿')}，${goal?.name ?? tr(context, '未绑定')}',
       button: true,
       enabled: onPressed != null,
       onTap: onPressed,
       child: ExcludeSemantics(
         child: Tooltip(
-          message: '绑定心愿',
+          message: tr(context, '绑定心愿'),
           child: Material(
             color: softPink,
             borderRadius: BorderRadius.circular(AppRadius.control),
@@ -89,7 +90,7 @@ Future<int?> showWishBindingPicker(
                 const Icon(Icons.link_rounded, color: deepPink),
                 const Spacer(),
                 IconButton(
-                  tooltip: '取消',
+                  tooltip: tr(context, '取消'),
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close_rounded, color: mutedInk),
                 ),
@@ -106,9 +107,9 @@ Future<int?> showWishBindingPicker(
                       width: (area.maxWidth - 24) / 4,
                       height: 72,
                       child: Tooltip(
-                        message: goal?.name ?? '未绑定',
+                        message: goal?.name ?? tr(context, '未绑定'),
                         child: Semantics(
-                          label: goal?.name ?? '未绑定',
+                          label: goal?.name ?? tr(context, '未绑定'),
                           selected: selectedId == goal?.id,
                           button: true,
                           child: Material(

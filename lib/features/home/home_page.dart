@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import '../../shared/sound_service.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -148,7 +149,7 @@ class _HomePageState extends State<HomePage>
           levelUp: levelUp,
           moment: moment,
           reaction: added.single.id!.isEven ? 1 : 0,
-          amount: '+¥${formatMoney(amount!)}',
+          amount: '+${currencySymbol(context)}${formatMoney(amount!)}',
           message: _encouragements.pick(scene),
         ),
       );
@@ -334,7 +335,7 @@ class _HomePageState extends State<HomePage>
         curve: Curves.easeOutCubic,
         child: IconButton.filled(
           key: const Key('newRecord'),
-          tooltip: '记录节省',
+          tooltip: tr(context, '记录节省'),
           style: IconButton.styleFrom(
             minimumSize: const Size(48, 48),
             maximumSize: const Size(48, 48),
@@ -368,7 +369,7 @@ class _HomePageState extends State<HomePage>
         child: Row(
           children: [
             _navItem(
-              '首页',
+              tr(context, '首页'),
               Icons.home_outlined,
               const Key('homeTab'),
               _home,
@@ -376,7 +377,7 @@ class _HomePageState extends State<HomePage>
             ),
             Expanded(child: Center(child: _addButton())),
             _navItem(
-              '帮助',
+              tr(context, '帮助'),
               Icons.help_outline_rounded,
               const Key('helpTab'),
               _help,
@@ -426,11 +427,11 @@ class _HomePageState extends State<HomePage>
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       if (!controller.loaded) ...[
-                        Text(controller.error ?? '正在唤醒小猪…'),
+                        Text(tr(context, controller.error ?? '正在唤醒小猪…')),
                         if (!controller.busy)
                           TextButton(
                             onPressed: controller.load,
-                            child: const Text('重新读取'),
+                            child: Text(tr(context, '重新读取')),
                           ),
                       ] else
                         LayoutBuilder(
@@ -459,21 +460,21 @@ class _HomePageState extends State<HomePage>
                                 final confirmed = await showDialog<bool>(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: const Text('删除这笔记录？'),
+                                    title: Text(tr(context, '删除这笔记录？')),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(28),
                                     ),
-                                    content: const Text('删除后无法撤销。'),
+                                    content: Text(tr(context, '删除后无法撤销。')),
                                     actions: [
                                       IconButton(
-                                        tooltip: '取消',
+                                        tooltip: tr(context, '取消'),
                                         onPressed: () =>
                                             Navigator.pop(context, false),
                                         icon: const Icon(Icons.close_rounded),
                                       ),
                                       IconButton(
                                         key: const Key('confirmDeleteSaving'),
-                                        tooltip: '确认删除',
+                                        tooltip: tr(context, '确认删除'),
                                         onPressed: () =>
                                             Navigator.pop(context, true),
                                         icon: const Icon(
@@ -563,7 +564,7 @@ class _HomePageState extends State<HomePage>
                         ),
                       if (controller.error != null && controller.loaded)
                         Text(
-                          controller.error!,
+                          tr(context, controller.error!),
                           style: const TextStyle(color: deepPink),
                         ),
                     ],
@@ -580,7 +581,7 @@ class _HomePageState extends State<HomePage>
   Widget _savedMoney() => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text('累计节省', style: AppType.caption),
+      Text(tr(context, '累计节省'), style: AppType.caption),
       const SizedBox(height: 4),
       Align(
         alignment: Alignment.centerLeft,
@@ -593,7 +594,7 @@ class _HomePageState extends State<HomePage>
                 : const Duration(milliseconds: 700),
             curve: Curves.easeOutCubic,
             builder: (_, value, _) => Text(
-              '¥${formatMoney(value.round())}',
+              '${currencySymbol(context)}${formatMoney(value.round())}',
               key: const Key('savedMoney'),
               style: AppType.savedAmount,
             ),

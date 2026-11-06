@@ -20,6 +20,22 @@ class MainActivity : FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         sounds["coin"] = soundPool.load(this, dev.wallehog.wallehog.R.raw.coin, 1)
         sounds["celebrate"] = soundPool.load(this, dev.wallehog.wallehog.R.raw.celebrate, 1)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dev.wallehog/settings")
+            .setMethodCallHandler { call, result ->
+                val prefs = getSharedPreferences("wallehog_settings", MODE_PRIVATE)
+                when (call.method) {
+                    "getLanguage" -> result.success(prefs.getString("language", "zh_CN"))
+                    "setLanguage" -> {
+                        val language = call.arguments as? String
+                        if (language != "en" && language != "zh_CN") {
+                            result.error("language", "Unsupported language", null)
+                        } else {
+                            result.success(prefs.edit().putString("language", language).commit())
+                        }
+                    }
+                    else -> result.notImplemented()
+                }
+            }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dev.wallehog/sound")
             .setMethodCallHandler { call, result ->
                 val prefs = getSharedPreferences("wallehog_sound", MODE_PRIVATE)

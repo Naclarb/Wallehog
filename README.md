@@ -4,7 +4,7 @@
 
 A small, offline Android companion for mindful spending choices. Tap **+ → enter an amount → confirm**, watch your wish progress, and share a little moment with your piggy bank.
 
-**Pre-alpha · Android APK only.** Features and appearance may change. The current interface is primarily Simplified Chinese.
+**Pre-alpha · Android APK only.** Features and appearance may change. Choose Simplified Chinese or English from **Help → Language**.
 
 Wallehog records savings you report yourself. These amounts are **not deposits, bank balances, or spendable funds**. No mandatory budgets or categories, no streak penalties, no accounts, ads, banking connections, or telemetry. Records stay in local SQLite; you can edit, delete, export, and restore them.
 

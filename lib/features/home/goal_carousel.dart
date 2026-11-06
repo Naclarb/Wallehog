@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../domain/wishlist_goal.dart';
@@ -151,7 +152,11 @@ class _GoalCarouselState extends State<GoalCarousel>
         }
 
         final width = area.maxWidth - 16;
-        final captionHeight = height('已积累 100%', AppType.caption, width - 36);
+        final captionHeight = height(
+          tr(context, '已积累 100%'),
+          AppType.caption,
+          width - 36,
+        );
         final titleHeight = c.goals
             .map(
               (g) => height(
@@ -163,7 +168,8 @@ class _GoalCarouselState extends State<GoalCarousel>
             .reduce(math.max);
         final header = math.max(
           48,
-          titleHeight + height('心愿', AppType.caption, width - 36 - 48),
+          titleHeight +
+              height(tr(context, '心愿'), AppType.caption, width - 36 - 48),
         );
         final cardHeight = math.max(
           GoalLayout.minHeight(widget.spacious),
@@ -312,7 +318,7 @@ class _GoalCarouselState extends State<GoalCarousel>
                 IconButton(
                   key: const Key('previousGoal'),
                   visualDensity: VisualDensity.compact,
-                  tooltip: '上一个心愿',
+                  tooltip: tr(context, '上一个心愿'),
                   onPressed:
                       !c.canWrite ||
                           _selecting ||
@@ -325,7 +331,7 @@ class _GoalCarouselState extends State<GoalCarousel>
                 IconButton(
                   key: const Key('nextGoal'),
                   visualDensity: VisualDensity.compact,
-                  tooltip: '下一个心愿',
+                  tooltip: tr(context, '下一个心愿'),
                   onPressed:
                       !c.canWrite ||
                           _selecting ||
@@ -338,7 +344,7 @@ class _GoalCarouselState extends State<GoalCarousel>
                 IconButton(
                   key: const Key('addGoal'),
                   visualDensity: VisualDensity.compact,
-                  tooltip: '添加心愿',
+                  tooltip: tr(context, '添加心愿'),
                   onPressed: !c.canWrite || _selecting || _from != null
                       ? null
                       : () => showGoalEditor(context, c, creating: true),

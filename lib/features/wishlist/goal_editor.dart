@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../../application/records_controller.dart';
 import '../../app/design_tokens.dart';
@@ -42,17 +43,17 @@ class _GoalEditorState extends State<_GoalEditor> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('清除心愿？'),
-        content: const Text('只清除这个心愿，所有记录仍会保留，不会转入其他心愿。'),
+        title: Text(tr(context, '清除心愿？')),
+        content: Text(tr(context, '只清除这个心愿，所有记录仍会保留，不会转入其他心愿。')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('取消'),
+            child: Text(tr(context, '取消')),
           ),
           TextButton(
             key: const Key('confirmClearGoal'),
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('清除'),
+            child: Text(tr(context, '清除')),
           ),
         ],
       ),
@@ -133,7 +134,7 @@ class _GoalEditorState extends State<_GoalEditor> {
         _name.text.trim().length > 60 ||
         amount <= 0) {
       setState(() {
-        _error = '请填写心愿名称和正数目标金额';
+        _error = tr(context, '请填写心愿名称和正数目标金额');
       });
       return;
     }
@@ -183,7 +184,7 @@ class _GoalEditorState extends State<_GoalEditor> {
                   const Icon(Icons.favorite_border_rounded, color: deepPink),
                   const Spacer(),
                   IconButton(
-                    tooltip: '关闭',
+                    tooltip: tr(context, '关闭'),
                     onPressed: _busy ? null : () => Navigator.pop(context),
                     icon: const Icon(Icons.close_rounded, color: mutedInk),
                   ),
@@ -200,9 +201,9 @@ class _GoalEditorState extends State<_GoalEditor> {
                         width: (area.maxWidth - 24) / 4,
                         height: 72,
                         child: Tooltip(
-                          message: goalStyleNames[style]!,
+                          message: tr(context, goalStyleNames[style]!),
                           child: Semantics(
-                            label: goalStyleNames[style],
+                            label: tr(context, goalStyleNames[style]!),
                             selected: _style == style,
                             button: true,
                             child: Material(
@@ -217,12 +218,18 @@ class _GoalEditorState extends State<_GoalEditor> {
                                     ? null
                                     : () => setState(() {
                                         if (_name.text.isEmpty ||
-                                            goalStyleNames.values.contains(
-                                              _name.text,
+                                            goalStyleNames.values.any(
+                                              (name) =>
+                                                  name == _name.text ||
+                                                  tr(context, name) ==
+                                                      _name.text,
                                             )) {
                                           _name.text = style == 'gift'
                                               ? ''
-                                              : goalStyleNames[style]!;
+                                              : tr(
+                                                  context,
+                                                  goalStyleNames[style]!,
+                                                );
                                         }
                                         _style = style;
                                       }),
@@ -244,7 +251,7 @@ class _GoalEditorState extends State<_GoalEditor> {
               ),
               const SizedBox(height: 20),
               Semantics(
-                label: '心愿名称',
+                label: tr(context, '心愿名称'),
                 child: TextField(
                   key: const Key('goalNameInput'),
                   controller: _name,
@@ -259,7 +266,7 @@ class _GoalEditorState extends State<_GoalEditor> {
               ),
               const SizedBox(height: 12),
               Semantics(
-                label: '目标金额，元',
+                label: tr(context, '目标金额，元'),
                 child: TextField(
                   key: const Key('goalTargetInput'),
                   controller: _target,
@@ -268,9 +275,14 @@ class _GoalEditorState extends State<_GoalEditor> {
                     decimal: true,
                   ),
                   maxLength: 128,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     counterText: '',
-                    prefixIcon: Icon(Icons.currency_yen_rounded, size: 20),
+                    prefixIcon: Icon(
+                      isEnglish(context)
+                          ? Icons.attach_money_rounded
+                          : Icons.currency_yen_rounded,
+                      size: 20,
+                    ),
                   ),
                 ),
               ),
@@ -280,7 +292,7 @@ class _GoalEditorState extends State<_GoalEditor> {
                   child: Semantics(
                     liveRegion: true,
                     child: Text(
-                      _error!,
+                      tr(context, _error!),
                       style: const TextStyle(color: deepPink),
                     ),
                   ),
@@ -291,7 +303,7 @@ class _GoalEditorState extends State<_GoalEditor> {
                   if (_editing)
                     IconButton(
                       key: const Key('clearGoal'),
-                      tooltip: '清除心愿',
+                      tooltip: tr(context, '清除心愿'),
                       onPressed: _busy || _readOnly ? null : _clear,
                       icon: const Icon(
                         Icons.delete_outline_rounded,
@@ -302,12 +314,12 @@ class _GoalEditorState extends State<_GoalEditor> {
                   IconButton.filled(
                     key: const Key('saveGoal'),
                     tooltip: _busy
-                        ? '保存中'
+                        ? tr(context, '保存中')
                         : _readOnly
-                        ? '重试读取'
+                        ? tr(context, '重试读取')
                         : _clearing
-                        ? '重试清除'
-                        : '保存心愿',
+                        ? tr(context, '重试清除')
+                        : tr(context, '保存心愿'),
                     style: IconButton.styleFrom(
                       backgroundColor: const Color(0xFFECC2D2),
                       foregroundColor: goalInk,

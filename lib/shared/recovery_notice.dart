@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../application/records_controller.dart';
 
@@ -13,11 +14,11 @@ class RecoveryNotice extends StatelessWidget {
     children: [
       Semantics(
         liveRegion: true,
-        child: Text(controller.error ?? '请重新读取最新数据后继续，不会重复提交。'),
+        child: Text(tr(context, controller.error ?? '请重新读取最新数据后继续，不会重复提交。')),
       ),
       TextButton(
         onPressed: controller.busy ? null : controller.load,
-        child: const Text('重新读取'),
+        child: Text(tr(context, '重新读取')),
       ),
     ],
   );

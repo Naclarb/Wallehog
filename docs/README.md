@@ -9,6 +9,7 @@ Start with [current status](STATUS.md). Read the detailed documents only for the
 | Question | Read |
 | --- | --- |
 | What is complete, and what remains? | [Current status](STATUS.md) |
+| How does interface language switching work? | [Interface language and verification](LANGUAGE.md) |
 | How should an agent work here? | [Project instructions and repository layout](../AGENTS.md) |
 | What is the product for? | [Product intent](INTENT.md) |
 | What behavior has been agreed? | [Requirements and decisions](PRODUCT_SPEC.md) |

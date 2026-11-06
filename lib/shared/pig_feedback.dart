@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'pig_character.dart';
@@ -48,7 +49,10 @@ class _PigFeedbackState extends State<PigFeedback> {
         child: PigCharacter(height: widget.height),
       ),
       const SizedBox(height: 2),
-      Text(_happy ? '又一个小确幸，小猪收到啦 ♡' : '把小确幸，慢慢变成大期待', style: AppType.caption),
+      Text(
+        _happy ? tr(context, '又一个小确幸，小猪收到啦 ♡') : tr(context, '把小确幸，慢慢变成大期待'),
+        style: AppType.caption,
+      ),
     ],
   );
 }

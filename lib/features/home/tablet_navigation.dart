@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../../app/design_tokens.dart';
 
@@ -49,15 +50,15 @@ class TabletNavigation extends StatelessWidget {
             destinations: [
               NavigationRailDestination(
                 icon: Icon(Icons.home_outlined, key: Key('homeTab')),
-                label: Text('首页'),
+                label: Text(tr(context, '首页')),
               ),
               NavigationRailDestination(
                 icon: primaryAction,
-                label: const Text('记录节省'),
+                label: Text(tr(context, '记录节省')),
               ),
-              const NavigationRailDestination(
+              NavigationRailDestination(
                 icon: Icon(Icons.help_outline_rounded, key: Key('helpTab')),
-                label: Text('帮助'),
+                label: Text(tr(context, '帮助')),
               ),
             ],
           ),
