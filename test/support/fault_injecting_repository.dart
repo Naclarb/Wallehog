@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:wallehog/domain/backup.dart';
 import 'package:wallehog/domain/record_repository.dart';
 import 'package:wallehog/domain/saving_record.dart';
@@ -36,8 +37,14 @@ class FaultInjectingRepository implements RecordRepository, BackupRepository {
   @override
   Future<List<SavingRecord>> readAll() => delegate.readAll();
   @override
-  Future<void> save(SavingRecord record) =>
-      _write('save', () => delegate.save(record));
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) => _write(
+    'save',
+    () => delegate.save(record, goalId: goalId, updateGoal: updateGoal),
+  );
   @override
   Future<void> delete(int id) => _write('delete', () => delegate.delete(id));
   @override

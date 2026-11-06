@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import '../../app/design_tokens.dart';
 import '../../application/records_controller.dart';
 import '../../domain/expression_parser.dart';
@@ -57,6 +59,83 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
   late final String _token =
       widget.record?.clientToken ??
       '${DateTime.now().microsecondsSinceEpoch}-${Random.secure().nextInt(1 << 32)}';
+  late int? _goalId = _initialGoalId();
+  int? _initialGoalId() {
+    if (widget.record == null) return widget.controller.goal?.id;
+    for (final goal in widget.controller.goals) {
+      if (goal.recordIds?.contains(widget.record!.id) ?? false) return goal.id;
+    }
+    return null;
+  }
+
+  String get _goalName {
+    for (final goal in widget.controller.goals) {
+      if (goal.id == _goalId) return goal.name;
+    }
+    return '未绑定';
+  }
+
+  Future<void> _chooseGoal() async {
+    if (_saving || _readOnly || !widget.controller.canWrite) return;
+    final selected = await showModalBottomSheet<int>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: pageBackground,
+      builder: (context) => SafeArea(
+        top: false,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.sizeOf(context).height * .7,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 8, 8),
+                  child: Row(
+                    children: [
+                      Expanded(child: Text('绑定心愿', style: AppType.heading)),
+                      IconButton(
+                        tooltip: '取消',
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.close_rounded),
+                      ),
+                    ],
+                  ),
+                ),
+                for (final id in [
+                  0,
+                  ...widget.controller.goals.map((g) => g.id!),
+                ])
+                  ListTile(
+                    key: Key('bindingOption_$id'),
+                    title: Text(
+                      id == 0
+                          ? '未绑定'
+                          : widget.controller.goals
+                                .firstWhere((g) => g.id == id)
+                                .name,
+                    ),
+                    selected: (_goalId ?? 0) == id,
+                    selectedTileColor: softPink,
+                    trailing: (_goalId ?? 0) == id
+                        ? const Icon(Icons.check_rounded)
+                        : null,
+                    onTap: () => Navigator.pop(context, id),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    if (mounted && selected != null && !_readOnly) {
+      setState(() => _goalId = selected == 0 ? null : selected);
+    }
+  }
+
   bool _saving = false;
   bool _details = false;
   late double _heightFraction = _preferredCalculatorFraction;
@@ -158,7 +237,11 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
           now,
           originalOccurredOn: widget.record?.occurredOn,
         );
-        success = await widget.controller.save(record);
+        success = await widget.controller.save(
+          record,
+          goalId: _goalId,
+          updateGoal: true,
+        );
         _committed = widget.controller.writeCommitted;
       } on RuleViolation catch (e) {
         setState(() {
@@ -247,7 +330,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                         children: [
                           IconButton(
                             key: const Key('advancedDetails'),
-                            tooltip: '备注与日期',
+                            tooltip: '备注、日期与心愿',
                             visualDensity: VisualDensity.compact,
                             onPressed: _saving || _readOnly
                                 ? null
@@ -494,6 +577,52 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                         }
                                       },
                               ),
+                              const SizedBox(height: 4),
+                              Material(
+                                color: softPink,
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.control,
+                                ),
+                                child: ListTile(
+                                  key: const Key('wishBinding'),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      AppRadius.control,
+                                    ),
+                                  ),
+                                  title: Row(
+                                    children: [
+                                      Text('绑定心愿', style: AppType.body),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: Text(
+                                          _goalName,
+                                          textAlign: TextAlign.end,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  trailing: const Icon(
+                                    Icons.chevron_right_rounded,
+                                  ),
+                                  onTap:
+                                      _saving ||
+                                          _readOnly ||
+                                          !widget.controller.canWrite
+                                      ? null
+                                      : _chooseGoal,
+                                ),
+                              ),
+                              if (widget.controller.goals.isEmpty)
+                                Padding(
+                                  padding: EdgeInsets.only(top: 8),
+                                  child: Text(
+                                    '暂无心愿，创建第一个心愿后自动计入。',
+                                    style: AppType.caption,
+                                  ),
+                                ),
                             ],
                             if (widget.record != null &&
                                 widget.record!.kind != DecisionKind.quick)

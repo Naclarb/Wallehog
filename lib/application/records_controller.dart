@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../domain/record_repository.dart';
 import '../domain/saving_record.dart';
 import '../domain/wishlist_goal.dart';
@@ -45,8 +46,13 @@ class RecordsController extends ChangeNotifier {
   }
 
   Future<bool> load() => _perform(_refresh);
-  Future<bool> save(SavingRecord record) =>
-      _write(() => repository.save(record));
+  Future<bool> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) => _write(
+    () => repository.save(record, goalId: goalId, updateGoal: updateGoal),
+  );
   Future<bool> delete(int id) => _write(() => repository.delete(id));
   Future<bool> createGoal(
     String name,

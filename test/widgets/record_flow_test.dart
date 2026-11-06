@@ -4,6 +4,7 @@ import 'package:wallehog/app/wallehog_app.dart';
 import 'package:wallehog/application/records_controller.dart';
 import 'package:wallehog/domain/saving_record.dart';
 import 'package:wallehog/features/entry/calculator_sheet.dart';
+
 import '../support/memory_repository.dart';
 
 Future<void> reveal(WidgetTester tester, Finder target) async {
@@ -217,8 +218,12 @@ void main() {
 
 class _FailReadAfterWrite extends MemoryRepository {
   @override
-  Future<void> save(SavingRecord record) async {
-    await super.save(record);
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
+    await super.save(record, goalId: goalId, updateGoal: updateGoal);
     failRead = true;
   }
 }

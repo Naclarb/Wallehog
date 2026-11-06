@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:wallehog/data/sqlite_record_repository.dart';
@@ -38,6 +39,7 @@ void main() {
     await old.execute(
       'INSERT INTO active_goal SELECT id,name,target_minor,start_after_id FROM goals',
     );
+    await old.execute('UPDATE active_goal SET start_after_id=1');
     await old.execute('DROP TABLE goal_selection');
     await old.execute('DROP TABLE goal_records');
     await old.execute('DROP TABLE goals');

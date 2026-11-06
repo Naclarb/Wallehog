@@ -15,7 +15,7 @@ Start with [current status](STATUS.md). Read the detailed documents only for the
 | Where does implementation belong? | [Architecture](DESIGN.md) |
 | How did the plan evolve? | [Roadmap and milestone history](ROADMAP.md) |
 
-INTENT, PRODUCT_SPEC, DESIGN, and ROADMAP are legacy Chinese documents. Their existing content is preserved; this navigation update does not translate or reinterpret their decisions. The roadmap contains historical “current” headings; use STATUS for the present handoff and verify detailed claims against the relevant decisions and evidence.
+PRODUCT_SPEC, DESIGN, and ROADMAP are legacy Chinese documents; INTENT now has English and Chinese counterparts. Their existing content is preserved; this navigation update does not translate or reinterpret their decisions. The roadmap contains historical “current” headings; use STATUS for the present handoff and verify detailed claims against the relevant decisions and evidence.
 
 ## Evidence and supporting material
 

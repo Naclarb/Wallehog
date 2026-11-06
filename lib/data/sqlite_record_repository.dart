@@ -1,5 +1,6 @@
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart';
+
 import '../domain/expression_parser.dart';
 import '../domain/record_repository.dart';
 import '../domain/saving_record.dart';
@@ -216,7 +217,11 @@ class SqliteRecordRepository
   }
 
   @override
-  Future<void> save(SavingRecord record) async {
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
     final values = <String, Object?>{
       'kind': record.kind.name,
       'description': record.description,
@@ -230,6 +235,15 @@ class SqliteRecordRepository
       'client_token': record.clientToken,
     };
     await _db.transaction((tx) async {
+      if (updateGoal &&
+          goalId != null &&
+          (await tx.query(
+            'goals',
+            where: 'id=?',
+            whereArgs: [goalId],
+          )).isEmpty) {
+        throw const RuleViolation('心愿已不存在，请重新选择');
+      }
       if (record.id == null) {
         if (record.clientToken != null) {
           final existing = await tx.query(
@@ -244,17 +258,27 @@ class SqliteRecordRepository
                 old.occurredOn != record.occurredOn) {
               throw const RuleViolation('这次选择可能已保存，请重新读取记录确认');
             }
+            if (updateGoal) {
+              final assignments = await tx.query(
+                'goal_records',
+                where: 'record_id=?',
+                whereArgs: [old.id],
+              );
+              final existingGoal = assignments.isEmpty
+                  ? null
+                  : assignments.single['goal_id'];
+              if (existingGoal != goalId) {
+                throw const RuleViolation('这次选择可能已保存，请重新读取记录确认');
+              }
+            }
             return; // 同一次保存重试，不增加记录或好选择。
           }
         }
         record.validateInputDate(_clock());
         final id = await tx.insert('saving_records', values);
-        final selected = await _selectedId(tx);
+        final selected = updateGoal ? goalId : await _selectedId(tx);
         if (selected != null) {
-          await tx.insert('goal_records', {
-            'record_id': id,
-            'goal_id': selected,
-          });
+          await _assignGoal(tx, id, selected);
         }
       } else {
         final old = await tx.query(
@@ -279,10 +303,31 @@ class SqliteRecordRepository
           whereArgs: [record.id],
         );
       }
+      if (record.id != null && updateGoal) {
+        await tx.delete(
+          'goal_records',
+          where: 'record_id=?',
+          whereArgs: [record.id],
+        );
+        if (goalId != null) await _assignGoal(tx, record.id!, goalId);
+      }
       SavingsSummary.fromRecords(
         (await tx.query('saving_records')).map(_decode),
       );
     });
+  }
+
+  // Keep the legacy lower boundary compatible with v2 backup validation.
+  Future<void> _assignGoal(
+    DatabaseExecutor tx,
+    int recordId,
+    int goalId,
+  ) async {
+    await tx.rawUpdate(
+      'UPDATE goals SET start_after_id = MIN(start_after_id, ?) WHERE id=?',
+      [recordId - 1, goalId],
+    );
+    await tx.insert('goal_records', {'record_id': recordId, 'goal_id': goalId});
   }
 
   @override
@@ -302,6 +347,11 @@ class SqliteRecordRepository
     if ((await tx.query('goals', columns: ['id'])).length >= 50) {
       throw const RuleViolation('最多保留 50 个心愿');
     }
+    final wasEmpty = (await tx.query(
+      'goals',
+      columns: ['id'],
+      limit: 1,
+    )).isEmpty;
     final sequence = await tx.rawQuery(
       "SELECT seq FROM sqlite_sequence WHERE name = 'saving_records'",
     );
@@ -317,6 +367,16 @@ class SqliteRecordRepository
       'start_after_id': goal.startAfterId,
       'style': goal.style,
     });
+    if (wasEmpty) {
+      await tx.rawUpdate(
+        'UPDATE goals SET start_after_id = MIN(start_after_id, COALESCE((SELECT MIN(id) - 1 FROM saving_records WHERE id NOT IN (SELECT record_id FROM goal_records)), start_after_id)) WHERE id=?',
+        [id],
+      );
+      await tx.rawInsert(
+        'INSERT INTO goal_records(record_id, goal_id) SELECT id, ? FROM saving_records WHERE id NOT IN (SELECT record_id FROM goal_records)',
+        [id],
+      );
+    }
     await tx.update('goal_selection', {'goal_id': id}, where: 'id=1');
   });
   @override

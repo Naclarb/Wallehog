@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wallehog/application/records_controller.dart';
 import 'package:wallehog/domain/saving_record.dart';
+
 import '../support/memory_repository.dart';
 
 void main() {
@@ -87,8 +89,12 @@ void main() {
 class _DelayedRepository extends MemoryRepository {
   final gate = Completer<void>();
   @override
-  Future<void> save(SavingRecord record) async {
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
     await gate.future;
-    await super.save(record);
+    await super.save(record, goalId: goalId, updateGoal: updateGoal);
   }
 }

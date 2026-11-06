@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:wallehog/domain/pig_growth.dart';
 import 'package:wallehog/domain/record_repository.dart';
 import 'package:wallehog/domain/saving_record.dart';
@@ -21,7 +22,9 @@ class MemoryRepository implements RecordRepository, GrowthCelebrationStore {
     id: g.id,
     name: g.name,
     targetMinor: g.targetMinor,
-    startAfterId: g.startAfterId,
+    startAfterId: assignments.entries
+        .where((e) => e.value == g.id)
+        .fold(g.startAfterId, (boundary, e) => min(boundary, e.key - 1)),
     style: g.style,
     recordIds: assignments.entries
         .where((e) => e.value == g.id)
@@ -46,7 +49,11 @@ class MemoryRepository implements RecordRepository, GrowthCelebrationStore {
   }
 
   @override
-  Future<void> save(SavingRecord record) async {
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
     if (fail) throw StateError('测试写失败');
     if (record.id == null &&
         record.clientToken != null &&
@@ -54,7 +61,12 @@ class MemoryRepository implements RecordRepository, GrowthCelebrationStore {
       return;
     }
     final id = record.id ?? ++highWater;
-    if (record.id == null && goal != null) assignments[id] = goal!.id!;
+    if (updateGoal) {
+      assignments.remove(id);
+      if (goalId != null) assignments[id] = goalId;
+    } else if (record.id == null && goal != null) {
+      assignments[id] = goal!.id!;
+    }
     highWater = max(highWater, id);
     records.removeWhere((r) => r.id == id);
     records.add(
@@ -96,6 +108,11 @@ class MemoryRepository implements RecordRepository, GrowthCelebrationStore {
       targetMinor: targetMinor,
       startAfterId: highWater,
     );
+    if (goals.isEmpty) {
+      for (final record in records) {
+        assignments.putIfAbsent(record.id!, () => goal!.id!);
+      }
+    }
     goals.add(goal!);
   }
 

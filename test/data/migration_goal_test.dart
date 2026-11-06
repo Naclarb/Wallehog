@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -72,23 +73,23 @@ void main() {
     expect(old.createdAt, now.toUtc());
     await repository.createGoal('耳机', 10000);
     var snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.startAfterId, 8);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 0);
+    expect(snapshot.goal!.startAfterId, 0);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 2000);
     await repository.save(quick(2700));
     snapshot = await repository.readSnapshot();
     expect(snapshot.records.first.id, 9);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 2700);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 4700);
     await repository.save(quick(9999, previous: old));
     snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.progressMinor(snapshot.records), 2700);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 12699);
     await repository.editGoal('新耳机', 20000);
     snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.startAfterId, 8);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 2700);
+    expect(snapshot.goal!.startAfterId, 0);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 12699);
     final latest = snapshot.records.first;
     await repository.save(quick(300, previous: latest));
     snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.progressMinor(snapshot.records), 300);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 10299);
     await repository.close();
     repository = await SqliteRecordRepository.open(
       databasePath: dbPath,
@@ -96,20 +97,20 @@ void main() {
     );
     snapshot = await repository.readSnapshot();
     expect(snapshot.goal!.name, '新耳机');
-    expect(snapshot.goal!.progressMinor(snapshot.records), 300);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 10299);
     await repository.delete(latest.id!);
     snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.progressMinor(snapshot.records), 0);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 9999);
     await repository.clearGoal();
     expect((await repository.readSnapshot()).goal, isNull);
     await repository.createGoal('下一愿望', 5000);
     snapshot = await repository.readSnapshot();
-    expect(snapshot.goal!.startAfterId, 9);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 0);
+    expect(snapshot.goal!.startAfterId, 0);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 9999);
     await repository.save(quick(200));
     snapshot = await repository.readSnapshot();
     expect(snapshot.records.first.id, 10);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 200);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 10199);
   });
   test('重试同一请求不重复记录，目标操作失败不覆盖旧状态', () async {
     final repository = await SqliteRecordRepository.open(

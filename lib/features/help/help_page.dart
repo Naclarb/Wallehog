@@ -1,5 +1,7 @@
 import '../../shared/sound_service.dart';
+
 import 'package:flutter/material.dart';
+
 import '../../app/design_tokens.dart';
 import '../../application/records_controller.dart';
 import '../backup/backup_page.dart';
@@ -45,7 +47,7 @@ class HelpPage extends StatelessWidget {
             ),
             _HelpItem(
               '心愿',
-              '上下滑动循环切换心愿，卡片下方 ＋ 添加心愿，铅笔编辑。之后的新记录只计入当前心愿，切换不转移已有进度；无心愿也能记录。名称、金额和样式可修改；清除只删除该心愿，保留记录。',
+              '上下滑动循环切换心愿，卡片下方 ＋ 添加心愿，铅笔编辑。新记录默认计入当前心愿，可在备注、日期下方修改绑定；长按记录也可改绑。无心愿也能记录，只有从没有心愿到新增第一个心愿时，未绑定记录才自动计入；已有心愿时新增或切换不会转移记录。名称、金额和样式可修改；清除只删除该心愿，保留记录。',
             ),
             _HelpItem(
               '金额的含义',

@@ -1,13 +1,15 @@
-# 产品意图
+# Product Intent
 
-更新：2026-10-23。Wallehog（电子猪）是极简的游戏化省钱习惯应用，不是要求填写预算、分类或消费明细的记账工具。
+[English](INTENT.md) · [简体中文](INTENT.zh-CN.md)
 
-核心体验是：打开 → 加号 → 输入省下的金额 → 确认 → 小猪正反馈，累计金额与心愿进度更新。一次记录应能在几秒内完成，不要求用户证明计算依据。
+Updated: 2026-11-06. Wallehog is a minimal, gamified companion for saving habits, not a bookkeeping tool that requires budgets, categories, or spending details.
 
-Saved Money 是用户自行报告的节省成果，不代表真实存款、账户余额或可用资金。Good Choices 为内部/次级成长指标，每次有效记录计一次；不抢占首页金额和 Goal 的视觉层级。
+The core experience is: open → plus → enter savings → confirm → receive a small response from the pig, with totals and wish progress updated. Recording should take seconds without requiring proof of how the amount was calculated.
 
-多个心愿帮助用户保持期待，上下滑动循环选择当前心愿。2026-10-24 用户确认：新记录只归属当前卡片，切换保留各自进度，累计节省只计算一次；新心愿从零开始。进度是激励，不证明可以买下目标物品。小猪直接陪伴在首页右上角，不再打开独立角落弹层。
+Saved Money is self-reported savings, not actual deposits, an account balance, or spendable funds. Good Choices is a secondary internal growth measure: each valid record counts once and does not compete visually with savings or the goal.
 
-消费不是失败，不羞辱用户、不惩罚断签、不要求完整流水。Android 优先、本地 SQLite、无需账号，无业务联网、遥测、广告、银行、支付或社交功能。先用静态猪和轻微原生反馈，不引入游戏引擎。
+Multiple wishes help users look forward to something; swipe vertically to cycle through the current wish. Confirmed on 2026-11-06: new records default to the current card, and binding can be changed when entering or editing a record. Switching preserves each wish's progress; total savings count each record once. Only when there are no wishes does creating the first wish automatically adopt unbound records; creating or switching wishes when others exist does not automatically transfer records. Progress is encouragement, not proof that a purchase is affordable. The pig accompanies users at the upper right of home without a separate corner overlay.
 
-开发期中文文档和界面优先；公开发布前补英文入口与语言切换，确认许可证、应用正式包名和发布签名。
+Spending is not failure: no shaming, missed-day penalties, or demands for complete transaction histories. Android first, local SQLite, no accounts, business networking, telemetry, ads, banking, payments, or social features. Start with a static pig and gentle native feedback, without a game engine.
+
+During development, prioritize Chinese documentation and UI. Before public release, add an English entry point and language switching, and confirm licensing, the final app package name, and release signing.
