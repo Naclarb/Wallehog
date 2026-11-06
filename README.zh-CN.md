@@ -28,6 +28,8 @@ flutter run
 flutter build apk --release --target-platform android-arm,android-arm64,android-x64
 ```
 
+发布构建必须配置持久签名凭据，步骤见 [Android 发布签名](docs/ANDROID_RELEASE.zh-CN.md)。缺少凭据会阻断构建。
+
 APK 位于 `build/app/outputs/flutter-apk/app-release.apk`。本机 SDK 路径由工具生成，不提交。测试使用系统 SQLite，Windows 使用 winsqlite3，其他主机需提供系统 SQLite。可复现构建环境不代表跨机器、跨签名的 APK 字节完全相同。
 
 ## 限制与许可

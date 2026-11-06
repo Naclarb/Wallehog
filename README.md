@@ -30,6 +30,8 @@ flutter run
 flutter build apk --release --target-platform android-arm,android-arm64,android-x64
 ```
 
+Release builds require persistent signing credentials; follow [Android release signing](docs/ANDROID_RELEASE.md). Missing credentials block the build.
+
 APK output: `build/app/outputs/flutter-apk/app-release.apk`. Local SDK paths are generated on your machine and must not be committed. Tests use system SQLite; Windows uses `winsqlite3`, and other hosts need an available system SQLite library. Reproducible setup does not imply byte-identical APKs across signing keys and machines.
 
 ## Limitations and license

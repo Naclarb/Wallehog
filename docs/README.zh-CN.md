@@ -12,6 +12,7 @@
 | agent 应该怎样工作？ | [项目规则与目录职责](../AGENTS.zh-CN.md) |
 | 产品解决什么问题？ | [产品意图](INTENT.md) |
 | 已经确定了哪些行为？ | [需求与决策](PRODUCT_SPEC.md) |
+| Android APK 如何签名与发布？ | [Android 发布签名](ANDROID_RELEASE.zh-CN.md) |
 | 实现应该放在哪里？ | [架构说明](DESIGN.md) |
 | 计划如何演变？ | [路线图与里程碑历史](ROADMAP.md) |
 
