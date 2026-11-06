@@ -1,0 +1,39 @@
+name: wallehog
+description: 电子猪：离线记录积极消费选择，不代表实际存款。
+publish_to: none
+version: 0.5.0+5
+environment:
+  sdk: '>=3.12.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  sqflite: ^2.4.2
+  path: ^1.9.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  sqflite_common_ffi: ^2.4.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/characters/wallehog-app-icon.png
+    - assets/characters/wish-gift-v1.png
+    - assets/characters/wish-ps5-v1.png
+    - assets/characters/wish-headphones-v1.png
+    - assets/characters/wish-camera-v1.png
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito.ttf
+# 仅桌面测试使用 FFI；复用系统 SQLite，避免额外下载原生二进制。
+hooks:
+  user_defines:
+    sqlite3:
+      source: system
+      name_windows: winsqlite3
+

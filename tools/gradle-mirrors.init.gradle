@@ -1,0 +1,23 @@
+if (System.getenv('WALLEHOG_BUILD_MIRRORS') == '1') {
+    beforeSettings { settings ->
+        settings.pluginManagement.repositories {
+            maven { url 'https://maven.aliyun.com/repository/google' }
+            maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+            maven { url 'https://maven.aliyun.com/repository/public' }
+        }
+        settings.dependencyResolutionManagement.repositories {
+            maven { url 'https://maven.aliyun.com/repository/google' }
+            maven { url 'https://maven.aliyun.com/repository/public' }
+            maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        }
+    }
+    allprojects {
+        if (rootDir.absolutePath == System.getenv('WALLEHOG_ANDROID_DIR')) {
+            repositories {
+                maven { url 'https://maven.aliyun.com/repository/google' }
+                maven { url 'https://maven.aliyun.com/repository/public' }
+                maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+            }
+        }
+    }
+}
