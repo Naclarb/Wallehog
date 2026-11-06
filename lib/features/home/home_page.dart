@@ -227,9 +227,12 @@ class _HomePageState extends State<HomePage>
                         final maxX = math.max(0.0, area.maxWidth - 84);
                         final minY = math.min(
                           safeTop,
-                          math.max(0.0, area.maxHeight - 78),
+                          math.max(0.0, area.maxHeight - InlinePig.height),
                         );
-                        final maxY = math.max(minY, area.maxHeight - 78);
+                        final maxY = math.max(
+                          minY,
+                          area.maxHeight - InlinePig.height,
+                        );
                         final initialX = tablet
                             ? math.max(0.0, area.maxWidth - 116)
                             : math.max(0.0, area.maxWidth - 104);
@@ -408,7 +411,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(height: 78),
+                    const SizedBox(height: InlinePig.height),
                     SizedBox(height: tablet ? 24 : 6),
                   ],
                 ),

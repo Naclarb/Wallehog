@@ -13,6 +13,7 @@ Updated: 2026-11-06.
 ## Home pig label adjustment
 
 - Removed the level label beneath the home pig while preserving its position, tap response, and growth rules.
+- Follow-up: reduced the pig box and home header reservation from 78dp to the pig's 62dp height, and aligned drag bounds with that height. Formatting, static analysis and all 7 focused pig/growth/coin-flow tests passed, including matching the container bottom to the pig bounds. Visual review and device delivery remain pending for this follow-up.
 - This adjustment is included in the ordinary-app language delivery. The earlier Figma quota block was bypassed with the user's authorized local preview workflow.
 - Latest analysis and growth/coin-flow checks pass. Five older `pig_room_test.dart` cases still expect the removed level label; the full-suite limitation is recorded in the language verification.
 
