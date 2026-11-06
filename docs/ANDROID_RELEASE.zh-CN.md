@@ -40,3 +40,5 @@ python -m unittest discover -s tools -p test_verify_apk.py
 - 使用相同签名配置单独构建的 `.uitest` release 在连接的 CGL-W00 上通过首次安装、`adb install -r` 和两次冷启动。日常安装保留原签名及数据；旧证书不同，无法安全覆盖交付新签名正式包，该交付仍待完成。
 - 持久私钥及凭据保存在 `C:/Users/12113/.android/wallehog-release`，仅本机 Windows 用户和 SYSTEM 可访问。Git 中没有私密材料，仍需独立私密备份。
 - 尚未配置 GitHub secrets，修复包未发布；完整 GitHub 模拟器及发布工作流尚未运行。本地 Git 凭据管理器没有可用 GitHub 凭据，连接器无法管理 secrets。
+
+修复已推送至开发分支 `codex/apk-signing-fix`，远程提交为 `8ca87f139c6c00c4b8b76975477f6d17c2e971a2`，见[草稿 PR #1](https://github.com/Naclarb/Wallehog/pull/1)。仅在公开仓库历史上应用发布相关文件，未推送本地其他任务改动。
