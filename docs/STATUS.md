@@ -8,7 +8,7 @@ Updated: 2026-11-06.
 
 - The 2026-11-06 clarification is implemented: only creating a wish when the wishlist is empty adopts unbound records. Additional wishes and switching do not transfer records. Entry/edit details now expose wish binding. Rules and evidence: [wish binding](WISH_BINDING.md).
 - In the isolated worktree at `C:/Users/12113/AppData/Local/Temp/wallehog-binding-review`, `flutter analyze` reports no issues and all 200 tests pass, including 10 new binding regressions. Formatting and diff checks passed. SQLite v4 and backup v2 remain compatible; no dependency was added.
-- Figma frames [18–21](https://www.figma.com/design/CE0fcYnBBxRVcE1ORXw08P?node-id=12-12) are ready for ordinary free Design comments. The browser editor repaired the picker overlay after the Starter MCP quota was exhausted. Final composition was exported and visually checked; empty-wishlist background is simplified.
+- The follow-up implements icon-only binding, an image picker limited to existing wishes, a crossed-circle unbound tile, and wish-editor inputs without redundant placeholder text. Current [Flutter preview](screenshots/wish-binding-icons.png) was visually checked. Figma is only partially updated; the user authorized code-first completion after quota exhaustion. Analysis is clean and all 200 tests pass for this iteration.
 - This is a local checkpoint on `codex/wish-binding-review`, not completed delivery. Design annotations and explicit review completion are pending; no APK build, device acceptance, or ordinary-app installation has been performed. The main working tree has concurrent language-switch work, which was preserved and excluded from this checkpoint. No remote is configured, so no push was performed.
 
 ## Product and current work

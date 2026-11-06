@@ -189,6 +189,20 @@ void main() {
       await tester.tap(find.byKey(const Key('editGoal')));
       await tester.pumpAndSettle();
       expect(find.text('选择心愿样式'), findsNothing);
+      expect(
+        tester
+            .widget<TextField>(find.byKey(const Key('goalNameInput')))
+            .decoration!
+            .hintText,
+        isNull,
+      );
+      expect(
+        tester
+            .widget<TextField>(find.byKey(const Key('goalTargetInput')))
+            .decoration!
+            .hintText,
+        isNull,
+      );
       expect(find.text('保存心愿'), findsNothing);
       expect(find.byTooltip('保存心愿'), findsOneWidget);
       await tester.enterText(find.byKey(const Key('goalNameInput')), '柔软的新心愿');

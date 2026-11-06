@@ -8,7 +8,7 @@
 
 - 已实现 2026-11-06 的澄清规则：只有心愿列表为空时新增心愿才接收未绑定记录；已有心愿时新增或切换不转移记录。录入／编辑详情现提供绑定心愿入口。规则与证据见[心愿绑定](WISH_BINDING.zh-CN.md)。
 - 在独立检出 `C:/Users/12113/AppData/Local/Temp/wallehog-binding-review` 中，`flutter analyze` 无问题，全部 200 项测试通过，其中包含 10 项新增绑定回归。格式与差异检查通过。保持 SQLite v4 和备份 v2 兼容，未新增依赖。
-- Figma [第 18–21 页](https://www.figma.com/design/CE0fcYnBBxRVcE1ORXw08P?node-id=12-12)可使用普通免费的 Design 评论。Starter MCP 额度用完后，已通过浏览器编辑器修复选择浮层，最终导出构图已目视检查；空心愿背景为简化展示。
+- 后续修改已实现纯图标绑定、仅含已有心愿的图片选择、圆圈斜杠未绑定项，以及去掉重复占位提示字的心愿输入框。当前 [Flutter 预览](screenshots/wish-binding-icons.png)已目视检查。Figma 仅部分更新；额度耗尽后，用户授权先完成代码。本轮分析无问题，全部 200 项测试通过。
 - 这是 `codex/wish-binding-review` 的本地检查点，不是完整交付。待用户批注并明确确认设计评审结束；尚未构建 APK、进行真机验收或更新日常安装。主工作区并行的语言切换改动已保留，未混入此检查点。未配置远程，因此未推送。
 
 ## 产品与当前工作

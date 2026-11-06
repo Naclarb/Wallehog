@@ -252,7 +252,6 @@ class _GoalEditorState extends State<_GoalEditor> {
                   maxLength: 60,
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
-                    hintText: '心愿名称',
                     counterText: '',
                     prefixIcon: Icon(Icons.edit_outlined, size: 20),
                   ),
@@ -270,7 +269,6 @@ class _GoalEditorState extends State<_GoalEditor> {
                   ),
                   maxLength: 128,
                   decoration: const InputDecoration(
-                    hintText: '目标金额',
                     counterText: '',
                     prefixIcon: Icon(Icons.currency_yen_rounded, size: 20),
                   ),

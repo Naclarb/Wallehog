@@ -43,9 +43,17 @@ void main() {
         await tester.pumpAndSettle();
         final binding = find.byKey(const Key('wishBinding'));
         await reveal(tester, binding);
-        await reveal(tester, binding);
         await tester.tap(binding);
         await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byKey(const Key('wishBindingPicker')),
+            matching: find.byType(Text),
+          ),
+          findsNothing,
+        );
+        expect(find.byKey(const Key('bindingOption_0')), findsOneWidget);
+        expect(find.byKey(const Key('bindingOption_3')), findsNothing);
         await tester.tap(find.byKey(Key('bindingOption_$a')));
         await tester.pumpAndSettle();
         expect(c.records, isEmpty);
@@ -100,7 +108,9 @@ void main() {
       final binding = find.byKey(const Key('wishBinding'));
       await reveal(tester, binding);
       expect(
-        find.descendant(of: binding, matching: find.text('A')),
+        find.byWidgetPredicate(
+          (w) => w is Semantics && w.properties.label == '绑定心愿，A',
+        ),
         findsOneWidget,
       );
       await tester.tap(binding);
@@ -113,7 +123,9 @@ void main() {
       await tester.pumpAndSettle();
       await reveal(tester, binding);
       expect(
-        find.descendant(of: binding, matching: find.text('未绑定')),
+        find.byWidgetPredicate(
+          (w) => w is Semantics && w.properties.label == '绑定心愿，未绑定',
+        ),
         findsOneWidget,
       );
       expect(repo.assignments.values.single, a);
