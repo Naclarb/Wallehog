@@ -35,11 +35,10 @@ Keep durable agreements here and progress, version status, and delivery history 
 
 Root Flutter configuration files stay at the project root. Generated directories such as `build/`, `.dart_tool/`, `.buildlog/`, and local IDE metadata are ignored working files, not source folders to relocate or commit. This map describes responsibilities, not an exhaustive allowlist of filenames.
 
-## Task Workflow and Figma Review
+## Task Workflow
 
 - Identify the requested outcome, relevant requirements, and acceptance criteria before editing. Avoid unrelated refactors, cleanup, and dependencies for hypothetical future needs.
-- For visual or interaction design work, use the Figma plugin to prepare reviewable pages. Preserve complete screens for context and split meaningful regions and states into identifiable frames/components. Provide page or node links for user annotations. Pure logic or storage fixes do not require Figma mockups.
-- Iterate on annotations in the preview. Wait for the user's confirmation that design review is complete before final device validation; silence is not approval. If tools cannot retrieve comments, explain the limitation and work from feedback supplied by the user.
+- When design review is requested, iterate on annotations in the preview. Wait for the user's confirmation that design review is complete before final device validation; silence is not approval. If tools cannot retrieve comments, explain the limitation and work from feedback supplied by the user.
 - Carry a clearly authorized task through implementation, required checks, applicable device validation, and Git delivery. Progress updates do not end the task. Do not stop at an intermediate step or ask whether to perform an already requested next step.
 - Pause only for user interruption, required feedback/approval, or a genuine blocker such as an unavailable device or permission. Complete independent work where possible, then explain the remaining work and precise blocker. Never report partial work as complete.
 
