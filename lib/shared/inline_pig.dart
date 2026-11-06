@@ -140,12 +140,6 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
                       );
                     },
                   ),
-                  Text(
-                    'Lv.${widget.level}',
-                    key: const Key('roomLevel'),
-                    style: AppType.small.copyWith(fontSize: 10),
-                    textScaler: TextScaler.noScaling,
-                  ),
                 ],
               ),
             ),

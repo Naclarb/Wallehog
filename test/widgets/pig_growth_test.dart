@@ -41,10 +41,11 @@ void main() {
     await c.delete(record.id!);
     await tester.tap(find.byKey(const Key('pigRoomTab')));
     await tester.pumpAndSettle();
-    expect(find.text('Lv.1'), findsOneWidget);
+    expect(find.text('Lv.1'), findsNothing);
+    expect(find.byKey(const Key('roomPig')), findsOneWidget);
     await c.save(quick(1));
     await tester.pumpAndSettle();
-    expect(find.text('Lv.2'), findsOneWidget);
+    expect(find.text('Lv.2'), findsNothing);
     expect(find.byKey(const Key('levelUpCelebration')), findsNothing);
     await c.delete(c.records.first.id!);
     expect(find.byType(BottomSheet), findsNothing);
@@ -57,10 +58,8 @@ void main() {
     expect(find.byKey(const Key('depositFeedback')), findsNothing);
     await add();
     expect(reopened.summary.goodChoices, 5);
-    expect(
-      tester.widget<Text>(find.byKey(const Key('roomLevel'))).data,
-      'Lv.2',
-    );
+    expect(find.byKey(const Key('roomLevel')), findsNothing);
+    expect(find.byKey(const Key('roomPig')), findsOneWidget);
     expect(find.byKey(const Key('levelUpCelebration')), findsNothing);
     await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();
