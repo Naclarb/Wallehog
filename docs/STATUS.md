@@ -4,16 +4,22 @@
 
 Updated: 2026-11-06.
 
+## Interface language
+
+- Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
+- The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
+- Delivery branch: `codex/language-switch`. Integration target is not established; wish-binding work remains unfinished in the shared working tree. Local integration is pending target confirmation and the other task's completion. No remote is configured.
+
 ## Home pig label adjustment
 
 - Removed the level label beneath the home pig while preserving its position, tap response, and growth rules.
-- Figma synchronization is blocked by the Starter-plan MCP call limit. Design review confirmation, APK build, and ordinary-device delivery remain pending.
-- Formatting passed. Full analysis reports an unnecessary import in the existing language controller; growth and coin-flow widget tests time out during application startup.
+- This adjustment is included in the ordinary-app language delivery. The earlier Figma quota block was bypassed with the user's authorized local preview workflow.
+- Latest analysis and growth/coin-flow checks pass. Five older `pig_room_test.dart` cases still expect the removed level label; the full-suite limitation is recorded in the language verification.
 
 ## Product and current work
 
-- The user has declared the MVP complete. The latest work concerns maintainability and collaboration, not another feature milestone. The public README still labels distribution as Pre-alpha; MVP completion does not change that release label.
-- The local application version is `0.5.0+5` in `pubspec.yaml`. This repository setup creates no new application version or device installation.
+- The user has declared the MVP complete. The latest feature delivery adds English language switching; the public distribution label remains Pre-alpha.
+- The local application version remains `0.5.0+5` in `pubspec.yaml`; the language update was delivered in place without publishing a release.
 - Product decisions and implementation evidence remain in the documents linked from the [index](README.md). Their historical validation results have not been rerun in this task.
 
 ## Layout review

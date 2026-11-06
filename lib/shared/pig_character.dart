@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../character/pig_actor.dart';
 
@@ -20,7 +21,7 @@ class PigCharacter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Semantics(
-    label: '陪伴你的小猪',
+    label: tr(context, '陪伴你的小猪'),
     image: true,
     child: SizedBox(
       height: height,

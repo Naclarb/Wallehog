@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'pig_character.dart';
@@ -88,7 +89,10 @@ class _CoinDepositFeedbackState extends State<CoinDepositFeedback>
   Widget build(BuildContext context) => IgnorePointer(
     child: Semantics(
       liveRegion: true,
-      label: '已记录 ${widget.amount}，${widget.message}',
+      label: tr(context, '已记录 {0}，{1}', [
+        widget.amount,
+        tr(context, widget.message),
+      ]),
       child: ExcludeSemantics(
         child: SizedBox.expand(
           key: _canvas,
@@ -159,9 +163,9 @@ class _CoinDepositFeedbackState extends State<CoinDepositFeedback>
                                 ),
                               ],
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                '¥',
+                                currencySymbol(context),
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w800,
@@ -209,19 +213,19 @@ class _CoinDepositFeedbackState extends State<CoinDepositFeedback>
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  '已记录 ${widget.amount}',
+                                  tr(context, '已记录 {0}', [widget.amount]),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 if (widget.moment.label != null)
                                   Text(
-                                    widget.moment.label!,
+                                    tr(context, widget.moment.label!),
                                     key: const Key('depositMoment'),
                                   ),
                                 if (widget.levelUp)
                                   Text(
-                                    '升级啦！Lv.${widget.level}',
+                                    tr(context, '升级啦！Lv.{0}', [widget.level]),
                                     key: const Key('levelUpCelebration'),
                                   ),
                                 Text(
@@ -236,7 +240,7 @@ class _CoinDepositFeedbackState extends State<CoinDepositFeedback>
                                   opacity: reduced
                                       ? 1
                                       : ((ms - 550) / 180).clamp(0.0, 1.0),
-                                  child: Text(widget.message),
+                                  child: Text(tr(context, widget.message)),
                                 ),
                               ],
                             ),

@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../app/design_tokens.dart';
@@ -75,9 +76,9 @@ class GoalCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('心愿', style: AppType.caption),
+                      Text(tr(context, '心愿'), style: AppType.caption),
                       Text(
-                        goal?.name ?? '给小猪一个期待',
+                        goal?.name ?? tr(context, '给小猪一个期待'),
                         style: AppType.heading.copyWith(
                           fontSize: 18,
                           color: goalInk,
@@ -89,7 +90,9 @@ class GoalCard extends StatelessWidget {
                 IconButton(
                   key: active ? const Key('editGoal') : null,
                   onPressed: onEdit,
-                  tooltip: goal == null ? '创建心愿' : '编辑心愿',
+                  tooltip: goal == null
+                      ? tr(context, '创建心愿')
+                      : tr(context, '编辑心愿'),
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white.withValues(alpha: .38),
                   ),
@@ -104,8 +107,8 @@ class GoalCard extends StatelessWidget {
             SizedBox(height: GoalLayout.topGap(spacious)),
             Semantics(
               label: goal == null
-                  ? '尚未设置心愿'
-                  : '心愿激励进度 ${(fraction * 100).round()}%',
+                  ? tr(context, '尚未设置心愿')
+                  : tr(context, '心愿激励进度 {0}%', [(fraction * 100).round()]),
               child: SizedBox(
                 width: GoalLayout.ring(spacious),
                 height: GoalLayout.ring(spacious),
@@ -169,8 +172,10 @@ class GoalCard extends StatelessWidget {
             if (goal != null) ...[
               Text(
                 fraction >= 1
-                    ? '心愿进度已达成'
-                    : '已积累 ${(fraction.clamp(0, 1) * 100).round()}%',
+                    ? tr(context, '心愿进度已达成')
+                    : tr(context, '已积累 {0}%', [
+                        (fraction.clamp(0, 1) * 100).round(),
+                      ]),
                 style: AppType.caption.copyWith(
                   color: goalInk,
                   fontWeight: FontWeight.w500,
@@ -180,7 +185,7 @@ class GoalCard extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  '¥${formatMoney(progressMinor)} / ¥${formatMoney(goal!.targetMinor)}',
+                  '${currencySymbol(context)}${formatMoney(progressMinor)} / ${currencySymbol(context)}${formatMoney(goal!.targetMinor)}',
                   key: active
                       ? const Key('goalProgress')
                       : ValueKey('goalProgress_${goal?.id}'),
@@ -190,7 +195,7 @@ class GoalCard extends StatelessWidget {
             ] else
               IconButton(
                 key: const Key('createGoal'),
-                tooltip: '设置心愿',
+                tooltip: tr(context, '设置心愿'),
                 onPressed: onEdit,
                 icon: const Icon(Icons.add_rounded, color: deepPink),
               ),

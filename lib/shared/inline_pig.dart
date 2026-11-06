@@ -1,3 +1,4 @@
+import '../app/app_strings.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -83,7 +84,7 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
       clipBehavior: Clip.none,
       children: [
         Semantics(
-          label: '小猪，等级 ${widget.level}，摸摸小猪',
+          label: tr(context, '小猪，等级 {0}，摸摸小猪', [widget.level]),
           button: true,
           child: GestureDetector(
             key: const Key('pigRoomTab'),
@@ -162,7 +163,7 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
                     boxShadow: const [cardShadow],
                   ),
                   child: Text(
-                    _message!,
+                    tr(context, _message!),
                     key: const Key('pigRoomBubble'),
                     style: AppType.caption.copyWith(color: ink),
                   ),

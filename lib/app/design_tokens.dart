@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_strings.dart';
 
 // Phase 2：390 × 844 为手机构图基准；金额与进度只在展示层使用这些样式。
 const pageBackground = Color(0xFFFFF9F8);
@@ -8,9 +9,7 @@ const ink = Color(0xFF302832);
 const mutedInk = Color(0xFF8D7B85);
 const positiveGreen = Color(0xFF27865B);
 Color moneyColor(BuildContext context) =>
-    Localizations.localeOf(context).languageCode == 'zh'
-    ? const Color(0xFFB83F4E)
-    : positiveGreen;
+    isEnglish(context) ? positiveGreen : const Color(0xFFB83F4E);
 
 const softPink = Color(0xFFFFEBF1);
 

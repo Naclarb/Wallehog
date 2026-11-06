@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'package:flutter/material.dart';
 import '../../application/records_controller.dart';
 import '../../domain/expression_parser.dart';
@@ -18,7 +19,7 @@ class HistoryPage extends StatelessWidget {
     listenable: controller,
     builder: (context, _) => Scaffold(
       appBar: AppBar(
-        title: const Text('选择记录'),
+        title: Text(tr(context, '选择记录')),
         automaticallyImplyLeading: !embedded,
       ),
       body: Center(
@@ -28,15 +29,15 @@ class HistoryPage extends StatelessWidget {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(controller.error ?? '正在读取…'),
+                    Text(tr(context, controller.error ?? '正在读取…')),
                     TextButton(
                       onPressed: controller.busy ? null : controller.load,
-                      child: const Text('重新读取'),
+                      child: Text(tr(context, '重新读取')),
                     ),
                   ],
                 )
               : controller.records.isEmpty
-              ? const Center(child: Text('还没有记录，从一个小选择开始。'))
+              ? Center(child: Text(tr(context, '还没有记录，从一个小选择开始。')))
               : ListView.builder(
                   padding: const EdgeInsets.all(20),
                   itemCount: controller.records.length,
@@ -49,17 +50,22 @@ class HistoryPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              record.displayTitle,
+                              record.description.isEmpty
+                                  ? tr(context, record.displayTitle)
+                                  : record.description,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '${kindLabel(record.kind)} · ${record.occurredOn}',
+                              '${tr(context, kindLabel(record.kind))} · ${record.occurredOn}',
                             ),
                             Text(
                               record.kind == DecisionKind.forgone
-                                  ? '一次值得记住的选择 · 未计金额'
-                                  : '省钱成果 +¥${formatMoney(record.savedMinor)}',
+                                  ? tr(context, '一次值得记住的选择 · 未计金额')
+                                  : tr(context, '省钱成果 +{0}{1}', [
+                                      currencySymbol(context),
+                                      formatMoney(record.savedMinor),
+                                    ]),
                             ),
                             Wrap(
                               spacing: 12,
@@ -81,7 +87,7 @@ class HistoryPage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                  child: const Text('编辑'),
+                                  child: Text(tr(context, '编辑')),
                                 ),
                                 TextButton(
                                   onPressed: controller.busy
@@ -90,9 +96,14 @@ class HistoryPage extends StatelessWidget {
                                           final confirmed = await showDialog<bool>(
                                             context: context,
                                             builder: (context) => AlertDialog(
-                                              title: const Text('删除这个选择？'),
-                                              content: const Text(
-                                                '删除后，已节省金额和好选择次数会重新计算。此操作不能撤销。',
+                                              title: Text(
+                                                tr(context, '删除这个选择？'),
+                                              ),
+                                              content: Text(
+                                                tr(
+                                                  context,
+                                                  '删除后，已节省金额和好选择次数会重新计算。此操作不能撤销。',
+                                                ),
                                               ),
                                               actions: [
                                                 TextButton(
@@ -101,7 +112,9 @@ class HistoryPage extends StatelessWidget {
                                                         context,
                                                         false,
                                                       ),
-                                                  child: const Text('保留'),
+                                                  child: Text(
+                                                    tr(context, '保留'),
+                                                  ),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
@@ -109,7 +122,9 @@ class HistoryPage extends StatelessWidget {
                                                         context,
                                                         true,
                                                       ),
-                                                  child: const Text('删除'),
+                                                  child: Text(
+                                                    tr(context, '删除'),
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -118,7 +133,7 @@ class HistoryPage extends StatelessWidget {
                                             await controller.delete(record.id!);
                                           }
                                         },
-                                  child: const Text('删除'),
+                                  child: Text(tr(context, '删除')),
                                 ),
                               ],
                             ),

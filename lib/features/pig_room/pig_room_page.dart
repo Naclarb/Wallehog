@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../app/design_tokens.dart';
@@ -51,7 +52,7 @@ class _PigRoomPageState extends State<PigRoomPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text('小猪的角落', style: AppType.heading),
+                  Text(tr(context, '小猪的角落'), style: AppType.heading),
                   const SizedBox(height: 24),
                   Container(
                     padding: const EdgeInsets.all(20),
@@ -80,7 +81,7 @@ class _PigRoomPageState extends State<PigRoomPage>
                               ),
                             ),
                             child: Text(
-                              _message,
+                              tr(context, _message),
                               key: const Key('pigRoomBubble'),
                               textAlign: TextAlign.center,
                             ),
@@ -90,7 +91,7 @@ class _PigRoomPageState extends State<PigRoomPage>
                         LayoutBuilder(
                           builder: (context, area) => Semantics(
                             button: true,
-                            label: '摸摸小猪',
+                            label: tr(context, '摸摸小猪'),
                             child: GestureDetector(
                               key: const Key('roomPig'),
                               behavior: HitTestBehavior.opaque,
@@ -118,12 +119,14 @@ class _PigRoomPageState extends State<PigRoomPage>
                         ),
                         const SizedBox(height: 12),
                         if (!widget.controller.loaded) ...[
-                          Text(widget.controller.error ?? '正在读取成长状态…'),
+                          Text(
+                            tr(context, widget.controller.error ?? '正在读取成长状态…'),
+                          ),
                           TextButton(
                             onPressed: widget.controller.busy
                                 ? null
                                 : widget.controller.load,
-                            child: const Text('重新读取'),
+                            child: Text(tr(context, '重新读取')),
                           ),
                         ] else ...[
                           Text(

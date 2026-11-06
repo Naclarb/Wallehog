@@ -1,3 +1,4 @@
+import '../../app/app_strings.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../app/design_tokens.dart';
@@ -73,12 +74,14 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
   }
 
   String get _result {
-    if (_expression.text.isEmpty) return '¥0.00';
+    if (_expression.text.isEmpty) return '${currencySymbol(context)}0.00';
     try {
       final value = evaluateMoney(_expression.text);
-      return value > 0 ? '+¥${formatMoney(value)}' : '金额需要大于零';
+      return value > 0
+          ? '+${currencySymbol(context)}${formatMoney(value)}'
+          : tr(context, '金额需要大于零');
     } on RuleViolation catch (e) {
-      return e.message;
+      return tr(context, e.message);
     }
   }
 
@@ -247,7 +250,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                         children: [
                           IconButton(
                             key: const Key('advancedDetails'),
-                            tooltip: '备注与日期',
+                            tooltip: tr(context, '备注与日期'),
                             visualDensity: VisualDensity.compact,
                             onPressed: _saving || _readOnly
                                 ? null
@@ -260,7 +263,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                           ),
                           Expanded(
                             child: Semantics(
-                              label: '调整计算器高度',
+                              label: tr(context, '调整计算器高度'),
                               value: '${(_heightFraction * 100).round()}%',
                               increasedValue:
                                   '${((_heightFraction + .1).clamp(1 / 3, .9) * 100).round()}%',
@@ -289,7 +292,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                             ),
                           ),
                           IconButton(
-                            tooltip: '关闭',
+                            tooltip: tr(context, '关闭'),
                             visualDensity: VisualDensity.compact,
                             onPressed: _saving
                                 ? null
@@ -310,7 +313,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                               children: [
                                 Expanded(
                                   child: Semantics(
-                                    label: '节省金额算式',
+                                    label: tr(context, '节省金额算式'),
                                     child: TextField(
                                       key: const Key('expression'),
                                       controller: _expression,
@@ -345,7 +348,9 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                       horizontal: 8,
                                     ),
                                     child: Text(
-                                      _amount == null ? '¥0.00' : _result,
+                                      _amount == null
+                                          ? '${currencySymbol(context)}0.00'
+                                          : _result,
                                       key: const Key('calculatorResult'),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
@@ -373,15 +378,15 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                       : _save,
                                   child: Semantics(
                                     label: _saving
-                                        ? '正在保存'
+                                        ? tr(context, '正在保存')
                                         : _readOnly
-                                        ? '重试读取已保存记录'
-                                        : '保存节省金额',
+                                        ? tr(context, '重试读取已保存记录')
+                                        : tr(context, '保存节省金额'),
                                     button: true,
                                     child: Tooltip(
                                       message: _readOnly
-                                          ? '重试读取已保存记录'
-                                          : '保存节省金额',
+                                          ? tr(context, '重试读取已保存记录')
+                                          : tr(context, '保存节省金额'),
                                       child: _saving
                                           ? const SizedBox(
                                               width: 20,
@@ -426,9 +431,9 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                           child: Text(
                                             key,
                                             semanticsLabel: key == '⌫'
-                                                ? '退格'
+                                                ? tr(context, '退格')
                                                 : key == 'C'
-                                                ? '清空'
+                                                ? tr(context, '清空')
                                                 : key,
                                             style: TextStyle(
                                               fontSize: 20,
@@ -462,8 +467,8 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                 controller: _note,
                                 enabled: !_saving && !_readOnly,
                                 maxLength: 200,
-                                decoration: const InputDecoration(
-                                  hintText: '备注',
+                                decoration: InputDecoration(
+                                  hintText: tr(context, '备注'),
                                   prefixIcon: Icon(Icons.notes_rounded),
                                   counterText: '',
                                 ),
@@ -497,10 +502,10 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                             ],
                             if (widget.record != null &&
                                 widget.record!.kind != DecisionKind.quick)
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.only(top: 8),
                                 child: Text(
-                                  '旧版记录：确认后改为直接记录金额，原比较依据不再保留。',
+                                  tr(context, '旧版记录：确认后改为直接记录金额，原比较依据不再保留。'),
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: mutedInk,
@@ -513,7 +518,7 @@ class _CalculatorSheetState extends State<CalculatorSheet> {
                                 child: Semantics(
                                   liveRegion: true,
                                   child: Text(
-                                    _error!,
+                                    tr(context, _error!),
                                     key: const Key('saveError'),
                                     style: const TextStyle(color: deepPink),
                                   ),
