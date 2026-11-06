@@ -22,4 +22,9 @@ Updated: 2026-11-06.
 - The initial commit records the current project snapshot, including source, assets, tests, documentation, tools, and promotional material. Ignored build outputs, local settings, private inputs, and experiments remain outside this snapshot.
 - The `C:/blog` parent repository and its history/index were left unchanged; its existing tracking of Wallehog remains. This independent repository starts a new history and does not import the parent history.
 - No remote is configured and no push was performed. The GitHub address in the README is reachable, but remote ownership, history reconciliation, and connection remain pending confirmation.
-- Figma is the agreed route for future visual reviews. This maintenance task does not create or claim approval of a Figma design.
+## Figma layout review
+
+- The user selected the `Figma` connection and requested review of all primary pages inside Codex before physical-device acceptance.
+- [Review file](https://www.figma.com/design/CE0fcYnBBxRVcE1ORXw08P), page `01 · 全部主要页面 · 待批注`, contains 17 editable 390 × 844 phone frames: home and empty state, compact/expanded entry, record editing and failure, wish creation/editing, swipe/delete/clear states, help, backup preview/confirmation, recovery, and legacy record editing. Frame numbers identify feedback targets.
+- This is a source-based layout reference with fictional data, not a running Flutter prototype or pixel-identical capture. Existing wish assets are retained; the pig uses a simplified source-based vector reference. Representative compositions were visually checked, with icon contrast and alignment corrected. Application code is unchanged.
+- User annotations and explicit completion of design review are pending. The available Figma tools do not expose comment retrieval; feedback may need to be supplied in chat. No APK build, installation, or physical-device acceptance has been performed for this review.
