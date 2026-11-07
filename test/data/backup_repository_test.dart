@@ -35,14 +35,14 @@ void main() {
     await repo.restoreBackup(backup);
     var snapshot = await repo.readSnapshot();
     expect(snapshot.records.map((r) => r.savedMinor), [300, 100]);
-    expect(snapshot.goal!.startAfterId, 2);
-    expect(snapshot.goal!.progressMinor(snapshot.records), 300);
+    expect(snapshot.goal!.startAfterId, 0);
+    expect(snapshot.goal!.progressMinor(snapshot.records), 400);
     await repo.save(record(400));
     snapshot = await repo.readSnapshot();
     expect(snapshot.records.first.id, 4);
     await repo.clearGoal();
     await repo.createGoal('新心愿', 1000);
-    expect((await repo.readSnapshot()).goal!.startAfterId, 4);
+    expect((await repo.readSnapshot()).goal!.startAfterId, 0);
   });
   test('恢复没有现存记录的备份仍保留历史高水位', () async {
     await repo.save(record(100));

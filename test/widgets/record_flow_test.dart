@@ -217,8 +217,12 @@ void main() {
 
 class _FailReadAfterWrite extends MemoryRepository {
   @override
-  Future<void> save(SavingRecord record) async {
-    await super.save(record);
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
+    await super.save(record, goalId: goalId, updateGoal: updateGoal);
     failRead = true;
   }
 }

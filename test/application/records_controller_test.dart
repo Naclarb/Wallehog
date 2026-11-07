@@ -87,8 +87,12 @@ void main() {
 class _DelayedRepository extends MemoryRepository {
   final gate = Completer<void>();
   @override
-  Future<void> save(SavingRecord record) async {
+  Future<void> save(
+    SavingRecord record, {
+    int? goalId,
+    bool updateGoal = false,
+  }) async {
     await gate.future;
-    await super.save(record);
+    await super.save(record, goalId: goalId, updateGoal: updateGoal);
   }
 }

@@ -2,13 +2,19 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Updated: 2026-11-06.
+Updated: 2026-11-07.
+
+## Repository synchronization
+
+- Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.
+- The user requested uploading the current working tree, including the wish-binding implementation checkpoint. Formatting (15 Dart files), `flutter analyze`, 32 focused controller/storage/migration/widget tests, and `git diff --check` passed. Design review and physical-device delivery remain pending; this source synchronization does not publish an APK or complete application acceptance.
+- Integration target: `main`, explicitly authorized by the user. The independent histories will be joined with a merge retaining the current local project tree and both commit histories. The local tree has no release workflow, so this synchronization does not run the old workflow that overwrote existing APK assets. No force push is needed.
 
 ## Interface language
 
 - Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
 - The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
-- Delivery branch: `codex/language-switch`, feature commit `d5faaba`. Integration target is not established; wish-binding work remains unfinished in the shared working tree. Local integration is pending target confirmation and the other task's completion. No remote is configured.
+- Delivery branch: `codex/language-switch`, feature commit `d5faaba`. Wish-binding acceptance remains unfinished. Default-branch integration remains pending as described above.
 
 ## Home pig label adjustment
 
@@ -34,7 +40,7 @@ Updated: 2026-11-06.
 - Wallehog now has its own Git repository at `C:/blog/vibecoding/Wallehog/.git`, on `codex/standalone-repository`. Git commands inside this project use this repository.
 - The initial commit records the current project snapshot, including source, assets, tests, documentation, tools, and promotional material. Ignored build outputs, local settings, private inputs, and experiments remain outside this snapshot.
 - The `C:/blog` parent repository and its history/index were left unchanged; its existing tracking of Wallehog remains. This independent repository starts a new history and does not import the parent history.
-- No remote is configured and no push was performed. The GitHub address in the README is reachable, but remote ownership, history reconciliation, and connection remain pending confirmation.
+- Remote connection and development-branch push were completed on 2026-11-07. The separate remote `main` history is preserved; see repository synchronization above.
 ## Figma layout review
 
 - The user selected the `Figma` connection and requested review of all primary pages inside Codex before physical-device acceptance.
