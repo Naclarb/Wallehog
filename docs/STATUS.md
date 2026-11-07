@@ -8,13 +8,13 @@ Updated: 2026-11-07.
 
 - Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.
 - The user requested uploading the current working tree, including the wish-binding implementation checkpoint. Formatting (15 Dart files), `flutter analyze`, 32 focused controller/storage/migration/widget tests, and `git diff --check` passed. Design review and physical-device delivery remain pending; this source synchronization does not publish an APK or complete application acceptance.
-- Integration target: `main`, explicitly authorized by the user. The independent histories will be joined with a merge retaining the current local project tree and both commit histories. The local tree has no release workflow, so this synchronization does not run the old workflow that overwrote existing APK assets. No force push is needed.
+- Integration target: `main`, explicitly authorized by the user. Source checkpoint `35c3448` and merge `7301599` join the independent histories, retaining the current local project tree and remote `main` commit `94d552f` as an ancestor. The merge changes no project files. The local tree has no release workflow, so this synchronization does not run the old workflow that overwrote existing APK assets. No force push is needed. Synchronization branch: `codex/repository-sync`; application acceptance remains pending independently of source integration.
 
 ## Interface language
 
 - Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
 - The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
-- Delivery branch: `codex/language-switch`, feature commit `d5faaba`. Wish-binding acceptance remains unfinished. Default-branch integration remains pending as described above.
+- Original delivery branch: `codex/language-switch`, feature commit `d5faaba`. Its source is included in the repository synchronization above. Wish-binding acceptance remains unfinished.
 
 ## Home pig label adjustment
 
