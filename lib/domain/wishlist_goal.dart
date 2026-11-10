@@ -73,7 +73,6 @@ const goalStyles = [
   'travel',
   'clothing',
   'learning',
-  'home',
 ];
 const goalStyleNames = {
   'gift': '自由心愿',
@@ -83,7 +82,6 @@ const goalStyleNames = {
   'travel': '旅行探索',
   'clothing': '服饰穿搭',
   'learning': '阅读学习',
-  'home': '舒适居家',
 };
 String goalAsset(String style) => style == 'gift'
     ? 'assets/characters/wish-gift-v1.png'

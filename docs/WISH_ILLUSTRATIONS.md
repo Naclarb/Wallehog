@@ -2,17 +2,15 @@
 
 [English](WISH_ILLUSTRATIONS.md) · [简体中文](WISH_ILLUSTRATIONS.zh-CN.md)
 
-2026-11-10. Integration target: main; development branch: codex/wish-images. Visual acceptance is pending. Do not treat this checkpoint as completed device delivery.
+2026-11-10. Branch: codex/wish-images. Integration target: main. Visual review is ongoing; device delivery, integration and push are pending. Other independent work has not been integrated.
 
-New illustrations represent categories rather than particular brands or models: suitcase for travel and holidays; sweater for clothing, personal style and wardrobe upgrades; books for reading, courses and learning; armchair for furniture, decoration and home comfort. These extend the existing four choices to eight. Existing controller, headphones, camera and gift remain unchanged. Users select an illustration explicitly and supply their own wish name and amount; names do not infer categories or prices.
+Three new representative categories extend the existing four choices to seven: suitcase for travel and holidays; sweater for clothing and personal style; books for reading, courses and learning. The user removed the sneaker and armchair during review. Existing controller, headphones, camera and gift remain unchanged. Illustration selection is explicit; users supply their own wish name and amount, without automatic category or price inference.
 
-Original PNGs were generated using the built-in ImageGen tool, copied unchanged into assets/characters, with alpha preserved. No reference image was supplied to generation. Prompts use the existing camera and gift's material and lighting description. No dependency, database migration or backup format change is required. The existing editor wraps the eight options into two rows.
+Style follows the existing crisp physical-object 3D renders, soft lighting and refined materials. Pink is optional, not a palette requirement. The revised sweater is muted slate blue, neatly arranged with level shoulders, straight sleeves and an even hem, without rumpled fabric or prominent folds.
 
-Pending: user visual feedback, final device validation and ordinary-app installation, integration and push. Other ongoing branches have not been integrated. Full prompts follow.
+Built-in ImageGen produced the original transparent PNGs, copied unchanged into assets/characters with alpha preserved. Travel and books used descriptive prompts without image inputs. The revised sweater used the existing controller, headphones and camera as style references only. No new dependencies, database migration or backup format change is required. The existing editor displays seven choices across two rows.
 
-Previous checkpoint validation (before replacing the sneaker): all four PNGs are 1254 × 1254 RGBA with genuine alpha. Dart formatting, flutter analyze, 19 focused tests, release APK build and git diff --check passed.
-
-Review update: the user requested replacing the sneaker with clothing. The new sweater uses style key clothing and label Clothing and style. The sneaker is removed from runtime assets; the earlier source checkpoint preserves its history. The new PNG is 1254 × 1254 RGBA. Formatting, analysis and 19 focused tests pass after replacement. No APK rebuild/install during this review iteration.
+Validation for the previous checkpoint: formatting, static analysis, 19 focused tests and a release APK build passed. After removing the armchair and revising the sweater, formatting, static analysis and 18 focused tests passed; no APK rebuild/install during individual review annotations. Full prompts follow.
 
 ## wish-travel-v1.png
 
@@ -23,7 +21,7 @@ Use case: stylized-concept. Asset type: Wallehog mobile savings wish-card transp
 ## wish-clothing-v1.png
 
 ```text
-undefined
+Use case: stylized-concept. Create a new Wallehog savings app wish illustration. Input images 1-3 are STYLE REFERENCES ONLY: existing controller, headphones and camera. Match their premium realistic physical-object 3D product render, crisp silhouette, restrained material detailing, soft upper-left studio lighting and clean isolated presentation; do not copy their subjects. Subject: ONE unbranded gender-neutral classic fine-knit crew-neck pullover in muted slate blue, with matching tonal ribbed collar, cuffs and hem, no pink trim. The sweater represents clothing and personal style generally. Neat product catalog display, pressed and meticulously arranged, frontal view with extremely subtle depth, straight horizontal hem, balanced level shoulders, both sleeves straight and neatly angled downward symmetrically, no bent cuffs. Smooth even body and sleeves, NO wrinkles, rumples, draped folds, sagging fabric, bunching, creases or wavy hem. Fine subtle knit texture is visible but shape is structured and tidy, not inflated or puffy. Garment empty, no mannequin, person, hanger or body. Single centered object fully visible within square canvas with 10 percent transparent margins. Actual transparent background with clean antialiasing. No text, labels, brands, logos, decorations, coins, pig, props, scenery, ground, baked drop shadow or watermark. This is a clothing category representative, not a fashion advertisement. Keep it readable as a small wish-card icon.
 ```
 
 ## wish-learning-v1.png
@@ -31,10 +29,3 @@ undefined
 ```text
 Use case: stylized-concept. Asset type: Wallehog mobile savings wish-card transparent illustration. Two beautifully bound books stacked with one slightly rotated, ivory and muted sage covers with a blush ribbon bookmark. Represents reading, courses, study and personal growth; blank covers and spines. Premium satin physical product 3D render matching the existing ivory champagne camera and blush gift assets. Soft upper-left studio lighting, delicate pink reflected light, refined tactile material, calm warm playful mood. Three-quarter view facing slightly left, centered square composition, entire object visible occupying about 78 percent of canvas with generous margins. Gently floating isolated cutout. Actual transparent background. No brand, logos, text, letters, numbers, coins, people, pig, scenery, ground plane, baked drop shadow or watermark. A representative category symbol that remains recognizable at 64px; simple clear silhouette, restrained detail. Save PNG.
 ```
-
-## wish-home-v1.png
-
-```text
-Use case: stylized-concept. Asset type: Wallehog mobile savings wish-card transparent illustration. One inviting rounded upholstered armchair, ivory soft fabric, pale wooden feet and one muted blush cushion. Represents furniture, home decoration and a comfortable living space, not a particular product. Premium satin physical product 3D render matching the existing ivory champagne camera and blush gift assets. Soft upper-left studio lighting, delicate pink reflected light, refined tactile material, calm warm playful mood. Three-quarter view facing slightly left, centered square composition, entire object visible occupying about 78 percent of canvas with generous margins. Gently floating isolated cutout. Actual transparent background. No brand, logos, text, letters, numbers, coins, people, pig, scenery, ground plane, baked drop shadow or watermark. A representative category symbol that remains recognizable at 64px; simple clear silhouette, restrained detail. Save PNG.
-```
-

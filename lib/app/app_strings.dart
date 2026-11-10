@@ -232,7 +232,6 @@ const englishMessages = <String, String>{
   '旅行探索': 'Travel and exploration',
   '服饰穿搭': 'Clothing and style',
   '阅读学习': 'Reading and learning',
-  '舒适居家': 'Home comforts',
   '耳机': 'Headphones',
   '相机': 'Camera',
   '存下一个小确幸': 'A little win saved',

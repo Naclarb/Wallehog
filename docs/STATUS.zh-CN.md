@@ -7,9 +7,9 @@
 
 ## 心愿类别图片（2026-11-10）
 
-- 分支：`codex/wish-images`；集成目标：`main`。新增旅行箱、针织衫、书本和扶手椅，分别代表旅行、服饰、学习和居家；现有四张素材不变。见[素材来源及提示词](WISH_ILLUSTRATIONS.zh-CN.md)。
-- 格式化、静态分析及 19 项心愿、界面和备份相关测试通过。此前运动鞋检查点的通用 release APK 构建通过（61.5 MB），衣服评审迭代未重复构建或安装；视觉反馈与真机交付待完成。
-- 其他独立工作尚未完成（`codex/home-widget`、`codex/wish-binding-review`、`codex/apk-signing-fix`）。此源码检查点不集成这些任务，不替换普通应用；集成与推送等待组合交付就绪。
+- 分支：`codex/wish-images`；目标：`main`。新增旅行、服饰和学习三类。用户移除运动鞋与扶手椅，要求衣服整齐无明显褶皱，并明确不限定粉色。见[来源与提示词](WISH_ILLUSTRATIONS.zh-CN.md)。
+- 视觉评审继续；此前检查点的分析、19 项测试与 release 构建通过，最新迭代格式化、分析及 18 项相关测试通过。不针对单条批注重复构建或安装 APK。
+- 真机交付、集成及推送待完成；其他独立工作尚未完成（`codex/home-widget`、`codex/wish-binding-review`、`codex/apk-signing-fix`）。
 
 ## 仓库同步
 

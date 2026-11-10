@@ -29,7 +29,6 @@ flutter:
     - assets/characters/wish-travel-v1.png
     - assets/characters/wish-clothing-v1.png
     - assets/characters/wish-learning-v1.png
-    - assets/characters/wish-home-v1.png
   fonts:
     - family: Nunito
       fonts:
