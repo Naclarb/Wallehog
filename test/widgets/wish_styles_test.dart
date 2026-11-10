@@ -6,7 +6,7 @@ import '../support/memory_repository.dart';
 import 'package:wallehog/domain/backup.dart';
 
 void main() {
-  for (final style in ['travel', 'sport', 'learning', 'home']) {
+  for (final style in ['travel', 'clothing', 'learning', 'home']) {
     testWidgets('new representative wish $style preserves a custom name', (
       tester,
     ) async {

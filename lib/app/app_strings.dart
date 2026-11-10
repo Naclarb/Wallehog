@@ -230,7 +230,7 @@ const englishMessages = <String, String>{
   '一副好耳机': 'Headphones',
   '我的相机': 'My camera',
   '旅行探索': 'Travel and exploration',
-  '运动户外': 'Sports and outdoors',
+  '服饰穿搭': 'Clothing and style',
   '阅读学习': 'Reading and learning',
   '舒适居家': 'Home comforts',
   '耳机': 'Headphones',

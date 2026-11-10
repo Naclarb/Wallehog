@@ -71,7 +71,7 @@ const goalStyles = [
   'headphones',
   'camera',
   'travel',
-  'sport',
+  'clothing',
   'learning',
   'home',
 ];
@@ -81,7 +81,7 @@ const goalStyleNames = {
   'headphones': '一副好耳机',
   'camera': '我的相机',
   'travel': '旅行探索',
-  'sport': '运动户外',
+  'clothing': '服饰穿搭',
   'learning': '阅读学习',
   'home': '舒适居家',
 };
