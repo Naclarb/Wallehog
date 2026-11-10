@@ -4,23 +4,30 @@
 
 Updated: 2026-11-10.
 
+## Wish binding delivery
+
+- First-wish adoption and icon/image binding controls are implemented. Only creation when no wishes exist adopts unbound records; additional creation/switching does not transfer records. Details and evidence: [wish binding](WISH_BINDING.md).
+- On 2026-11-06, static analysis and all 210 tests passed after language/home integration. Native Android instrumentation passed at phone and original tablet sizes. The ordinary app was updated with `adb install -r`, cold startup succeeded, and existing visible totals/progress/settings were preserved. Original display and rotation settings were restored.
+- On 2026-11-10, acceptance evidence was committed and the task was reconciled with the now-established `main` and confirmed `origin`. The task branch is `codex/wish-binding-review`; no release is published. Later pig-layout and widget changes from `main` are preserved; static analysis and all 218 tests pass for the combined source. These checks are separate from the November 6 installed APK. Figma remains deferred by user instruction.
+
+## Home-screen widget
+
+- The widget follows the application's currently selected wish. Its only entry workflow is **+ → amount keypad → Save**; wish creation/editing/switching remain in the application. Existing wish art and card colors are reused. [Scope, architecture and evidence](HOME_WIDGET.md).
+- Dart formatting, static analysis, 149 focused regressions, the final arm64 release build and native CGL-W00 widget-host acceptance passed. Background entry launches no Activity; SQLite count/amount deltas, changed-wish review, foreground entry, cancellation, English and idle worker teardown were checked in the isolated `.widgetuitest` package. Phone display settings were restored.
+- The ordinary installation was updated with `adb install -r` and cold startup confirmed. No data clearing, migration, dependency addition or release publication. Native-host captures use fictional data; placement/resizing in individual home-screen launchers and large-font behavior remain outside the verified coverage. Add the widget using the home screen's widget picker.
+- Source branch: `codex/home-widget`; integration target: `main`. Earlier wish-binding/design-review items below retain their existing status.
+
 ## Repository synchronization
 
 - Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.
 - The user requested uploading the current working tree, including the wish-binding implementation checkpoint. Formatting (15 Dart files), `flutter analyze`, 32 focused controller/storage/migration/widget tests, and `git diff --check` passed. Design review and physical-device delivery remain pending; this source synchronization does not publish an APK or complete application acceptance.
 - Integration target: `main`, explicitly authorized by the user. Source checkpoint `35c3448` and merge `7301599` join the independent histories, retaining the current local project tree and remote `main` commit `94d552f` as an ancestor. The merge changes no project files. The local tree has no release workflow, so this synchronization does not run the old workflow that overwrote existing APK assets. No force push is needed. Synchronization branch: `codex/repository-sync`; application acceptance remains pending independently of source integration.
 
-## Wish binding delivery
-
-- First-wish adoption and icon/image binding controls are implemented. Only creation when no wishes exist adopts unbound records; additional creation/switching does not transfer records. Details and evidence: [wish binding](WISH_BINDING.md).
-- On 2026-11-06, static analysis and all 210 tests passed after language/home integration. Native Android instrumentation passed at phone and original tablet sizes. The ordinary app was updated with `adb install -r`, cold startup succeeded, and existing visible totals/progress/settings were preserved. Original display and rotation settings were restored.
-- On 2026-11-10, acceptance evidence was committed and the task was reconciled with the now-established `main` and confirmed `origin`. The task branch is `codex/wish-binding-review`; no release is published. Later pig-layout changes from `main` are preserved and checked separately from the November 6 installed APK. Figma remains deferred by user instruction.
-
 ## Interface language
 
 - Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
 - The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
-- Original delivery branch: `codex/language-switch`, feature commit `d5faaba`. Its source is included in the repository synchronization above. Wish-binding acceptance is recorded above.
+- Original delivery branch: `codex/language-switch`, feature commit `d5faaba`. Its source is included in the repository synchronization above. Wish-binding acceptance remains unfinished.
 
 ## Home pig label adjustment
 
