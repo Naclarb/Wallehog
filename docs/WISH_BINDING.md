@@ -2,7 +2,7 @@
 
 [English](WISH_BINDING.md) · [简体中文](WISH_BINDING.zh-CN.md)
 
-Updated: 2026-11-06. Implementation checkpoint; design review and device delivery remain pending.
+Updated: 2026-11-10. Device acceptance and ordinary-app delivery completed on 2026-11-06; source acceptance records were reconciled on 2026-11-10.
 
 ## Confirmed behavior
 

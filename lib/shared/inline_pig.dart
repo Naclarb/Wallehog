@@ -8,6 +8,8 @@ import 'pig_character.dart';
 import '../character/pig_actor.dart';
 
 class InlinePig extends StatefulWidget {
+  static const height = 62.0;
+
   const InlinePig({
     super.key,
     required this.level,
@@ -79,7 +81,7 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => SizedBox(
     width: 84,
-    height: 78,
+    height: InlinePig.height,
     child: Stack(
       clipBehavior: Clip.none,
       children: [
@@ -93,7 +95,7 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
             child: SizedBox(
               key: const Key('roomPig'),
               width: 84,
-              height: 78,
+              height: InlinePig.height,
               child: Column(
                 children: [
                   AnimatedBuilder(
@@ -122,7 +124,7 @@ class _InlinePigState extends State<InlinePig> with TickerProviderStateMixin {
                           child: SizedBox(
                             key: widget.imageKey,
                             width: 80,
-                            height: 62,
+                            height: InlinePig.height,
                             child: PigCharacterView(
                               action: _flyaway.isAnimating
                                   ? PigAction.flyaway

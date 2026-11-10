@@ -2,24 +2,30 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Updated: 2026-11-06.
+Updated: 2026-11-10.
 
-## Wish binding fix — review checkpoint
+## Repository synchronization
 
-- The 2026-11-06 clarification is implemented: only creating a wish when the wishlist is empty adopts unbound records. Additional wishes and switching do not transfer records. Entry/edit details now expose wish binding. Rules and evidence: [wish binding](WISH_BINDING.md).
-- In the isolated worktree at `C:/Users/12113/AppData/Local/Temp/wallehog-binding-review`, `flutter analyze` reports no issues and all 200 tests pass, including 10 new binding regressions. Formatting and diff checks passed. SQLite v4 and backup v2 remain compatible; no dependency was added.
-- The follow-up implements icon-only binding, an image picker limited to existing wishes, a crossed-circle unbound tile, and wish-editor inputs without redundant placeholder text. Current [Flutter preview](screenshots/wish-binding-icons.png) was visually checked. Figma is only partially updated; the user authorized code-first completion after quota exhaustion. Analysis is clean and all 200 tests pass for this iteration.
-- This is a local checkpoint on `codex/wish-binding-review`, not completed delivery. Design annotations and explicit review completion are pending; no APK build, device acceptance, or ordinary-app installation has been performed. The main working tree has concurrent language-switch work, which was preserved and excluded from this checkpoint. No remote is configured, so no push was performed.
+- Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.
+- The user requested uploading the current working tree, including the wish-binding implementation checkpoint. Formatting (15 Dart files), `flutter analyze`, 32 focused controller/storage/migration/widget tests, and `git diff --check` passed. Design review and physical-device delivery remain pending; this source synchronization does not publish an APK or complete application acceptance.
+- Integration target: `main`, explicitly authorized by the user. Source checkpoint `35c3448` and merge `7301599` join the independent histories, retaining the current local project tree and remote `main` commit `94d552f` as an ancestor. The merge changes no project files. The local tree has no release workflow, so this synchronization does not run the old workflow that overwrote existing APK assets. No force push is needed. Synchronization branch: `codex/repository-sync`; application acceptance remains pending independently of source integration.
+
+## Wish binding delivery
+
+- First-wish adoption and icon/image binding controls are implemented. Only creation when no wishes exist adopts unbound records; additional creation/switching does not transfer records. Details and evidence: [wish binding](WISH_BINDING.md).
+- On 2026-11-06, static analysis and all 210 tests passed after language/home integration. Native Android instrumentation passed at phone and original tablet sizes. The ordinary app was updated with `adb install -r`, cold startup succeeded, and existing visible totals/progress/settings were preserved. Original display and rotation settings were restored.
+- On 2026-11-10, acceptance evidence was committed and the task was reconciled with the now-established `main` and confirmed `origin`. The task branch is `codex/wish-binding-review`; no release is published. Later pig-layout changes from `main` are preserved and checked separately from the November 6 installed APK. Figma remains deferred by user instruction.
 
 ## Interface language
 
 - Help now offers Simplified Chinese / English switching with a persistent device preference. English uses `$` notation and green home-record amounts; Chinese restores `¥` and red. Recorded values and CNY storage are unchanged.
 - The user approved local preview review. Static analysis, 9 language regressions and native Android acceptance passed. The release APK was installed with `adb install -r` and cold startup, language persistence and existing data were checked. Original display settings were restored. Full-suite limitations and evidence are recorded in [Interface language](LANGUAGE.md).
-- Delivery branch: `codex/language-switch`, feature commit `d5faaba`. Integration target is not established; wish-binding work remains unfinished in the shared working tree. Local integration is pending target confirmation and the other task's completion. No remote is configured.
+- Original delivery branch: `codex/language-switch`, feature commit `d5faaba`. Its source is included in the repository synchronization above. Wish-binding acceptance is recorded above.
 
 ## Home pig label adjustment
 
 - Removed the level label beneath the home pig while preserving its position, tap response, and growth rules.
+- Follow-up: reduced the pig box and home header reservation from 78dp to the pig's 62dp height, and aligned drag bounds with that height. Formatting, static analysis and all 7 focused pig/growth/coin-flow tests passed, including matching the container bottom to the pig bounds. Visual review and device delivery remain pending for this follow-up.
 - This adjustment is included in the ordinary-app language delivery. The earlier Figma quota block was bypassed with the user's authorized local preview workflow.
 - Latest analysis and growth/coin-flow checks pass. Five older `pig_room_test.dart` cases still expect the removed level label; the full-suite limitation is recorded in the language verification.
 
@@ -40,7 +46,7 @@ Updated: 2026-11-06.
 - Wallehog now has its own Git repository at `C:/blog/vibecoding/Wallehog/.git`, on `codex/standalone-repository`. Git commands inside this project use this repository.
 - The initial commit records the current project snapshot, including source, assets, tests, documentation, tools, and promotional material. Ignored build outputs, local settings, private inputs, and experiments remain outside this snapshot.
 - The `C:/blog` parent repository and its history/index were left unchanged; its existing tracking of Wallehog remains. This independent repository starts a new history and does not import the parent history.
-- No remote is configured and no push was performed. The GitHub address in the README is reachable, but remote ownership, history reconciliation, and connection remain pending confirmation.
+- Remote connection and development-branch push were completed on 2026-11-07. The separate remote `main` history is preserved; see repository synchronization above.
 ## Figma layout review
 
 - The user selected the `Figma` connection and requested review of all primary pages inside Codex before physical-device acceptance.

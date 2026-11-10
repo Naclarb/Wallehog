@@ -1,5 +1,5 @@
-import '../../app/language_controller.dart';
 import '../../app/app_strings.dart';
+import '../../app/language_controller.dart';
 import '../../shared/sound_service.dart';
 
 import 'package:flutter/material.dart';
