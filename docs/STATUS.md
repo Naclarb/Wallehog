@@ -4,13 +4,6 @@
 
 Updated: 2026-11-07.
 
-
-## Representative wish images (2026-11-10)
-
-- Branch: `codex/wish-images`; target: `main`. Three new categories: travel, clothing and learning. The user removed the sneaker and armchair, requested a tidy sweater without wrinkles, and clarified that pink is optional. See [sources and prompts](WISH_ILLUSTRATIONS.md).
-- Visual review continues. Previous checkpoint analysis, 19 tests and release build passed; latest iteration formatting, analysis and 18 focused tests passed. No APK rebuild/install for individual review annotations.
-- Device delivery, integration and push remain pending; other independent work remains unfinished (`codex/home-widget`, `codex/wish-binding-review`, `codex/apk-signing-fix`).
-
 ## Repository synchronization
 
 - Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.

@@ -4,13 +4,6 @@
 
 更新：2026-11-07。
 
-
-## 心愿类别图片（2026-11-10）
-
-- 分支：`codex/wish-images`；目标：`main`。新增旅行、服饰和学习三类。用户移除运动鞋与扶手椅，要求衣服整齐无明显褶皱，并明确不限定粉色。见[来源与提示词](WISH_ILLUSTRATIONS.zh-CN.md)。
-- 视觉评审继续；此前检查点的分析、19 项测试与 release 构建通过，最新迭代格式化、分析及 18 项相关测试通过。不针对单条批注重复构建或安装 APK。
-- 真机交付、集成及推送待完成；其他独立工作尚未完成（`codex/home-widget`、`codex/wish-binding-review`、`codex/apk-signing-fix`）。
-
 ## 仓库同步
 
 - 已确认远程：`origin`，`https://github.com/Naclarb/Wallehog.git`。`codex/language-switch` 跟踪远程同名分支；提交改动后可以直接运行 `git push`。
