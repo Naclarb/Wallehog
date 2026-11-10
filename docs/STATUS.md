@@ -15,7 +15,8 @@ Updated: 2026-11-10.
 - The default footprint is now **2 × 2 launcher cells**, following the current home wish. Only **+ → amount keypad → Save** is available; wish creation/editing/switching stay in the app. [Scope, architecture and evidence](HOME_WIDGET.md).
 - Reproduced the loading failure on the real Honor launcher: its substituted Button rejects the RemoteViews `setEnabled` call. Removing click actions during submission replaces that call while receiver-side input locking remains. The actual launcher now displays the card and saved-state updates.
 - Static analysis, 8 widget-service regressions, the final arm64 release build, compact native acceptance and 2 additional cross-package/real-launcher checks passed. Phone-sized captures are 156 × 156dp. The ordinary app was updated with `adb install -r` and cold startup confirmed; no data clearing, migration, new dependency or release publication. Display settings were unchanged and temporary diagnostic settings restored.
-- Existing test-package records are preserved and test applications/providers have explicit Test labels. Remove the old widget and add **Wallehog**, not a Test provider, to apply the new default span. Fix branch: `codex/widget-add-2x2`; integration target: `main`. Other tasks' status is unchanged.
+- Image clarity follow-up: removed half-resolution thumbnail sizing. Full display density and exact/upper launcher dimensions now determine image pixels, with a 1024px cap and viewport memory budget. Static analysis, 8 service regressions, 6 native image/host tests and the arm64 build passed; before/after phone captures were inspected. Branch: `codex/widget-image-quality`; target: `main`.
+- Existing test-package records are preserved and test applications/providers have explicit Test labels. Choose **Wallehog**, not a Test provider. The image-only follow-up keeps the 2 × 2 span and data rules. Other tasks' status is unchanged.
 
 ## Repository synchronization
 

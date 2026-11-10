@@ -2,7 +2,7 @@
 
 [English](HOME_WIDGET.md) · [简体中文](HOME_WIDGET.zh-CN.md)
 
-更新：2026-11-10。修复分支：`codex/widget-add-2x2`；集成目标：`main`。初始实现：`23ea269`。
+更新：2026-11-10。本轮修复分支：`codex/widget-image-quality`；集成目标：`main`。初始实现：`23ea269`；荣耀／2 × 2 修复：`801e9b2`。
 
 ## 已确认范围
 
@@ -12,7 +12,8 @@
 
 ## 实现
 
-- 使用 Android `AppWidgetProvider` 和 `RemoteViews`，`targetCellWidth`／`targetCellHeight` 均为 2，最小／兼容尺寸为 110 × 110dp。文字、按钮和键盘适配小面积。根据宿主尺寸限制图片大小，最大 512 × 512 像素。保留已有卡片配色和物件图片。
+- 使用 Android `AppWidgetProvider` 和 `RemoteViews`，`targetCellWidth`／`targetCellHeight` 均为 2，最小／兼容尺寸为 110 × 110dp。文字、按钮和键盘适配小面积，保留已有卡片配色和物件图片。
+- 图片按完整屏幕密度生成，优先使用桌面提供的精确显示尺寸，缺失时使用尺寸范围上界。此前按最小边长的一半生成缩略图，被桌面放大后导致物件模糊。`WidgetImageSizing` 现在按较大的显示尺寸分配像素，并相应解码原始素材；位图最大 1024 × 1024 像素，字节数低于最小已声明视口的内存限额。2 × 2 占位和物件比例不变。
 - `HomeWidgetBridge` 发布控制器一致快照，返回应用时重新读取。语言跟随已有偏好。Android 可能延迟周期刷新。
 - 小组件操作复用应用控制器，或用短时、无界面的 Flutter 引擎运行 `widgetMain`；两者均使用 `HomeWidgetService`、`RecordsController` 与既有 SQLite 仓储。不新增运行依赖或数据库迁移。
 - 提交前持久化金额、目标心愿、发生日期和请求标识。未确认的提交保持不变，重试沿用同一 token。仓储幂等和快照恢复防止重复记录。当前心愿变化时，先核对再保存。每个组件各有草稿；移除组件不删除已保存记录。
@@ -23,9 +24,9 @@
 
 已在连接的 CGL-W00 的真实荣耀桌面复现加载失败。堆栈报告 `Button can't use method with RemoteViews: setEnabled(boolean)`。移除背景资源调用未解决问题；移除两处 enabled 状态调用后恢复正常，并保留原背景配色。真实桌面随后显示 2 × 2 卡片及保存状态更新。原先同应用宿主测试没有覆盖荣耀替换的按钮。
 
-本轮检查：`flutter analyze`、8 项小组件服务回归及最终 arm64 release 构建通过。原生 `HomeWidgetTest` 在新建的 `.widgetcompactuitest` 独立包中通过（`OK (1 test)`，27.556 秒），覆盖 2 × 2 元数据、156 × 156dp 卡片／键盘截图、SQLite 精确差值、重试保护、心愿变化核对、取消、英文、前台录入及空闲后台引擎退出。保留既有 `.widgetuitest` 记录，没有为重跑而重置。
+本轮清晰度检查：`flutter analyze`、8 项小组件服务回归及最终 arm64 release 构建通过。原生 `WidgetImageSizingTest` 与 `HomeWidgetTest` 在 `.widgetcompactuitest` 中通过（`OK (6 tests)`，27.68 秒）。5 项尺寸测试覆盖屏幕密度、荣耀式横竖屏范围、精确视口、位图边界及缺失尺寸。156dp 卡片在 3 倍密度下现在生成 468px，而不是 234px；旧式平板尺寸范围案例至少生成 400px，而不是约 155px。已对照修改前后的手机尺寸卡片截图。宿主流程还检查 2 × 2 元数据、SQLite 精确差值、重试保护、心愿变化核对、取消、英文、前台录入及后台引擎退出。既有测试记录保留。
 
-`LauncherWidgetTest` 也通过（`OK (2 tests)`）：独立应用宿主加载日常 release 组件，无障碍检查确认真实桌面已加载操作按钮。后者需要先打开已有组件所在的桌面页，并通过 `-e placedPackage` 传入组件包名；不点击按钮或写入数据。仅 debug 的包可见性配置允许访问日常 APK 资源，release 权限不变。
+此前荣耀／2 × 2 交付已通过 `LauncherWidgetTest` 两项检查：独立应用宿主加载日常 release 组件，无障碍检查确认真实桌面已加载操作按钮。本次安装清晰度更新后，已重跑跨包 release 加载检查并通过（`OK (1 test)`）。真实桌面检查需要先打开已有组件所在的桌面页，并通过 `-e placedPackage` 传入组件包名；不点击按钮或写入数据。仅 debug 的包可见性配置允许访问日常 APK 资源，release 权限不变。
 
 [卡片](screenshots/widget-native-card.png)、[金额录入](screenshots/widget-native-entry.png)和[英文录入](screenshots/widget-native-en-entry.png)为 156 × 156dp 原生宿主截图，使用虚构数据。含设备／用户数据的真实桌面截图仅保留在本地。本轮未改变原始显示设置：2032 × 3048、密度 400、字号比例 1.0。验收后恢复临时小组件绑定权限和诊断日志级别。
 

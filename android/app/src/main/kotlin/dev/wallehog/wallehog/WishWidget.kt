@@ -149,10 +149,9 @@ class WishWidget : AppWidgetProvider() {
             return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         }
 
-        private fun hero(context: Context, style: String, fraction: Float, edgeDp: Int): Bitmap {
+        private fun hero(context: Context, style: String, fraction: Float, size: Int): Bitmap {
             // Bounded, density-aware image stays crisp without sending original
             // asset bitmaps to the launcher.
-            val size = (minOf(180f, edgeDp * .5f) * context.resources.displayMetrics.density).toInt().coerceIn(48, 512)
             val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
             canvas.scale(size / 240f, size / 240f)
@@ -225,8 +224,8 @@ class WishWidget : AppWidgetProvider() {
             fun money(value: Long) = (if (english) "$" else "¥") + (value / 100).toString() + "." + (value % 100).toString().padStart(2, '0')
             views.setTextViewText(R.id.widget_progress, if (target > 0) "${money(progress)} / ${money(target)}" else text("记下每一个小确幸", "Every little choice counts"))
             val options = AppWidgetManager.getInstance(context).getAppWidgetOptions(id)
-            val edge = minOf(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110), options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)).coerceAtLeast(48)
-            views.setImageViewBitmap(R.id.widget_hero, hero(context, prefs.getString("style", "gift") ?: "gift", if (target > 0) (progress.toFloat() / target).coerceIn(0f, 1f) else 0f, edge))
+            val pixels = WidgetImageSizing.pixelEdge(options, context.resources.displayMetrics.density)
+            views.setImageViewBitmap(R.id.widget_hero, hero(context, prefs.getString("style", "gift") ?: "gift", if (target > 0) (progress.toFloat() / target).coerceIn(0f, 1f) else 0f, pixels))
             views.setContentDescription(R.id.widget_hero, text("心愿进度", "Wish progress") + if (target > 0) " ${(progress.toDouble() / target * 100).coerceIn(0.0, 100.0).toInt()}%" else "")
             views.removeAllViews(R.id.widget_keys)
             if (entry) {
