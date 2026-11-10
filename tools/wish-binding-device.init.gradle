@@ -1,0 +1,10 @@
+// Dedicated package for wish binding acceptance; existing installs are preserved.
+gradle.beforeProject { project ->
+    if (project.path == ':app') {
+        project.plugins.withId('com.android.application') {
+            project.extensions.getByName('androidComponents').finalizeDsl { android ->
+                android.defaultConfig.applicationIdSuffix = '.wishbindinguitest'
+            }
+        }
+    }
+}
