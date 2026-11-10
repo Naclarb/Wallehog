@@ -65,12 +65,25 @@ class RecordSnapshot {
       allGoals ?? (goal == null ? const [] : [goal!]);
 }
 
-const goalStyles = ['gift', 'ps5', 'headphones', 'camera'];
+const goalStyles = [
+  'gift',
+  'ps5',
+  'headphones',
+  'camera',
+  'travel',
+  'sport',
+  'learning',
+  'home',
+];
 const goalStyleNames = {
   'gift': '自由心愿',
   'ps5': 'PS5 游戏机',
   'headphones': '一副好耳机',
   'camera': '我的相机',
+  'travel': '旅行探索',
+  'sport': '运动户外',
+  'learning': '阅读学习',
+  'home': '舒适居家',
 };
 String goalAsset(String style) => style == 'gift'
     ? 'assets/characters/wish-gift-v1.png'

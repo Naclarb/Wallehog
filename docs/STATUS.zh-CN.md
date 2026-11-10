@@ -4,6 +4,13 @@
 
 更新：2026-11-07。
 
+
+## 心愿类别图片（2026-11-10）
+
+- 分支：`codex/wish-images`；集成目标：`main`。新增旅行箱、运动鞋、书本和扶手椅，分别代表旅行、运动、学习和居家；现有四张素材不变。见[素材来源及提示词](WISH_ILLUSTRATIONS.zh-CN.md)。
+- 格式化、静态分析及 19 项心愿、界面和备份相关测试通过。通用 release APK 构建通过（61.5 MB）；视觉反馈与真机交付待完成。
+- 其他独立工作尚未完成（`codex/home-widget`、`codex/wish-binding-review`、`codex/apk-signing-fix`）。此源码检查点不集成这些任务，不替换普通应用；集成与推送等待组合交付就绪。
+
 ## 仓库同步
 
 - 已确认远程：`origin`，`https://github.com/Naclarb/Wallehog.git`。`codex/language-switch` 跟踪远程同名分支；提交改动后可以直接运行 `git push`。

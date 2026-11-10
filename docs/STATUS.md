@@ -4,6 +4,13 @@
 
 Updated: 2026-11-07.
 
+
+## Representative wish images (2026-11-10)
+
+- Branch: `codex/wish-images`; integration target: `main`. Added suitcase, sneaker, books and armchair as representative travel, sports, learning and home illustrations; existing four assets remain unchanged. See [asset sources and prompts](WISH_ILLUSTRATIONS.md).
+- Formatting, static analysis and 19 focused wish/widget/backup tests pass. The universal release APK build passed (61.5 MB). Visual feedback and physical-device delivery remain pending.
+- Other independent work remains unfinished (`codex/home-widget`, `codex/wish-binding-review`, `codex/apk-signing-fix`). This source checkpoint does not integrate those tasks or replace the ordinary app. Integration and push remain pending until the combined delivery is ready.
+
 ## Repository synchronization
 
 - Confirmed remote: `origin`, `https://github.com/Naclarb/Wallehog.git`. `codex/language-switch` tracks its same-name remote branch; ordinary `git push` works after committing changes.
