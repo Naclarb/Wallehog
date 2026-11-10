@@ -3,7 +3,14 @@ gradle.beforeProject { project ->
     if (project.path == ':app') {
         project.plugins.withId('com.android.application') {
             project.extensions.getByName('androidComponents').finalizeDsl { android ->
-                android.defaultConfig.applicationIdSuffix = '.widgetuitest'
+                def suffix = project.findProperty('wallehogWidgetTestSuffix') ?: '.widgetuitest'
+                if (!(suffix in ['.widgetuitest', '.widgetcompactuitest'])) {
+                    throw new GradleException('Unsupported widget acceptance package')
+                }
+                android.defaultConfig.applicationIdSuffix = suffix
+                def label = suffix == '.widgetuitest' ? 'Wallehog Test' : 'Wallehog 2x2 Test'
+                android.defaultConfig.manifestPlaceholders['wallehogAppLabel'] = label
+                android.defaultConfig.manifestPlaceholders['wallehogWidgetLabel'] = label
             }
         }
     }

@@ -149,10 +149,10 @@ class WishWidget : AppWidgetProvider() {
             return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         }
 
-        private fun hero(context: Context, style: String, fraction: Float): Bitmap {
+        private fun hero(context: Context, style: String, fraction: Float, edgeDp: Int): Bitmap {
             // Bounded, density-aware image stays crisp without sending original
             // asset bitmaps to the launcher.
-            val size = (180 * context.resources.displayMetrics.density).toInt().coerceIn(180, 512)
+            val size = (minOf(180f, edgeDp * .5f) * context.resources.displayMetrics.density).toInt().coerceIn(48, 512)
             val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
             canvas.scale(size / 240f, size / 240f)
@@ -192,24 +192,28 @@ class WishWidget : AppWidgetProvider() {
                 "camera" -> R.drawable.widget_card_camera
                 else -> R.drawable.widget_card
             })
+            views.setViewVisibility(R.id.widget_title, if (entry) View.GONE else View.VISIBLE)
             val name = if (entry) draft.optString("goalName") else prefs.getString("name", "") ?: ""
             views.setTextViewText(R.id.widget_title, name.ifBlank { text("给小猪一个期待", "Something to look forward to") })
             views.setViewVisibility(R.id.widget_card, if (entry) View.GONE else View.VISIBLE)
             views.setViewVisibility(R.id.widget_entry, if (entry) View.VISIBLE else View.GONE)
             views.setViewVisibility(R.id.widget_cancel, if (entry) View.VISIBLE else View.GONE)
             views.setTextViewText(R.id.widget_cancel, text("取消", "Cancel"))
-            views.setBoolean(R.id.widget_cancel, "setEnabled", !submitted)
-            views.setOnClickPendingIntent(R.id.widget_cancel, key(context, id, "cancel"))
+            // Honor substitutes its own Button whose setEnabled override is not
+            // RemoteViews-callable. Remove actions instead; receiver guards also
+            // keep an unconfirmed submission immutable.
+            views.setOnClickPendingIntent(R.id.widget_cancel, if (submitted) null else key(context, id, "cancel"))
             views.setTextViewText(R.id.widget_amount, (if (english) "$" else "¥") + draft.optString("amount").ifBlank { "0" })
             val message = when (draft.optString("message")) {
                 "invalid" -> text("请输入大于零、最多两位小数的金额", "Enter a positive amount (up to 2 decimals)")
                 "saving" -> text("正在保存…", "Saving…")
                 "retry" -> text("尚未确认保存，请重试同一笔", "Save unconfirmed. Retry this entry")
-                "changed" -> text("当前心愿已更新，请核对后确认", "Wish changed. Review and confirm")
+                "changed" -> text("当前心愿已更新，请核对后确认：", "Wish changed. Review: ") + name
                 "saved" -> text("已记下 ¥", "Saved $") + draft.optString("amount")
                 else -> if (!entry && prefs.getLong("goalId", -1) < 0) text("在应用内创建心愿", "Create a wish in the app") else ""
             }
             views.setTextViewText(R.id.widget_message, message)
+            views.setViewVisibility(R.id.widget_message, if (message.isBlank()) View.GONE else View.VISIBLE)
             views.setTextViewText(R.id.widget_action, if (!entry) "＋" else if (submitted) text("重试", "Retry") else text("存下", "Save"))
             views.setContentDescription(R.id.widget_action, if (entry) text("保存金额", "Save amount") else text("记一笔金额", "Record savings"))
             views.setOnClickPendingIntent(R.id.widget_action, key(context, id, if (entry) "save" else "open"))
@@ -220,7 +224,9 @@ class WishWidget : AppWidgetProvider() {
             val target = prefs.getLong("target", 0)
             fun money(value: Long) = (if (english) "$" else "¥") + (value / 100).toString() + "." + (value % 100).toString().padStart(2, '0')
             views.setTextViewText(R.id.widget_progress, if (target > 0) "${money(progress)} / ${money(target)}" else text("记下每一个小确幸", "Every little choice counts"))
-            views.setImageViewBitmap(R.id.widget_hero, hero(context, prefs.getString("style", "gift") ?: "gift", if (target > 0) (progress.toFloat() / target).coerceIn(0f, 1f) else 0f))
+            val options = AppWidgetManager.getInstance(context).getAppWidgetOptions(id)
+            val edge = minOf(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110), options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)).coerceAtLeast(48)
+            views.setImageViewBitmap(R.id.widget_hero, hero(context, prefs.getString("style", "gift") ?: "gift", if (target > 0) (progress.toFloat() / target).coerceIn(0f, 1f) else 0f, edge))
             views.setContentDescription(R.id.widget_hero, text("心愿进度", "Wish progress") + if (target > 0) " ${(progress.toDouble() / target * 100).coerceIn(0.0, 100.0).toInt()}%" else "")
             views.removeAllViews(R.id.widget_keys)
             if (entry) {
@@ -230,8 +236,7 @@ class WishWidget : AppWidgetProvider() {
                     row.zip(listOf(R.id.key_a, R.id.key_b, R.id.key_c, R.id.key_d)).forEach { (label, view) ->
                         keys.setTextViewText(view, if (label == "delete") "⌫" else label)
                         keys.setContentDescription(view, if (label == "delete") text("退格", "Backspace") else label)
-                        keys.setBoolean(view, "setEnabled", !submitted)
-                        keys.setOnClickPendingIntent(view, key(context, id, label))
+                        keys.setOnClickPendingIntent(view, if (submitted) null else key(context, id, label))
                     }
                     views.addView(R.id.widget_keys, keys)
                 }

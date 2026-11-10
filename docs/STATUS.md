@@ -12,10 +12,10 @@ Updated: 2026-11-10.
 
 ## Home-screen widget
 
-- The widget follows the application's currently selected wish. Its only entry workflow is **+ → amount keypad → Save**; wish creation/editing/switching remain in the application. Existing wish art and card colors are reused. [Scope, architecture and evidence](HOME_WIDGET.md).
-- Dart formatting, static analysis, 149 focused regressions, the final arm64 release build and native CGL-W00 widget-host acceptance passed. Background entry launches no Activity; SQLite count/amount deltas, changed-wish review, foreground entry, cancellation, English and idle worker teardown were checked in the isolated `.widgetuitest` package. Phone display settings were restored.
-- The ordinary installation was updated with `adb install -r` and cold startup confirmed. No data clearing, migration, dependency addition or release publication. Native-host captures use fictional data; placement/resizing in individual home-screen launchers and large-font behavior remain outside the verified coverage. Add the widget using the home screen's widget picker.
-- Source branch: `codex/home-widget`; integration target: `main`. Earlier wish-binding/design-review items below retain their existing status.
+- The default footprint is now **2 × 2 launcher cells**, following the current home wish. Only **+ → amount keypad → Save** is available; wish creation/editing/switching stay in the app. [Scope, architecture and evidence](HOME_WIDGET.md).
+- Reproduced the loading failure on the real Honor launcher: its substituted Button rejects the RemoteViews `setEnabled` call. Removing click actions during submission replaces that call while receiver-side input locking remains. The actual launcher now displays the card and saved-state updates.
+- Static analysis, 8 widget-service regressions, the final arm64 release build, compact native acceptance and 2 additional cross-package/real-launcher checks passed. Phone-sized captures are 156 × 156dp. The ordinary app was updated with `adb install -r` and cold startup confirmed; no data clearing, migration, new dependency or release publication. Display settings were unchanged and temporary diagnostic settings restored.
+- Existing test-package records are preserved and test applications/providers have explicit Test labels. Remove the old widget and add **Wallehog**, not a Test provider, to apply the new default span. Fix branch: `codex/widget-add-2x2`; integration target: `main`. Other tasks' status is unchanged.
 
 ## Repository synchronization
 

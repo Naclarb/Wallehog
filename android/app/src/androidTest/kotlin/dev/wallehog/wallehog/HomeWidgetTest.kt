@@ -54,8 +54,8 @@ class HomeWidgetTest {
     private fun capture(name: String) {
         main {
             val density = context.resources.displayMetrics.density
-            val width = (360 * density).toInt()
-            val height = (340 * density).toInt()
+            val width = (156 * density).toInt()
+            val height = (156 * density).toInt()
             view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))
             view.layout(0, 0, width, height)
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -66,7 +66,7 @@ class HomeWidgetTest {
     }
 
     @Test fun coldWorkerAndRemoteViewsEntry() {
-        check(context.packageName.endsWith(".widgetuitest")) { "Requires isolated widget test package" }
+        check(context.packageName.endsWith(".widgetuitest") || context.packageName.endsWith(".widgetcompactuitest")) { "Requires isolated widget test package" }
         val manager = AppWidgetManager.getInstance(context)
         val monitor = instrumentation.addMonitor(MainActivity::class.java.name, null, false)
         var activity: android.app.Activity? = null
@@ -80,6 +80,14 @@ class HomeWidgetTest {
             assertTrue("Grant appwidget bind permission to isolated package first", manager.bindAppWidgetIdIfAllowed(id, ComponentName(context, WishWidget::class.java)))
             host.startListening()
             view = host.createView(context, id, manager.getAppWidgetInfo(id))
+            assertEquals(2, manager.getAppWidgetInfo(id).targetCellWidth)
+            assertEquals(2, manager.getAppWidgetInfo(id).targetCellHeight)
+            view.updateAppWidgetOptions(android.os.Bundle().apply {
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 156)
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 156)
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, 156)
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, 156)
+            })
         }
         try {
             val initial = snapshot()

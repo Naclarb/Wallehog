@@ -18,6 +18,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "dev.wallehog.wallehog"
+        manifestPlaceholders["wallehogAppLabel"] = "电子猪"
+        manifestPlaceholders["wallehogWidgetLabel"] = "Wallehog"
         // 真机集成测试使用独立沙盒，不能卸载或覆盖用户正在使用的应用。
         if (providers.gradleProperty("wallehogUiTest").orNull == "true") {
             applicationIdSuffix = ".uitest"
