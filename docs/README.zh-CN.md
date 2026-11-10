@@ -10,6 +10,7 @@
 | --- | --- |
 | 完成了什么，还剩什么？ | [当前状态](STATUS.zh-CN.md) |
 | 界面语言切换如何工作？ | [界面语言与验证](LANGUAGE.zh-CN.md) |
+| 桌面小组件如何工作？ | [小组件范围、实现与验证](HOME_WIDGET.zh-CN.md) |
 | agent 应该怎样工作？ | [项目规则与目录职责](../AGENTS.zh-CN.md) |
 | 产品解决什么问题？ | [产品意图](INTENT.md) |
 | 已经确定了哪些行为？ | [需求与决策](PRODUCT_SPEC.md) |

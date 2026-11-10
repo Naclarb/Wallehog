@@ -5,6 +5,15 @@ import 'app/language_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'application/records_controller.dart';
 import 'data/sqlite_record_repository.dart';
+import 'app/home_widget_bridge.dart';
+
+@pragma('vm:entry-point')
+Future<void> widgetMain() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final controller = RecordsController(await SqliteRecordRepository.open());
+  await controller.load();
+  await HomeWidgetBridge(controller).start();
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +28,15 @@ class Startup extends StatefulWidget {
 
 class _StartupState extends State<Startup> {
   final _language = LanguageController();
+  HomeWidgetBridge? _widgetBridge;
   late Future<RecordsController> _opening = _open();
   Future<RecordsController> _open() async {
     await _language.load();
     final repository = await SqliteRecordRepository.open();
     final controller = RecordsController(repository);
     await controller.load();
+    _widgetBridge = HomeWidgetBridge(controller);
+    await _widgetBridge!.start();
     return controller;
   }
 
@@ -77,6 +89,7 @@ class _StartupState extends State<Startup> {
 
   @override
   void dispose() {
+    _widgetBridge?.dispose();
     _language.dispose();
     super.dispose();
   }

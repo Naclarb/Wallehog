@@ -18,6 +18,7 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        WidgetRuntime.attach(applicationContext, flutterEngine)
         sounds["coin"] = soundPool.load(this, dev.wallehog.wallehog.R.raw.coin, 1)
         sounds["celebrate"] = soundPool.load(this, dev.wallehog.wallehog.R.raw.celebrate, 1)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dev.wallehog/settings")
@@ -30,7 +31,9 @@ class MainActivity : FlutterActivity() {
                         if (language != "en" && language != "zh_CN") {
                             result.error("language", "Unsupported language", null)
                         } else {
-                            result.success(prefs.edit().putString("language", language).commit())
+                            val saved = prefs.edit().putString("language", language).commit()
+                            if (saved) WishWidget.refresh(applicationContext)
+                            result.success(saved)
                         }
                     }
                     else -> result.notImplemented()
@@ -85,6 +88,7 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onDestroy() {
+        WidgetRuntime.detach()
         soundPool.release()
         super.onDestroy()
     }

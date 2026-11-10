@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="12dp" android:background="@drawable/widget_card">
+    <TextView android:id="@+id/widget_title" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Wallehog · 心愿" android:textSize="16sp" android:textStyle="bold" android:textColor="#583044" android:maxLines="2" android:ellipsize="end" />
+    <LinearLayout android:id="@+id/widget_card" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+        <ImageView android:id="@+id/widget_hero" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scaleType="fitCenter" android:contentDescription="心愿进度" android:src="@drawable/wallehog_icon" />
+        <TextView android:id="@+id/widget_progress" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:textSize="16sp" android:textColor="#583044" android:text="0 / 0" />
+        <TextView android:id="@+id/widget_brand" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:text="Wallehog" android:textSize="12sp" android:textColor="#82435F" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/widget_entry" android:visibility="gone" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="vertical">
+        <TextView android:id="@+id/widget_amount" android:layout_width="match_parent" android:layout_height="36dp" android:gravity="center_vertical|end" android:text="0" android:textSize="26sp" android:textColor="#583044" />
+        <LinearLayout android:id="@+id/widget_keys" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="vertical" />
+    </LinearLayout>
+    <TextView android:id="@+id/widget_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="20dp" android:textSize="12sp" android:gravity="center" android:textColor="#583044" android:maxLines="2" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:orientation="horizontal">
+        <Button android:id="@+id/widget_cancel" android:visibility="gone" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="取消" android:textColor="#583044" android:background="@drawable/widget_key" />
+        <Button android:id="@+id/widget_action" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="＋" android:textSize="22sp" android:textColor="#583044" android:background="@drawable/widget_key" />
+    </LinearLayout>
+</LinearLayout>

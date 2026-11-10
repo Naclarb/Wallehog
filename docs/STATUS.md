@@ -2,7 +2,14 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Updated: 2026-11-07.
+Updated: 2026-11-10.
+
+## Home-screen widget
+
+- The widget follows the application's currently selected wish. Its only entry workflow is **+ → amount keypad → Save**; wish creation/editing/switching remain in the application. Existing wish art and card colors are reused. [Scope, architecture and evidence](HOME_WIDGET.md).
+- Dart formatting, static analysis, 149 focused regressions, the final arm64 release build and native CGL-W00 widget-host acceptance passed. Background entry launches no Activity; SQLite count/amount deltas, changed-wish review, foreground entry, cancellation, English and idle worker teardown were checked in the isolated `.widgetuitest` package. Phone display settings were restored.
+- The ordinary installation was updated with `adb install -r` and cold startup confirmed. No data clearing, migration, dependency addition or release publication. Native-host captures use fictional data; placement/resizing in individual home-screen launchers and large-font behavior remain outside the verified coverage. Add the widget using the home screen's widget picker.
+- Source branch: `codex/home-widget`; integration target: `main`. Earlier wish-binding/design-review items below retain their existing status.
 
 ## Repository synchronization
 
