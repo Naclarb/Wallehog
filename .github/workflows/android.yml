@@ -19,13 +19,14 @@ jobs:
     permissions:
       contents: write
     env:
-      WALLEHOG_KEYSTORE_PATH: ${{ runner.temp }}/wallehog-release.jks
       WALLEHOG_STORE_PASSWORD: ${{ secrets.WALLEHOG_STORE_PASSWORD }}
       WALLEHOG_KEY_ALIAS: ${{ secrets.WALLEHOG_KEY_ALIAS }}
       WALLEHOG_KEY_PASSWORD: ${{ secrets.WALLEHOG_KEY_PASSWORD }}
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - name: Validate release inputs
         env:
           KEYSTORE_BASE64: ${{ secrets.WALLEHOG_KEYSTORE_BASE64 }}
@@ -48,6 +49,8 @@ jobs:
           SIGNING_CERT_SHA256=$(tr -d '\r\n' < android/release-certificate.sha256)
           [[ "$SIGNING_CERT_SHA256" =~ ^[0-9a-f]{64}$ ]]
           echo "SIGNING_CERT_SHA256=$SIGNING_CERT_SHA256" >> "$GITHUB_ENV"
+          WALLEHOG_KEYSTORE_PATH="$RUNNER_TEMP/wallehog-release.jks"
+          echo "WALLEHOG_KEYSTORE_PATH=$WALLEHOG_KEYSTORE_PATH" >> "$GITHUB_ENV"
           umask 077
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$WALLEHOG_KEYSTORE_PATH"
       - uses: actions/setup-java@v4
@@ -99,4 +102,4 @@ jobs:
       - name: Remove signing material
         if: always()
         shell: bash
-        run: rm -f -- "$WALLEHOG_KEYSTORE_PATH"
+        run: rm -f -- "$RUNNER_TEMP/wallehog-release.jks"
