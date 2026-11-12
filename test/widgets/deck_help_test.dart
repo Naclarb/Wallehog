@@ -159,7 +159,7 @@ void main() {
     expect(tester.widget<IconButton>(add).onPressed, isNotNull);
     expect(c.goal!.id, isNot(goal));
   });
-  testWidgets('帮助按主题展开并展示真实的仓库筹备状态', (tester) async {
+  testWidgets('帮助按主题展开并展示已公开的仓库地址', (tester) async {
     await fixtures.setup(tester, MemoryRepository());
     await tester.tap(find.byKey(const Key('helpTab')));
     await tester.pumpAndSettle();
@@ -171,7 +171,7 @@ void main() {
     await tester.ensureVisible(find.text('GitHub · 支持 Wallehog'));
     await tester.tap(find.text('GitHub · 支持 Wallehog'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('仓库正在筹备'), findsOneWidget);
+    expect(find.textContaining('github.com/Naclarb/Wallehog'), findsOneWidget);
+    expect(find.textContaining('仓库正在筹备'), findsNothing);
   });
 }
-

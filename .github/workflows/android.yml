@@ -1,4 +1,4 @@
-name: Android signed pre-alpha
+name: Android signed release
 on:
   push:
     tags: ['v*']
@@ -34,6 +34,8 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$ ]]
+          PACKAGE_VERSION=$(sed -n 's/^version: \([^+]*\)+.*/\1/p' pubspec.yaml)
+          [[ "$RELEASE_TAG" == "v$PACKAGE_VERSION" ]]
           for name in KEYSTORE_BASE64 WALLEHOG_STORE_PASSWORD WALLEHOG_KEY_ALIAS WALLEHOG_KEY_PASSWORD; do
             if [[ -z "${!name}" ]]; then echo "Missing signing configuration: $name" >&2; exit 1; fi
           done
@@ -63,7 +65,7 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - name: Build signed APK
-        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --build-number $((1000 + GITHUB_RUN_NUMBER))
+        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64
       - name: Verify final distribution file
         shell: bash
         run: |
@@ -84,14 +86,16 @@ jobs:
           target: google_apis
           disable-animations: true
           script: bash tools/smoke_install_apk.sh Wallehog-Android.apk
-      - name: Publish a new verified preview
+      - name: Publish a new verified release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
           sha256sum --check SHA256SUMS.txt
-          gh release create "$RELEASE_TAG" Wallehog-Android.apk SHA256SUMS.txt --target "$GITHUB_SHA" --prerelease --title "Wallehog $RELEASE_TAG · Android Pre-alpha" --notes-file docs/ANDROID_RELEASE_NOTES.md
+          FLAGS=(--latest)
+          if [[ "$RELEASE_TAG" == *-* ]]; then FLAGS=(--prerelease); fi
+          gh release create "$RELEASE_TAG" Wallehog-Android.apk SHA256SUMS.txt --verify-tag "${FLAGS[@]}" --title "Wallehog $RELEASE_TAG · Android" --notes-file docs/ANDROID_RELEASE_NOTES.md
       - name: Remove signing material
         if: always()
         shell: bash

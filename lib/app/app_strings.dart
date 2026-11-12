@@ -81,8 +81,8 @@ const englishMessages = <String, String>{
   '取消预览': 'Close preview',
   '只清除这个心愿，所有记录仍会保留，不会转入其他心愿。':
       'Only this wish will be removed. All records will be kept and will not move to another wish.',
-  '喜欢 Wallehog？欢迎在 GitHub 仓库开放后点一颗 Star，支持后续开发。仓库正在筹备，链接将在创建后更新到这里。':
-      'Enjoying Wallehog? Give it a Star when the GitHub repository opens. The repository is being prepared; its link will appear here when available.',
+  '喜欢 Wallehog？欢迎访问 github.com/Naclarb/Wallehog，点一颗 Star 支持后续开发。':
+      'Enjoying Wallehog? Visit github.com/Naclarb/Wallehog and leave a Star to support future development.',
   '填写做决定前已确定的预算，而不是事后设定的金额。':
       'Use the budget you set before making the choice.',
   '填写原计划购买选项的价格，与实际替代品比较。':

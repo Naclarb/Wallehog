@@ -90,7 +90,7 @@ class HelpPage extends StatelessWidget {
               tr(context, 'GitHub · 支持 Wallehog'),
               tr(
                 context,
-                '喜欢 Wallehog？欢迎在 GitHub 仓库开放后点一颗 Star，支持后续开发。仓库正在筹备，链接将在创建后更新到这里。',
+                '喜欢 Wallehog？欢迎访问 github.com/Naclarb/Wallehog，点一颗 Star 支持后续开发。',
               ),
             ),
             if (controller.supportsBackup)

@@ -22,6 +22,10 @@ Flutter-rendered 390 × 844 phone previews using fictional data. They illustrate
 
 <img src="docs/public/home.png" width="280" alt="Wish progress and savings"> <img src="docs/public/calculator.png" width="280" alt="Quick amount entry">
 
+Native Android widget preview with fictional data:
+
+<img src="docs/public/widget.png" width="220" alt="2 by 2 Wallehog home-screen widget">
+
 ## Download
 
 Get the universal APK (ARM, ARM64 and x86_64) from [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0). Add the **Wallehog** widget using your launcher's widget picker. Launcher cell sizes vary; remove and re-add older widget instances for the 2 × 2 default.

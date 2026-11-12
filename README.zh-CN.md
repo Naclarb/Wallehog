@@ -22,6 +22,10 @@
 
 <img src="docs/public/home.png" width="280" alt="心愿进度与累计节省"> <img src="docs/public/calculator.png" width="280" alt="快速金额录入">
 
+使用虚构数据的原生 Android Widget 预览：
+
+<img src="docs/public/widget.png" width="220" alt="2 × 2 Wallehog 桌面 Widget">
+
 ## 下载
 
 从 [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0) 下载通用 APK，支持 ARM、ARM64 和 x86_64。在桌面启动器的组件列表中选择 **Wallehog**。不同启动器的格子尺寸有所不同；旧 Widget 可移除后重新添加，采用默认 2 × 2 布局。
@@ -47,4 +51,4 @@ APK 位于 `build/app/outputs/flutter-apk/app-release.apk`。仓库保留 Gradle
 
 备份为未加密 JSON，请私密保存。设备覆盖有限，请保留备份。公开源码包含运行资源、测试、构建配置和选定文档；本地设备截图、开发档案、实验、凭据和构建产物不纳入跟踪。参见[当前状态与仓库审计](docs/STATUS.zh-CN.md)。
 
-源码采用 [MIT 许可](LICENSE)，素材和依赖见[来源说明](docs/public/CREDITS.md)。手柄插图仅为心愿示意，不代表品牌关联。
+源码采用 [MIT 许可](LICENSE)，素材和依赖见[来源说明](docs/public/CREDITS.zh-CN.md)。手柄插图仅为心愿示意，不代表品牌关联。
