@@ -2,7 +2,7 @@
 
 [English](ANDROID_RELEASE.md) · [简体中文](ANDROID_RELEASE.zh-CN.md)
 
-官方 APK 使用 `android/release-certificate.sha256` 固定的持久证书。私钥库和凭据必须在 Git 之外，并保留私有备份。调试证书不得用于官方发布。
+官方 APK 使用 `android/release-certificate.sha256` 固定的持久证书。验签固定使用 Android Build-Tools 36.0.0，不随预装 SDK 预览版变化。私钥库和凭据必须在 Git 之外，并保留私有备份。调试证书不得用于官方发布。
 
 本地发布构建需要 `WALLEHOG_KEYSTORE_PATH`、`WALLEHOG_STORE_PASSWORD`、`WALLEHOG_KEY_ALIAS` 和 `WALLEHOG_KEY_PASSWORD`。GitHub Actions 使用相同的三个凭据 Secret，另加 `WALLEHOG_KEYSTORE_BASE64`。缺少凭据时阻断发布构建。密钥和本机 SDK 路径由 Git 忽略，不在日志中输出签名值。
 

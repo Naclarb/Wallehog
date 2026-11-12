@@ -23,6 +23,7 @@ jobs:
       WALLEHOG_KEY_ALIAS: ${{ secrets.WALLEHOG_KEY_ALIAS }}
       WALLEHOG_KEY_PASSWORD: ${{ secrets.WALLEHOG_KEY_PASSWORD }}
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      ANDROID_BUILD_TOOLS_VERSION: '36.0.0'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,6 +65,8 @@ jobs:
           ACTUAL_CERT_SHA256=$(keytool -exportcert -alias "$WALLEHOG_KEY_ALIAS" -keystore "$WALLEHOG_KEYSTORE_PATH" -storepass:env WALLEHOG_STORE_PASSWORD | sha256sum | cut -d ' ' -f1)
           echo "Configured certificate SHA-256: $ACTUAL_CERT_SHA256"
           [[ "$ACTUAL_CERT_SHA256" == "$SIGNING_CERT_SHA256" ]]
+      - name: Install pinned APK verifier
+        run: sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.7'
@@ -81,8 +84,8 @@ jobs:
         run: |
           set -euo pipefail
           cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android.apk
-          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -1)
-          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 Wallehog-Android.apk | grep -E '^Verified using v[123]|^Number of signers:|^Signer .* certificate SHA-256 digest:'
+          APKSIGNER="$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION/apksigner"
+          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 Wallehog-Android.apk
           python3 tools/verify_apk.py Wallehog-Android.apk --apksigner "$APKSIGNER" --certificate-sha256 "$SIGNING_CERT_SHA256" > SHA256SUMS.txt
       - name: Enable emulator acceleration
         run: |
@@ -111,3 +114,11 @@ jobs:
         if: always()
         shell: bash
         run: rm -f -- "$RUNNER_TEMP/wallehog-release.jks"
+      - name: Preserve rejected APK for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rejected-release-apk
+          path: Wallehog-Android.apk
+          if-no-files-found: ignore
+          retention-days: 1

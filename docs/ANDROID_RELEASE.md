@@ -2,7 +2,7 @@
 
 [English](ANDROID_RELEASE.md) · [简体中文](ANDROID_RELEASE.zh-CN.md)
 
-Official APKs use the persistent certificate pinned in `android/release-certificate.sha256`. Keep the private keystore and credentials outside Git and maintain a private backup. Debug certificates cannot be published as official releases.
+Official APKs use the persistent certificate pinned in `android/release-certificate.sha256`. Verification uses Android Build-Tools 36.0.0 instead of whichever SDK preview happens to be preinstalled. Keep the private keystore and credentials outside Git and maintain a private backup. Debug certificates cannot be published as official releases.
 
 Local release builds require `WALLEHOG_KEYSTORE_PATH`, `WALLEHOG_STORE_PASSWORD`, `WALLEHOG_KEY_ALIAS` and `WALLEHOG_KEY_PASSWORD`. GitHub Actions uses the same three credential secrets plus `WALLEHOG_KEYSTORE_BASE64`. Missing credentials block release builds. Secrets and local SDK paths are ignored; never print signing values in logs.
 
