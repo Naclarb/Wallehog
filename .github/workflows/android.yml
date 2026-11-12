@@ -82,7 +82,7 @@ jobs:
           set -euo pipefail
           cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android.apk
           APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -1)
-          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 Wallehog-Android.apk | grep -E '^Verified using v[123] scheme|^Number of signers:|^Signer #1 certificate SHA-256 digest:'
+          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 Wallehog-Android.apk | grep -E '^Verified using v[123]|^Number of signers:|^Signer .* certificate SHA-256 digest:'
           python3 tools/verify_apk.py Wallehog-Android.apk --apksigner "$APKSIGNER" --certificate-sha256 "$SIGNING_CERT_SHA256" > SHA256SUMS.txt
       - name: Enable emulator acceleration
         run: |
