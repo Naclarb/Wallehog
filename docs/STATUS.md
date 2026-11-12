@@ -2,7 +2,7 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Updated: 2026-11-11. Release task: `codex/release-1.0`; integration target: `main`.
+Updated: 2026-11-11. Latest task: `codex/apk-size-optimization`; integration target: `main`.
 
 The approved MVP is implemented: precise amount entry, edit/delete/rebind, multiple wishes, first-wish adoption, backups, recovery, pig feedback/sound, language switching and the 2 × 2 Android widget. Unapproved animation proposals and deferred Figma synchronization are outside the 1.0 runtime scope.
 
@@ -13,6 +13,12 @@ Version is `1.0.0+1000`. Static analysis and all 218 Flutter tests passed, as di
 Physical-device acceptance passed 6 widget/image tests, wish-binding acceptance at phone and original tablet sizes (1 test each), and cross-package inflation of the final ordinary-app widget (1 test). The ordinary installation was updated with `adb install -r` using a private compatibility-signed build from the same source: installation and cold startup succeeded, first-install timestamp and visible application data/language were unchanged. No uninstall or data clearing occurred; original display/rotation settings and temporary widget-binding access were restored. The public APK uses the separate pinned official release certificate.
 
 [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0) is published as a stable latest release, with a universal official APK and SHA256SUMS.txt. [GitHub validation](https://github.com/Naclarb/Wallehog/actions/runs/43145507938) passed analysis, all 218 Flutter tests, 13 verifier regressions, signature verification, and fresh install/reinstall/cold startup on Android 16. The downloaded public attachment was independently checked against GitHub and checksum-file digests and the pinned certificate; no audited personal-device/private-path patterns were found in its contents. APK SHA-256: `3572be1a66fcdb0bcd4a10a7f8e530b95e68c014f715e9f5d26d48bf2de98058`. Tagged source: `ffa0137`; the release workflow fixes are integrated in `main`.
+
+ARM64 download (2026-11-11): the pre-alpha is 22.95 MiB and contains only arm64-v8a. The original 1.0 universal APK is 57.00 MiB, including 33.93 MiB of additional ARMv7/x86_64 libraries. The ARM64 application library grew by only 64 KiB and shared compressed assets by 439 bytes. Commit `94d552f` records the earlier switch to ARM64-only packaging.
+
+The added official [ARM64 APK](https://github.com/Naclarb/Wallehog/releases/download/v1.0.0/Wallehog-Android-arm64.apk) is 24,142,018 bytes (23.02 MiB), reducing the download by 59.6%. It retains version `1.0.0+1000` and the official certificate. ARM64 engine/application libraries, Flutter assets and Android bytecode match the previously verified local universal build byte for byte. The new `SHA256SUMS-arm64.txt` covers this asset; the original universal APK and checksum were preserved. ARM64 SHA-256: `86356c9555ffd75814b59bc3b16bb39be98e72d9a9277272e8b69fe36974bd34`.
+
+Packaging checks passed: 13 signature-verifier regressions, workflow validation and the real ARM64-only archive gate. An official-key isolated ARM64 release passed phone-sized cold startup, entry open/close, reinstall and startup. The ordinary installation was updated in place with a private compatibility-signed ARM64 build; visible data/language and first-install timestamp were preserved. The widget cross-package check passed. Display/rotation and temporary binding access were restored; the dedicated Size Test application was disabled without clearing data. The public ARM64 attachment was downloaded again and its checksum, signatures and pinned certificate verified. Application sources, dependencies, runtime assets and database schema are unchanged; future releases build both package variants with the same version code.
 
 Repository audit covered 10 remote/tag refs and 341 historical text objects. No high-confidence private-key/token pattern was found. Device models, local paths and internal review links were present in development reports. Device captures, recordings, historical verification archives and promotional source are now local-only, removed from current tracking and ignored. Current public feature documents no longer include personal device details or private signing locations. Pattern scanning cannot prove the absence of every secret.
 

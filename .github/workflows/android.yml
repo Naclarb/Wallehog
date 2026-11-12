@@ -85,15 +85,31 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - name: Build signed APK
-        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64
+        run: |
+          flutter build apk --release --target-platform android-arm,android-arm64,android-x64
+          cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android.apk
+      - name: Build recommended ARM64 APK
+        run: |
+          flutter build apk --release --target-platform android-arm64
+          cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android-arm64.apk
       - name: Verify final distribution file
         shell: bash
         run: |
           set -euo pipefail
-          cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android.apk
           APKSIGNER="$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION/apksigner"
-          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 Wallehog-Android.apk
-          python3 tools/verify_apk.py Wallehog-Android.apk --apksigner "$APKSIGNER" --certificate-sha256 "$SIGNING_CERT_SHA256" > SHA256SUMS.txt
+          : > SHA256SUMS.txt
+          for APK in Wallehog-Android-arm64.apk Wallehog-Android.apk; do
+            "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 23 "$APK"
+            python3 tools/verify_apk.py "$APK" --apksigner "$APKSIGNER" --certificate-sha256 "$SIGNING_CERT_SHA256" >> SHA256SUMS.txt
+          done
+          python3 - <<'PY'
+          import zipfile
+          with zipfile.ZipFile('Wallehog-Android-arm64.apk') as apk:
+              abis = {name.split('/')[1] for name in apk.namelist() if name.startswith('lib/') and name.endswith('.so')}
+              assert abis == {'arm64-v8a'}, f'ARM64 download contains unexpected architectures: {abis}'
+              for library in ('libflutter.so', 'libapp.so'):
+                  assert f'lib/arm64-v8a/{library}' in apk.namelist()
+          PY
       - name: Enable emulator acceleration
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -116,7 +132,7 @@ jobs:
           sha256sum --check SHA256SUMS.txt
           FLAGS=(--latest)
           if [[ "$RELEASE_TAG" == *-* ]]; then FLAGS=(--prerelease); fi
-          gh release create "$RELEASE_TAG" Wallehog-Android.apk SHA256SUMS.txt --verify-tag "${FLAGS[@]}" --title "Wallehog $RELEASE_TAG · Android" --notes-file docs/ANDROID_RELEASE_NOTES.md
+          gh release create "$RELEASE_TAG" Wallehog-Android-arm64.apk Wallehog-Android.apk SHA256SUMS.txt --verify-tag "${FLAGS[@]}" --title "Wallehog $RELEASE_TAG · Android" --notes-file docs/ANDROID_RELEASE_NOTES.md
       - name: Remove signing material
         if: always()
         shell: bash
@@ -126,6 +142,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rejected-release-apk
-          path: Wallehog-Android.apk
+          path: |
+            Wallehog-Android.apk
+            Wallehog-Android-arm64.apk
           if-no-files-found: ignore
           retention-days: 1
