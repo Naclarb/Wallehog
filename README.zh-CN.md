@@ -28,7 +28,16 @@
 
 ## 下载
 
-从 [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0) 下载通用 APK，支持 ARM、ARM64 和 x86_64。在桌面启动器的组件列表中选择 **Wallehog**。不同启动器的格子尺寸有所不同；旧 Widget 可移除后重新添加，采用默认 2 × 2 布局。
+ARM64 Android 设备推荐[下载 ARM64 小包](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android-arm64.apk)。两种包的功能、正式证书和版本号相同。
+
+| 安装包 | 1.0 下载体积 | 支持的架构 |
+| --- | --- | --- |
+| [ARM64](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android-arm64.apk) | 23.02 MiB | arm64-v8a |
+| [通用包](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android.apk) | 57.00 MiB | ARM、ARM64、x86_64 |
+
+Pre-alpha 的 22.95 MiB 包仅含 ARM64。1.0 通用包多带了两种原生架构；选择 ARM64 后下载体积减少 59.6%。MiB 按 1,048,576 字节计算，校验文件见[发布页](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0)。
+
+在桌面启动器的组件列表中选择 **Wallehog**。不同启动器的格子尺寸有所不同；旧 Widget 可移除后重新添加，采用默认 2 × 2 布局。
 
 1.0 使用持久发布证书。旧开发签名安装可能使用不同证书，无法直接覆盖升级。迁移前先导出并验证备份，核对记录与设置后再处理备份。详见[签名与迁移](docs/ANDROID_RELEASE.zh-CN.md)。不提供 iOS、桌面或网页版安装包。
 
@@ -42,10 +51,10 @@ flutter analyze
 flutter test
 flutter run
 # 先配置私有发布凭据，详见 docs/ANDROID_RELEASE.zh-CN.md。
-flutter build apk --release --target-platform android-arm,android-arm64,android-x64
+flutter build apk --release --target-platform android-arm64
 ```
 
-APK 位于 `build/app/outputs/flutter-apk/app-release.apk`。仓库保留 Gradle wrapper 和 `pubspec.lock`；SDK 路径与签名输入保持私有。测试使用系统 SQLite，Windows 使用 `winsqlite3`。其他签名构建无法覆盖官方 APK。
+需要通用包时，将目标改为 `--target-platform android-arm,android-arm64,android-x64`。两种命令均输出 `build/app/outputs/flutter-apk/app-release.apk`，发布工作流会先复制产物再进行下一次构建。仓库保留 Gradle wrapper 和 `pubspec.lock`；SDK 路径与签名输入保持私有。测试使用系统 SQLite，Windows 使用 `winsqlite3`。其他签名构建无法覆盖官方 APK。
 
 ## 隐私与许可
 

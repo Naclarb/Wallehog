@@ -1,6 +1,9 @@
 # Wallehog 1.0
 
-Stable Android release / Android 正式版。Universal APK: ARM, ARM64, x86_64.
+Stable Android release / Android 正式版。
+
+Recommended: **Wallehog-Android-arm64.apk** for ARM64 devices. **Wallehog-Android.apk** supports ARM, ARM64 and x86_64. Both contain the same features and signing identity.
+ARM64 设备推荐 **Wallehog-Android-arm64.apk**；**Wallehog-Android.apk** 支持 ARM、ARM64 和 x86_64。两种包功能和签名相同。
 
 - Quick savings entry, record editing/deletion, multiple wishes and explicit record binding.
 - 2 × 2 home-screen widget: current wish and **+ → amount → Save** without opening the app.

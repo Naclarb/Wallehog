@@ -28,7 +28,16 @@ Native Android widget preview with fictional data:
 
 ## Download
 
-Get the universal APK (ARM, ARM64 and x86_64) from [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0). Add the **Wallehog** widget using your launcher's widget picker. Launcher cell sizes vary; remove and re-add older widget instances for the 2 × 2 default.
+[Download the recommended ARM64 APK](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android-arm64.apk) for ARM64 Android devices. Both packages include the same features and use the same official certificate and version code.
+
+| Package | 1.0 download size | Supported architecture |
+| --- | --- | --- |
+| [ARM64](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android-arm64.apk) | 23.02 MiB | arm64-v8a |
+| [Universal](https://github.com/Naclarb/Wallehog/releases/latest/download/Wallehog-Android.apk) | 57.00 MiB | ARM, ARM64, x86_64 |
+
+The pre-alpha's 22.95 MiB package was ARM64-only. The 1.0 universal package carries two additional native architectures; selecting ARM64 reduces the download by 59.6%. Sizes use MiB (1,048,576 bytes). Checksums are available on the [release page](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0).
+
+Add the **Wallehog** widget using your launcher's widget picker. Launcher cell sizes vary; remove and re-add older widget instances for the 2 × 2 default.
 
 Version 1.0 uses a persistent release certificate. Older development-signed copies may have a different certificate and cannot be updated in place. Export and verify a backup before migrating; keep the backup until your records and settings have been checked. See [signing and migration](docs/ANDROID_RELEASE.md). No iOS, desktop or web build is distributed.
 
@@ -42,10 +51,10 @@ flutter analyze
 flutter test
 flutter run
 # Configure private release credentials first; see docs/ANDROID_RELEASE.md.
-flutter build apk --release --target-platform android-arm,android-arm64,android-x64
+flutter build apk --release --target-platform android-arm64
 ```
 
-APK output: `build/app/outputs/flutter-apk/app-release.apk`. Gradle wrapper and `pubspec.lock` are committed. SDK paths and signing inputs stay private. Tests use system SQLite (`winsqlite3` on Windows). Builds made with other keys cannot update the official APK.
+For a universal build, use `--target-platform android-arm,android-arm64,android-x64` instead. Both commands produce `build/app/outputs/flutter-apk/app-release.apk`; the release workflow copies each output before the next build. Gradle wrapper and `pubspec.lock` are committed. SDK paths and signing inputs stay private. Tests use system SQLite (`winsqlite3` on Windows). Builds made with other keys cannot update the official APK.
 
 ## Privacy and license
 
