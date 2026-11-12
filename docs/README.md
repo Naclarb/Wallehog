@@ -14,6 +14,7 @@ Start with [current status](STATUS.md). Read the detailed documents only for the
 | How should an agent work here? | [Project instructions and repository layout](../AGENTS.md) |
 | What is the product for? | [Product intent](INTENT.md) |
 | What behavior has been agreed? | [Requirements and decisions](PRODUCT_SPEC.md) |
+| How are Android APKs signed and published? | [Android release signing](ANDROID_RELEASE.md) |
 | Where does implementation belong? | [Architecture](DESIGN.md) |
 | How did the plan evolve? | [Roadmap and milestone history](ROADMAP.md) |
 
