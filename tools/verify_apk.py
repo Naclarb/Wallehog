@@ -28,10 +28,17 @@ def verify(apk: Path, apksigner: str, expected: str) -> str:
             raise ValueError(f"Required APK v{scheme} signature is missing")
     if not re.search(r"^Number of signers: 1$", output, re.M):
         raise ValueError("Exactly one release signer is required")
-    match = re.search(r"^Signer #1 certificate SHA-256 digest: ([0-9a-fA-F]+)$", output, re.M)
-    if match is None or match[1].lower() != expected:
+    # apksigner uses SDK-range labels for v3.1 signatures. Every reported
+    # range must keep the pinned identity; unapproved key rotation is rejected.
+    signer = r"Signer (?:#\d+|\(minSdkVersion=\d+(?: \(dev release=true\))?, maxSdkVersion=\d+\))"
+    digests = re.findall(
+        rf"^{signer} certificate SHA-256 digest: ([0-9a-fA-F]{{64}})$", output, re.M,
+    )
+    if not digests:
+        raise ValueError("APK signing certificate could not be read")
+    if {digest.lower() for digest in digests} != {expected}:
         raise ValueError("APK signer does not match the pinned release certificate")
-    if re.search(r"^Signer #1 certificate DN: .*CN=Android Debug", output, re.M):
+    if re.search(rf"^{signer} certificate DN: .*CN=Android Debug", output, re.M):
         raise ValueError("Android debug certificates are forbidden for release")
     return hashlib.sha256(apk.read_bytes()).hexdigest()
 

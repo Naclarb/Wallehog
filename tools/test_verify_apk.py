@@ -57,6 +57,31 @@ class VerifyApkTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_output(self.output.replace("Number of signers: 1", "Number of signers: 2"))
 
+    def sdk_ranges(self):
+        current = self.output.replace("Signer #1", "Signer (minSdkVersion=33, maxSdkVersion=2147483647)")
+        previous = "\n".join(line.replace("Signer #1", "Signer (minSdkVersion=24, maxSdkVersion=32)") for line in self.output.splitlines() if line.startswith("Signer #1"))
+        return current + "\n" + previous
+
+    def test_sdk_range_labels_with_the_same_pinned_identity(self):
+        self.assertEqual(len(self.check_output(self.sdk_ranges())), 64)
+
+    def test_development_sdk_range_label(self):
+        output = self.sdk_ranges().replace("minSdkVersion=33,", "minSdkVersion=33 (dev release=true),")
+        self.assertEqual(len(self.check_output(output)), 64)
+
+    def test_one_unpinned_sdk_range_is_rejected(self):
+        output = self.sdk_ranges().replace(self.fingerprint, "cd" * 32, 1)
+        with self.assertRaises(ValueError):
+            self.check_output(output)
+
+    def test_debug_certificate_with_sdk_ranges_is_rejected(self):
+        with self.assertRaises(ValueError):
+            self.check_output(self.sdk_ranges().replace("Wallehog Release", "Android Debug"))
+
+    def test_source_stamp_is_not_an_application_signer(self):
+        with self.assertRaises(ValueError):
+            self.check_output(self.output.replace("Signer #1", "Source Stamp Signer"))
+
     def test_invalid_apk_is_rejected(self):
         self.apk.write_bytes(b"broken download")
         with self.assertRaises(zipfile.BadZipFile):
