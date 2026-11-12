@@ -1,35 +1,16 @@
-# 文档导航
+# 文档索引
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-先看[当前状态](STATUS.zh-CN.md)，再按任务阅读详细文档。本文只提供入口，不重复其中的规则。
+- [当前状态、验证与仓库审计](STATUS.zh-CN.md)
+- [产品意图](INTENT.zh-CN.md)
+- [Android Widget 使用与行为](HOME_WIDGET.zh-CN.md)
+- [心愿绑定](WISH_BINDING.zh-CN.md)
+- [界面语言](LANGUAGE.zh-CN.md)
+- [Android 签名、验证与迁移](ANDROID_RELEASE.zh-CN.md)
+- [素材与依赖来源](public/CREDITS.zh-CN.md)
+- [发布验证](public/VERIFICATION.zh-CN.md)
 
-## 工作文档
+旧需求（`PRODUCT_SPEC.md`）、架构（`DESIGN.md`）和路线图（`ROADMAP.md`）保留历史中文来源。后续已批准的行为以以上当前文档为准。动画提案不属于已完成的 1.0 功能。
 
-| 要了解什么 | 阅读入口 |
-| --- | --- |
-| 完成了什么，还剩什么？ | [当前状态](STATUS.zh-CN.md) |
-| 界面语言切换如何工作？ | [界面语言与验证](LANGUAGE.zh-CN.md) |
-| 桌面小组件如何工作？ | [小组件范围、实现与验证](HOME_WIDGET.zh-CN.md) |
-| agent 应该怎样工作？ | [项目规则与目录职责](../AGENTS.zh-CN.md) |
-| 产品解决什么问题？ | [产品意图](INTENT.zh-CN.md) |
-| 已经确定了哪些行为？ | [需求与决策](PRODUCT_SPEC.md) |
-| 实现应该放在哪里？ | [架构说明](DESIGN.md) |
-| 计划如何演变？ | [路线图与里程碑历史](ROADMAP.md) |
-
-PRODUCT_SPEC、DESIGN 和 ROADMAP 是历史中文文档；INTENT 现已有中英文对应版本。本轮保留其原有内容，导航更新不翻译或重新解释其中的决策。路线图含有历史“当前阶段”标题；现在的交接以 STATUS 为入口，具体结论需对照相关决策和证据。
-
-## 证据与辅助资料
-
-| 位置 | 内容 |
-| --- | --- |
-| `VERIFICATION.md`、`*_VERIFICATION.md` | 历史交付报告，按具体改动查阅 |
-| `screenshots/`、`recordings/` | 配套截图和录像，由对应报告说明是渲染预览还是真机证据 |
-| `public/` | 公开预览、来源说明和发布检查 |
-| `archive/` | 早期文档快照，不是当前需求 |
-| `CHARACTER_IDENTITY.md`、`GAMIFICATION_AND_ANIMATION.md` | 角色与动画的详细设计背景 |
-| `SOUND_CREDITS.md`、`PHASE2_VISUAL_REVIEW.md` | 音效来源和历史视觉评审 |
-
-历史报告保留现有路径，避免破坏交叉引用。过去的通过结果只证明当时版本的检查，不代表新一轮已验证。部分辅助资料目前仅存在于本地工作区，仓库限制见 STATUS。
-
-项目另有用于开发辅助的 `tools/`、用于宣传工程的 `marketing/` 和用于独立动画的 `experiments/phase2/`。职责与访问边界由 AGENTS 定义，这些目录不属于应用源码。
+设备截图、录像、历史验收报告和推广源项目保留在本地，并由 Git 忽略。部分历史源文档仍引用这些本地证据，公开仓库有意不包含这些文件。按所有者要求，项目指令继续公开。Git 上传已提交的文件，并非所有本地文件；新增忽略规则不会移除已跟踪文件或历史提交。

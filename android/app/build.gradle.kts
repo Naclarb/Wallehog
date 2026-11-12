@@ -4,6 +4,24 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val releaseSigning = mapOf(
+    "storeFile" to System.getenv("WALLEHOG_KEYSTORE_PATH"),
+    "storePassword" to System.getenv("WALLEHOG_STORE_PASSWORD"),
+    "keyAlias" to System.getenv("WALLEHOG_KEY_ALIAS"),
+    "keyPassword" to System.getenv("WALLEHOG_KEY_PASSWORD"),
+)
+val hasReleaseSigning = releaseSigning.values.all { !it.isNullOrBlank() }
+val verifyReleaseSigning = tasks.register("verifyReleaseSigning") {
+    doLast {
+        check(hasReleaseSigning) {
+            "Release signing is required. See docs/ANDROID_RELEASE.md; debug signing is forbidden for release builds."
+        }
+    }
+}
+tasks.configureEach {
+    if (name == "preReleaseBuild") dependsOn(verifyReleaseSigning)
+}
+
 android {
     namespace = "dev.wallehog.wallehog"
     compileSdk = flutter.compileSdkVersion
@@ -36,11 +54,23 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseSigning.getValue("storeFile")!!)
+                storePassword = releaseSigning.getValue("storePassword")
+                keyAlias = releaseSigning.getValue("keyAlias")
+                keyPassword = releaseSigning.getValue("keyPassword")
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            if (hasReleaseSigning) signingConfig = signingConfigs.getByName("release")
         }
     }
 }

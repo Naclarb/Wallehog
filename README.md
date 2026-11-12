@@ -2,38 +2,53 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-A small, offline Android companion for mindful spending choices. Tap **+ → enter an amount → confirm**, watch your wish progress, and share a little moment with your piggy bank.
+An offline Android companion for mindful spending choices. Tap **+ → enter an amount → save**, watch your wishes progress, and share a small moment with your piggy bank.
 
-**Pre-alpha · Android APK only.** Features and appearance may change. Choose Simplified Chinese or English from **Help → Language**.
+**Version 1.0 · Android APK.** Choose Simplified Chinese or English in **Help → Language**.
 
-Wallehog records savings you report yourself. These amounts are **not deposits, bank balances, or spendable funds**. No mandatory budgets or categories, no streak penalties, no accounts, ads, banking connections, or telemetry. Records stay in local SQLite; you can edit, delete, export, and restore them.
+## Features
+
+- Quick amount entry with arithmetic, optional notes and dates; edit, delete and rebind records.
+- Multiple wishes with separate progress. Swipe vertically to switch; the first wish adopts unbound records when no wishes exist.
+- A **2 × 2 Android home-screen widget** showing the current wish. Tap **+**, enter an amount and save directly in the widget. Create, edit and switch wishes in the app.
+- Gentle pig reactions, optional sound and reduced-motion support.
+- Local SQLite storage and JSON backup/restore. No accounts, ads, telemetry, banking connections or cloud synchronization.
+
+Saved amounts are self-reported savings, **not deposits, bank balances or spendable funds**. No mandatory budgets, categories or missed-day penalties.
 
 ## Preview
 
-390 × 844 Flutter-rendered phone previews using fictional demo data (not photographs or physical-device captures).
+Flutter-rendered 390 × 844 phone previews using fictional data. They illustrate the main app; see [widget usage](docs/HOME_WIDGET.md) for the launcher feature.
 
-<img src="docs/public/home.png" width="280" alt="Wallehog home with a wish, pig and saved amount"> <img src="docs/public/calculator.png" width="280" alt="Quick amount entry">
+<img src="docs/public/home.png" width="280" alt="Wish progress and savings"> <img src="docs/public/calculator.png" width="280" alt="Quick amount entry">
 
-## Android download
+Native Android widget preview with fictional data:
 
-Download the APK from [Releases](https://github.com/Naclarb/Wallehog/releases). No iOS, desktop, or web release is provided. Pre-alpha APKs currently use a development signing key; future signing changes may prevent in-place upgrades. Export a backup before changing installations. Never uninstall an existing copy without backing up its data.
+<img src="docs/public/widget.png" width="220" alt="2 by 2 Wallehog home-screen widget">
 
-## Run and build
+## Download
 
-Validated toolchain: Flutter **3.47.7** (Dart **3.13.5**), JDK **17**, Android SDK. Install the SDK/NDK requested by Flutter and accept Android SDK licenses. Gradle wrapper and `pubspec.lock` are committed. Dependency downloads require internet; app operation does not.
+Get the universal APK (ARM, ARM64 and x86_64) from [Wallehog 1.0](https://github.com/Naclarb/Wallehog/releases/tag/v1.0.0). Add the **Wallehog** widget using your launcher's widget picker. Launcher cell sizes vary; remove and re-add older widget instances for the 2 × 2 default.
+
+Version 1.0 uses a persistent release certificate. Older development-signed copies may have a different certificate and cannot be updated in place. Export and verify a backup before migrating; keep the backup until your records and settings have been checked. See [signing and migration](docs/ANDROID_RELEASE.md). No iOS, desktop or web build is distributed.
+
+## Build
+
+Validated toolchain: Flutter **3.47.7**, Dart **3.13.5**, JDK **17**, Android SDK/NDK requested by Flutter. Accept Android SDK licenses. Dependency downloads require internet; app operation does not.
 
 ```sh
 flutter pub get
 flutter analyze
 flutter test
 flutter run
+# Configure private release credentials first; see docs/ANDROID_RELEASE.md.
 flutter build apk --release --target-platform android-arm,android-arm64,android-x64
 ```
 
-APK output: `build/app/outputs/flutter-apk/app-release.apk`. Local SDK paths are generated on your machine and must not be committed. Tests use system SQLite; Windows uses `winsqlite3`, and other hosts need an available system SQLite library. Reproducible setup does not imply byte-identical APKs across signing keys and machines.
+APK output: `build/app/outputs/flutter-apk/app-release.apk`. Gradle wrapper and `pubspec.lock` are committed. SDK paths and signing inputs stay private. Tests use system SQLite (`winsqlite3` on Windows). Builds made with other keys cannot update the official APK.
 
-## Limitations and license
+## Privacy and license
 
-Early software: limited device coverage, no cloud synchronization, and no guarantee against data loss. Backups are unencrypted JSON; store them privately. Screenshots are demo previews. The bundled controller illustration resembles a game controller; no brand affiliation is implied.
+Backups are unencrypted JSON; store them privately. Device coverage is limited, so keep backups. Public source includes runtime assets, tests, build configuration and selected documentation. Local device captures, development archives, experiments, credentials and build outputs are excluded. See [current status and repository audit](docs/STATUS.md).
 
-Source code: [MIT](LICENSE), as already selected in this repository. Third-party and asset details: [Credits](docs/public/CREDITS.md). Only runtime assets, tests, build configuration and essential public documentation are included; discarded experiments, private data and development archives are excluded.
+Source: [MIT](LICENSE). [Asset and dependency credits](docs/public/CREDITS.md). The controller illustration is a wish symbol; no brand affiliation is implied.

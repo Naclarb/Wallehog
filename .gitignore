@@ -18,10 +18,8 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Editor settings can include local paths and remain private.
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -70,3 +68,17 @@ key.properties
 /assets/characters/pig-hero-v1.png
 /assets/characters/pig-hero-v2.png
 /wallehog-concept.png
+
+# Private working evidence and promotional source are retained locally.
+/docs/screenshots/
+/docs/recordings/
+/docs/archive/
+/docs/*VERIFICATION.md
+/docs/PHASE2_VISUAL_REVIEW.md
+/marketing/
+/backups/
+/private/
+__pycache__/
+*.pfx
+*.key
+*.backup.json

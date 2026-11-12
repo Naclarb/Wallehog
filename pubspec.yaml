@@ -1,7 +1,7 @@
 name: wallehog
 description: 电子猪：离线记录积极消费选择，不代表实际存款。
 publish_to: none
-version: 0.5.0+5
+version: 1.0.0+1000
 environment:
   sdk: '>=3.12.0 <4.0.0'
 dependencies:

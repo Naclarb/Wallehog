@@ -1,0 +1,102 @@
+name: Android signed release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: New release tag (existing releases cannot be overwritten)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: android-release
+  cancel-in-progress: false
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      WALLEHOG_KEYSTORE_PATH: ${{ runner.temp }}/wallehog-release.jks
+      WALLEHOG_STORE_PASSWORD: ${{ secrets.WALLEHOG_STORE_PASSWORD }}
+      WALLEHOG_KEY_ALIAS: ${{ secrets.WALLEHOG_KEY_ALIAS }}
+      WALLEHOG_KEY_PASSWORD: ${{ secrets.WALLEHOG_KEY_PASSWORD }}
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate release inputs
+        env:
+          KEYSTORE_BASE64: ${{ secrets.WALLEHOG_KEYSTORE_BASE64 }}
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$ ]]
+          PACKAGE_VERSION=$(sed -n 's/^version: \([^+]*\)+.*/\1/p' pubspec.yaml)
+          [[ "$RELEASE_TAG" == "v$PACKAGE_VERSION" ]]
+          for name in KEYSTORE_BASE64 WALLEHOG_STORE_PASSWORD WALLEHOG_KEY_ALIAS WALLEHOG_KEY_PASSWORD; do
+            if [[ -z "${!name}" ]]; then echo "Missing signing configuration: $name" >&2; exit 1; fi
+          done
+          # A failed API request also blocks publishing; it is never treated as absence.
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq '.[].tag_name' > "$RUNNER_TEMP/release-tags"
+          if grep -Fxq "$RELEASE_TAG" "$RUNNER_TEMP/release-tags"; then
+            echo 'Release already exists; choose a new tag. Assets must never be replaced.' >&2
+            exit 1
+          fi
+          SIGNING_CERT_SHA256=$(tr -d '\r\n' < android/release-certificate.sha256)
+          [[ "$SIGNING_CERT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          echo "SIGNING_CERT_SHA256=$SIGNING_CERT_SHA256" >> "$GITHUB_ENV"
+          umask 077
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$WALLEHOG_KEYSTORE_PATH"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
+      - run: flutter pub get
+      - run: python3 -m unittest discover -s tools -p test_verify_apk.py
+      - run: flutter analyze
+      - run: flutter test
+      - name: Build signed APK
+        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64
+      - name: Verify final distribution file
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp build/app/outputs/flutter-apk/app-release.apk Wallehog-Android.apk
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -1)
+          python3 tools/verify_apk.py Wallehog-Android.apk --apksigner "$APKSIGNER" --certificate-sha256 "$SIGNING_CERT_SHA256" > SHA256SUMS.txt
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Verify installation and startup on Android 16
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: bash tools/smoke_install_apk.sh Wallehog-Android.apk
+      - name: Publish a new verified release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum --check SHA256SUMS.txt
+          FLAGS=(--latest)
+          if [[ "$RELEASE_TAG" == *-* ]]; then FLAGS=(--prerelease); fi
+          gh release create "$RELEASE_TAG" Wallehog-Android.apk SHA256SUMS.txt --verify-tag "${FLAGS[@]}" --title "Wallehog $RELEASE_TAG · Android" --notes-file docs/ANDROID_RELEASE_NOTES.md
+      - name: Remove signing material
+        if: always()
+        shell: bash
+        run: rm -f -- "$WALLEHOG_KEYSTORE_PATH"
