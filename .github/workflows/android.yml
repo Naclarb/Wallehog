@@ -66,7 +66,14 @@ jobs:
           echo "Configured certificate SHA-256: $ACTUAL_CERT_SHA256"
           [[ "$ACTUAL_CERT_SHA256" == "$SIGNING_CERT_SHA256" ]]
       - name: Install pinned APK verifier
-        run: sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -x "$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION/apksigner" ]]; then
+            SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | sort -V | tail -1)
+            [[ -n "$SDKMANAGER" ]]
+            "$SDKMANAGER" "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
+          fi
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.7'
