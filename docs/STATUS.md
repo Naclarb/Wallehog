@@ -4,7 +4,7 @@
 
 Website (2026-11-13): bilingual product introduction implemented on `codex/product-website`, based on remote `main` (`9b41625`), integration target `main`. Local phone/desktop browser checks, language navigation, FAQ, local assets and official download links passed. [Website delivery](WEBSITE.md) records the Pages workflow and verification. Integration/publication are pending because the original local `main` includes seven unpublished commits with motion work awaiting review. No app or device changes.
 
-Updated: 2026-11-11. Latest task: `codex/apk-size-optimization`; integration target: `main`.
+Updated: 2026-11-13. Latest task: `codex/product-website`; integration target: `main` (pending).
 
 The approved MVP is implemented: precise amount entry, edit/delete/rebind, multiple wishes, first-wish adoption, backups, recovery, pig feedback/sound, language switching and the 2 × 2 Android widget. Unapproved animation proposals and deferred Figma synchronization are outside the 1.0 runtime scope.
 
