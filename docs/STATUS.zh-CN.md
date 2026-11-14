@@ -2,9 +2,9 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-官网上线（2026-11-13）：CEO 已明确批准受控正式上线。获批官网、双语内容、现有影片与小猪点击互动已从远端 `main`（`9b41625`）安全组装到 `codex/website-launch`；排除原本地 main 的全部七个无关提交，保留原本地 `main`。范围仅为官网、Pages 工作流与成对官网文档，App／APK 不变。GitHub Pages 配置／部署及公开 HTTPS 验收正在进行。见[官网交付与 QA](WEBSITE.zh-CN.md)。
+官网已上线（2026-11-13）：[中文](https://naclarb.github.io/Wallehog/)／[English](https://naclarb.github.io/Wallehog/en/)。CEO 授权的官网提交 `98e1d93` 已在 [Pages 工作流 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768) 成功部署。公开 HTTPS 页面与 14 项资源校验、完整官方 APK 下载、42 秒播放、独立 Edge 原生全屏／退出、双语导航／FAQ、小猪互动和手机布局通过。未发现核心线上故障；实体手机／Safari／读屏／真实网络仍有覆盖限制，见[交付证据](WEBSITE.zh-CN.md)。原本地 main 的七个无关提交与原本地 main 已保留并排除，App／APK 不变。
 
-已纳入获批的小猪互动（`ad78f6e`）。此前本地 QA 通过，保留已记录的内置浏览器全屏限制，并将其纳入线上验证。
+获批官网与小猪补充已集成至远端 `main`，保留官网各开发分支。未使用强制推送、破坏性重置或发布无关宣传源码。
 
 更新：2026-11-13。最新任务：`codex/website-launch`；集成目标：远端 `main`。
 

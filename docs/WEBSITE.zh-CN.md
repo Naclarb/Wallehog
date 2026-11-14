@@ -16,9 +16,25 @@
 
 在仓库根目录运行 `python -m http.server 4173 --bind 127.0.0.1 --directory website`，打开 `http://127.0.0.1:4173/`。无需安装依赖或构建。
 
-任务分支：`codex/product-website`；集成目标：`main`。工作从远端 `main`（`9b41625`）在独立工作区开始；原本地 `main` 有七个未发布提交，包含独立的宣传片工作。不纳入或发布无关工作。CEO 已明确批准安全集成、GitHub Actions Pages 设置、部署与公开 HTTPS 验收。`codex/website-launch` 从确认的远端 `main` 开始，仅快进集成获批官网和小猪互动。原本地 `main` 及七个未发布提交保持不变；这七个提交均不是官网交付的祖先。上线正在进行，线上结果将在验证后记录。
+任务分支：`codex/product-website`；集成目标：`main`。工作从远端 `main`（`9b41625`）在独立工作区开始；原本地 `main` 有七个未发布提交，包含独立的宣传片工作。不纳入或发布无关工作。CEO 已明确批准安全集成、GitHub Actions Pages 设置、部署与公开 HTTPS 验收。`codex/website-launch` 从确认的远端 `main` 开始，仅快进集成获批官网和小猪互动。原本地 `main` 及七个未发布提交保持不变；这七个提交均不是官网交付的祖先。受控上线与公开 HTTPS 验收已完成，见下方正式部署记录。
 
-批准且可以安全集成后，在仓库 Settings → Pages 中选择 **GitHub Actions**。现有 `.github/workflows/website.yml` 仅从 `main` 部署 `website/`，也支持在 `main` 手动触发。核实部署与两种语言的公开地址后，才能标记发布完成。计划地址为 `https://naclarb.github.io/Wallehog/`，无需购买域名。本任务未更改 Pages 配置、权限或线上环境，工作流尚未在远端运行。
+仓库已使用 GitHub Actions 作为 Pages 来源。`.github/workflows/website.yml` 仅从 `main` 部署 `website/`。未购买域名，未触发 Android 发布工作流。
+
+## 正式部署与 HTTPS 验收
+
+2026-11-13 已上线：[中文](https://naclarb.github.io/Wallehog/) · [English](https://naclarb.github.io/Wallehog/en/)。
+
+部署提交：`98e1d9341586d8ee10961c79ca81f7f7bb412cca`。[Website 工作流 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768) 成功完成，包含配置、仅官网文件的 artifact 上传与 Pages 部署。后续仅文档提交不改变该已部署官网内容。
+
+- 两个公开 HTML 及 14 项关联资源（含 CSS、两个脚本、PNG、字体、文本轨和 MP4）均返回 200，并与 Git 提交字节一致。MP4 分段请求返回 206，总大小正确。比较使用 Git blob，排除了 Windows 工作副本 CRLF 转换的影响。
+- 从公开页面取得两个官方 Release APK 链接，再次完整下载：ARM64 24,142,018 字节，仅 `arm64-v8a`；通用版 59,770,418 字节，含三种架构。版本均为 `1.0.0+1000`，SHA-256 与 STATUS 中此前固定签名核验过的文件完全一致。未修改或安装 APK。
+- 公开页面浏览器检查通过：中英文切换、首屏／顶部下载锚点及分开的 ARM64／通用链接、导航／返回、中英文共十项 FAQ、小猪点击弹跳，以及手机宽 320／360／390／430、桌面宽 1280／1440。未观察到水平溢出或控制台警告／错误。
+- 公开 HTTPS 视频可手动启动、暂停／继续，完整播放至 42.005 秒，无媒体错误。独立 Microsoft Edge 打开相同公开网站，成功进入原生视频全屏、继续播放到结尾并正常退出。此前独立浏览器全屏验证缺口已补齐；Codex 内嵌预览的全屏限制仍属于宿主限制。
+- 安全审计：扫描 28 条限定路径及 62 个新增／历史唯一 blob，未发现高置信度密钥或私人用户路径；获批影片校验值一致。原本地 main 的七个无关提交均未包含。模式扫描有范围限制，不代表能证明不存在任何形式的秘密。
+
+本地证据继续保存在已忽略的 `.buildlog/website/online/`：HTTP／校验值、APK、浏览器、导航与布局 JSON，以及 `zh-desktop.png`、`en-desktop.png`、`edge-fullscreen.png`。原本地 `main` 及七个未发布提交保持不变，需后续单独协调；远端 `main` 仅纳入获批官网交付。保留官网各分支。
+
+仍未认证的覆盖范围：实体 Android／iOS 触摸、Safari、TalkBack／VoiceOver 与真实低端设备／移动网络性能。核心公开下载与视频功能通过，未发现未解决的核心站点故障。
 
 ## 资产来源
 
@@ -45,7 +61,7 @@
 | PASS | 中英文共十项 FAQ 可展开／收起；语言切换、功能／下载／视频锚点、前进／返回，以及实际打开 GitHub 外链后返回正常。七个不同的外部链接均返回 HTTP 200。已有多心愿／上下切换说明保留。 |
 | PASS | 键盘操作、可见焦点、标题／语言／alt 语义、中英文视频文本轨与可阅读简介具备。减少动态效果模式关闭平滑滚动／过渡。禁用 JavaScript 时仍有原生视频控件、正文与下载链接。 |
 | PASS，有界 | 禁用缓存的本地手机首载观察到约 1.73 MB 编码资源，没有提前请求 7.16 MB 视频，无网络或脚本错误；下方图片延迟加载。1.6 Mb/s／150ms 模拟网络冒烟检查中首屏资源加载正常，未观察到失败。这不是校准后的实机性能测试或 Web Vitals 分数；请求起点关联不可用，未报告加载时长。 |
-| FAIL／验证受限 | 在可用的 Codex 内置浏览器中，原生全屏操作未进入全屏。**全屏尚未签收**，需要独立桌面 Chrome／Edge 和实体 Android Chrome 复核。 |
+| 历史宿主限制 | Codex 内置浏览器未进入原生全屏。公开站点随后已通过独立 Edge 的全屏／退出／结尾播放验证；实体手机覆盖仍单独保留。 |
 
 ### 实际修复并复测的问题
 
@@ -54,8 +70,8 @@
 
 ### 仍需人工验证
 
-- 独立浏览器及实体手机的全屏、浏览器原生触控控件、扬声器／耳机体验、旋转和真实触摸操作。
+- 实体手机全屏、浏览器原生触控控件、扬声器／耳机体验、旋转和真实触摸操作；独立 Edge 全屏已通过。
 - Android Chrome／iOS Safari／桌面浏览器覆盖，TalkBack／VoiceOver，以及真实慢设备／网络下的 Web Vitals。浏览器尺寸模拟不替代这些检查。
-- 最终批准并部署后：公开 HTTPS、项目子路径、缓存／Range／Content-Type 行为，以及线上下载／播放冒烟检查。未为获得这些结果而改动正式环境。
+- 未来更改应重复公开 HTTPS／子路径、下载与播放冒烟检查；首次受控上线已通过这些检查。
 
-证据保存在已忽略的 `.buildlog/website/final-qa/`：APK 核验、布局矩阵、导航、外链、对比度与资源 JSON，以及修复前后封面截图。下载的 APK 仅保存在本地。`node --check website/film.js`、源码／资源检查及 `git diff --check` 通过。未改 App 源码、安装包、数据或设备安装。CEO 已授权受控上线，继续进行公开 HTTPS 验收并如实报告失败。
+证据保存在已忽略的 `.buildlog/website/final-qa/`：APK 核验、布局矩阵、导航、外链、对比度与资源 JSON，以及修复前后封面截图。下载的 APK 仅保存在本地。`node --check website/film.js`、源码／资源检查及 `git diff --check` 通过。未改 App 源码、安装包、数据或设备安装。已完成授权的受控上线及公开 HTTPS 验收，保留所列人工覆盖限制。

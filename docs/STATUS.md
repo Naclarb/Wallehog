@@ -2,9 +2,9 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Website launch (2026-11-13): CEO explicitly approved controlled production launch. Approved website, bilingual content, existing movie and pig click interaction are safely assembled on `codex/website-launch` from remote `main` (`9b41625`); all seven unrelated local-main commits are excluded and the original local `main` is preserved. Scope: website, Pages workflow and paired website documentation only; App/APKs unchanged. GitHub Pages configuration/deployment and public HTTPS acceptance are in progress. See [website delivery and QA](WEBSITE.md).
+Website is live (2026-11-13): [Chinese](https://naclarb.github.io/Wallehog/) / [English](https://naclarb.github.io/Wallehog/en/). CEO-authorized website commit `98e1d93` deployed successfully in [Pages run 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768). Public HTTPS pages and 14 resource hashes, complete official APK downloads, 42-second playback, standalone Edge native fullscreen/exit, bilingual navigation/FAQ, pig interaction and mobile layouts passed. No core online failure observed. Physical-phone/Safari/screen-reader/real-network coverage remains bounded; see [delivery evidence](WEBSITE.md). The seven unrelated local-main commits and original local main are preserved and excluded; App/APKs are unchanged.
 
-The approved pig interaction (`ad78f6e`) is included. Earlier local QA passed except for the documented in-app-browser fullscreen limitation, which remains part of online verification.
+Approved website and pig follow-up are integrated into remote `main`; all website development branches are retained. No force push, destructive reset or unrelated promotional-source publication was used.
 
 Updated: 2026-11-13. Latest task: `codex/website-launch`; integration target: remote `main`.
 

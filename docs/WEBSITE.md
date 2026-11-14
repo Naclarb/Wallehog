@@ -16,9 +16,25 @@ The buildless product introduction site lives in `website/`: Simplified Chinese 
 
 Run `python -m http.server 4173 --bind 127.0.0.1 --directory website` from the repository root, then open `http://127.0.0.1:4173/`. No dependency installation or build is needed.
 
-Task branch: `codex/product-website`; integration target: `main`. Work began at remote `main` (`9b41625`) in an isolated worktree; the original local `main` had seven unpublished commits, including separate film work. Do not incorporate or publish unrelated work. The CEO has explicitly approved safe integration, GitHub Actions Pages setup, deployment and public HTTPS acceptance. `codex/website-launch` starts from confirmed remote `main` and fast-forwards the approved website and pig interaction only. The original local `main` and its seven unpublished commits remain untouched; none of those commits is an ancestor of the website delivery. Launch is in progress; online results will be recorded after verification.
+Task branch: `codex/product-website`; integration target: `main`. Work began at remote `main` (`9b41625`) in an isolated worktree; the original local `main` had seven unpublished commits, including separate film work. Do not incorporate or publish unrelated work. The CEO has explicitly approved safe integration, GitHub Actions Pages setup, deployment and public HTTPS acceptance. `codex/website-launch` starts from confirmed remote `main` and fast-forwards the approved website and pig interaction only. The original local `main` and its seven unpublished commits remain untouched; none of those commits is an ancestor of the website delivery. The controlled launch and public HTTPS acceptance are complete. See the live deployment record below.
 
-After approval and safe integration, choose **GitHub Actions** in repository Settings → Pages. The existing `.github/workflows/website.yml` deploys only `website/` from `main` and supports manual dispatch on `main`. Verify the deployment and both language URLs before marking publication complete. The intended address is `https://naclarb.github.io/Wallehog/`; no domain purchase is required. Pages configuration/permissions and production have not been changed. The workflow has not run remotely.
+The repository uses GitHub Actions for Pages. `.github/workflows/website.yml` deploys only `website/` from `main`; no domain was purchased and the Android release workflow was not triggered.
+
+## Live deployment and HTTPS acceptance
+
+Published 2026-11-13: [Chinese](https://naclarb.github.io/Wallehog/) · [English](https://naclarb.github.io/Wallehog/en/).
+
+Deployed commit: `98e1d9341586d8ee10961c79ca81f7f7bb412cca`. [Website workflow run 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768) completed successfully, including configuration, website-only artifact upload and Pages deployment. Later documentation-only commits do not change this deployed website payload.
+
+- Both public HTML responses and 14 linked resources (including CSS, both scripts, PNGs, font, captions and MP4) returned 200 and matched the committed bytes. MP4 byte-range request returned 206 with the expected total size. Windows working-copy CRLF conversion was excluded by comparing against Git blobs.
+- Both official Release APK URLs were taken from the public pages and downloaded completely again: ARM64 24,142,018 bytes, only `arm64-v8a`; Universal 59,770,418 bytes, three ABIs. Both retain `1.0.0+1000` and exactly match the previously pinned-signature-verified SHA-256 digests in STATUS. No APK was modified or installed.
+- Public-page browser checks passed: Chinese/English switching, hero/header download anchors and separate ARM64/Universal links, navigation/back, all 10 FAQ items, the pig click hop, and mobile widths 320/360/390/430 plus desktop 1280/1440. No horizontal overflow or console warnings/errors were observed.
+- Public HTTPS video started manually, paused/resumed and played to 42.005s with no media error. Standalone Microsoft Edge opened the same public site, entered native video fullscreen, continued to the end and exited normally. This resolves the previous standalone-fullscreen verification gap; the Codex embedded viewer's own fullscreen limitation remains host-specific.
+- Safety audit: 28 scoped paths and 62 unique new/history blobs scanned without a high-confidence secret or private-user-path finding. The approved film checksum matches. None of the seven unrelated local-main commits was included. Pattern scanning is bounded, not proof of the absence of every possible secret.
+
+Local evidence remains ignored in `.buildlog/website/online/`: HTTP/hash, APK, browser, navigation and layout JSON; `zh-desktop.png`, `en-desktop.png` and `edge-fullscreen.png`. The original local `main` and its seven unpublished commits remain unchanged and need separate later reconciliation; remote `main` contains only the approved website delivery. Website branches are retained.
+
+Remaining coverage: physical Android/iOS touch, Safari, TalkBack/VoiceOver and real low-end/mobile-network performance have not been certified. Core public download and video functions passed; no unresolved core site failure was found.
 
 ## Asset provenance
 
@@ -45,7 +61,7 @@ Browser checks passed in both languages: click/Enter/Space, five consecutive act
 | PASS | All 10 bilingual FAQ items open/close; language switching, feature/download/video anchors, back/forward and returning from the actual GitHub external link work. All seven unique external links return HTTP 200. The existing multiple-wish/vertical-switch sentence is retained. |
 | PASS | Keyboard interaction and visible focus, semantic heading/language/alt text, bilingual video text tracks and readable description are present. Reduced-motion mode disables smooth scrolling/transitions. With JavaScript disabled, native video controls, content and download links remain available. |
 | PASS, bounded | Cache-disabled local mobile first load: approximately 1.73 MB encoded resources observed, no eager 7.16 MB movie request, no network or script errors. Below-fold images load lazily. A 1.6 Mb/s / 150ms simulated-network smoke check loaded the hero resources without observed failures. This is not a calibrated device benchmark or a Web Vitals score; request-start correlation was unavailable for duration reporting. |
-| FAIL / blocked validation | The native fullscreen action did not enter fullscreen in the available Codex in-app browser. Fullscreen is **not signed off**; verify with standalone desktop Chrome/Edge and physical Android Chrome. |
+| Historical host limitation | The Codex in-app browser did not enter native fullscreen. The public site subsequently passed standalone Edge fullscreen/exit/end playback; physical mobile coverage remains separate. |
 
 ### Issues fixed and retested
 
@@ -54,8 +70,8 @@ Browser checks passed in both languages: click/Enter/Space, five consecutive act
 
 ### Still requiring manual verification
 
-- Standalone-browser and physical-phone fullscreen, browser-owned touch controls, speaker/headphone experience, rotation and real touch behavior.
+- Physical-phone fullscreen, browser-owned touch controls, speaker/headphone experience, rotation and real touch behavior; standalone Edge fullscreen has passed.
 - Android Chrome / iOS Safari / desktop-browser coverage, TalkBack/VoiceOver and real slow-device/network Web Vitals. Browser-size simulation does not replace these checks.
-- After final approval and deployment: public HTTPS, project-subpath URLs, cache/range/content-type behavior and an online download/playback smoke check. Production has not been changed to obtain these results.
+- Future changes should repeat public HTTPS/subpath, download and playback smoke checks; the initial controlled launch has passed those checks.
 
-Evidence stays in ignored `.buildlog/website/final-qa/`: APK verification, layout matrix, navigation, external links, contrast and resource JSON; before/after poster screenshots. Downloaded APKs remain local. `node --check website/film.js`, source/asset checks and `git diff --check` passed. No App code, package, data or device installation changed. The CEO has authorized controlled launch; continue with public HTTPS acceptance and report any failures.
+Evidence stays in ignored `.buildlog/website/final-qa/`: APK verification, layout matrix, navigation, external links, contrast and resource JSON; before/after poster screenshots. Downloaded APKs remain local. `node --check website/film.js`, source/asset checks and `git diff --check` passed. No App code, package, data or device installation changed. The authorized controlled launch and public HTTPS acceptance are complete; retain the stated manual-coverage limits.

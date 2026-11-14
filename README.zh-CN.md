@@ -6,6 +6,8 @@
 
 **1.0 正式版 · Android APK。** 在**帮助 → 语言**中选择简体中文或英文。
 
+[产品官网](https://naclarb.github.io/Wallehog/) · [English website](https://naclarb.github.io/Wallehog/en/)
+
 ## 功能
 
 - 快速金额录入，支持四则运算、可选备注和日期，以及记录编辑、删除和改绑。

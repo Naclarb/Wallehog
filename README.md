@@ -6,6 +6,8 @@ An offline Android companion for mindful spending choices. Tap **+ → enter an 
 
 **Version 1.0 · Android APK.** Choose Simplified Chinese or English in **Help → Language**.
 
+[Product website](https://naclarb.github.io/Wallehog/) · [English website](https://naclarb.github.io/Wallehog/en/)
+
 ## Features
 
 - Quick amount entry with arithmetic, optional notes and dates; edit, delete and rebind records.
