@@ -2,7 +2,7 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Website (2026-11-13): bilingual product introduction implemented on `codex/product-website`, based on remote `main` (`9b41625`), integration target `main`. Local phone/desktop browser checks, language navigation, FAQ, local assets and official download links passed. [Website delivery](WEBSITE.md) records the Pages workflow and verification. Integration/publication are pending because the original local `main` includes seven unpublished commits with motion work awaiting review. No app or device changes.
+Website (2026-11-13): bilingual product introduction implemented on `codex/product-website`, based on remote `main` (`9b41625`), integration target `main`. Local phone/desktop browser checks, language navigation, FAQ, local assets and official download links passed. Review corrections fix the calculator preview backspace glyph and remove its caption in both languages; screenshot rendering passed (1 test). Design review is ongoing. [Website delivery](WEBSITE.md) records the Pages workflow and verification. Integration/publication are pending because the original local `main` includes seven unpublished commits with motion work awaiting review. No app or device changes.
 
 Updated: 2026-11-13. Latest task: `codex/product-website`; integration target: `main` (pending).
 

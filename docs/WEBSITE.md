@@ -22,4 +22,6 @@ Once integration is unblocked, merge the website branch into `main` while preser
 - No JavaScript, analytics, cookies, remote font requests or user-data forms were added. Website copy distinguishes app privacy from GitHub hosting IP logs and explains that savings are self-reported and backups are unencrypted.
 - `git diff --check` is required before commit. Website-only work does not require Flutter analysis, an APK build or physical-device installation. Browser captures stay in ignored `.buildlog/website/`.
 
+- Review correction: regenerated the calculator preview with a local symbol-font fallback so the backspace glyph renders correctly; removed the screenshot caption from both languages. The screenshot harness passed (1 test); no runtime code or font files were added.
+
 The Pages workflow has not run remotely yet. Public deployment and integration remain pending; local preview is not proof of publication.
