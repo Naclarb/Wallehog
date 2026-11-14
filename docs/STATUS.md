@@ -2,7 +2,7 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Website (2026-11-13): CEO conditionally accepted the desktop direction. The first review revision on `codex/product-website` preserves the layout and adds the existing App-derived pig beside the phone, clearer savings/wish copy, a manual-play entrance to the unchanged existing 42-second final movie, and multiple-wish switching copy. Download, media, navigation, bilingual FAQ/keyboard, computed text contrast and responsive checks passed within the scope recorded in [website delivery](WEBSITE.md). Desktop hero, exact 390px mobile full-page and playing-video screenshots are ready for second-round review. **Await CEO review; no push, integration or deployment.** Integration target remains `main`; unrelated unpublished film work is preserved. No App/device changes.
+Website (2026-11-13): CEO accepted mobile visuals and locked desktop/mobile layouts. Prelaunch QA on `codex/product-website` verifies complete official APK downloads (version/ABI/checksum/signatures), eight bilingual layout widths, manual video playback, links/navigation/back behavior and basic accessibility/loading. Fixed initial poster-control shading and small mobile support text/touch targets. Native fullscreen did not enter in the available in-app browser and still requires standalone/physical-browser verification. See [QA results and manual checks](WEBSITE.md). **Await final CEO launch approval; no push, integration or deployment.** Target remains `main`; unrelated unpublished work and the ordinary App/device are preserved.
 
 Updated: 2026-11-13. Latest task: `codex/product-website`; integration target: `main` (pending).
 

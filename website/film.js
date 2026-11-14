@@ -3,9 +3,14 @@ const film = document.getElementById('product-film');
 const playButton = document.querySelector('.play-film');
 const status = document.getElementById('film-status');
 if (film && playButton && status) {
+  // Keep the poster clear; native controls remain the no-JS fallback.
+  film.controls = false;
+  film.tabIndex = -1;
   playButton.hidden = false;
   playButton.addEventListener('click', async () => {
     try {
+      film.controls = true;
+      film.tabIndex = 0;
       await film.play();
       film.focus({ preventScroll: true });
     } catch {

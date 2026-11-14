@@ -140,3 +140,10 @@ button:focus-visible,video:focus-visible{outline:3px solid #9b365c;outline-offse
 
 .film-player:focus-within{outline:3px solid #9b365c;outline-offset:5px}
 @media(max-width:620px){.download h2{font-size:clamp(24px,6.7vw,28px)}}
+
+/* Final QA: readable supporting text and touch targets; locked composition retained. */
+@media(max-width:620px){
+.fine,.caption,footer,.film-status,.film-description summary,.film-description p{font-size:14px}
+.brand,.lang,.text-link,.film-file,.download .fine a,footer a{min-height:44px;display:inline-flex;align-items:center}
+.faq summary,.film-description summary{min-height:44px;padding:7px 0}
+}
