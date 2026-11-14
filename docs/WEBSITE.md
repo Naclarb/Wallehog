@@ -6,7 +6,7 @@ The buildless product introduction site lives in `website/`: Simplified Chinese 
 
 ## CEO review
 
-2026-11-13: the CEO formally accepted the 390px mobile visuals and locked both desktop and mobile layouts. Prelaunch QA is complete within the scope below. **Final launch approval remains pending.** The brand, character, headline and overall structure are retained.
+2026-11-13: the CEO formally accepted the 390px mobile visuals and locked both desktop and mobile layouts. Prelaunch QA is complete within the scope below. **The CEO has now approved controlled production launch.** The brand, character, headline and overall structure are retained.
 
 - Hero: keep the original headline, explain manually recorded savings / wish progress / pig encouragement, and display the existing same-source character beside the phone. The existing character art is retained; the user-requested click hop is described below.
 - Film: clear 42-second hero link, existing poster, manual play button and native controls. No autoplay. Bilingual text tracks and a readable description support access to the Chinese film; The film script handles play/focus/status. Native controls and the direct file link remain available independently.
@@ -16,7 +16,7 @@ The buildless product introduction site lives in `website/`: Simplified Chinese 
 
 Run `python -m http.server 4173 --bind 127.0.0.1 --directory website` from the repository root, then open `http://127.0.0.1:4173/`. No dependency installation or build is needed.
 
-Task branch: `codex/product-website`; integration target: `main`. Work began at remote `main` (`9b41625`) in an isolated worktree; the original local `main` had seven unpublished commits, including separate film work. Do not incorporate or publish unrelated work. The CEO requires stopping after QA for final launch approval: **no push, merge or production deployment for this revision**.
+Task branch: `codex/product-website`; integration target: `main`. Work began at remote `main` (`9b41625`) in an isolated worktree; the original local `main` had seven unpublished commits, including separate film work. Do not incorporate or publish unrelated work. The CEO has explicitly approved safe integration, GitHub Actions Pages setup, deployment and public HTTPS acceptance. `codex/website-launch` starts from confirmed remote `main` and fast-forwards the approved website and pig interaction only. The original local `main` and its seven unpublished commits remain untouched; none of those commits is an ancestor of the website delivery. Launch is in progress; online results will be recorded after verification.
 
 After approval and safe integration, choose **GitHub Actions** in repository Settings → Pages. The existing `.github/workflows/website.yml` deploys only `website/` from `main` and supports manual dispatch on `main`. Verify the deployment and both language URLs before marking publication complete. The intended address is `https://naclarb.github.io/Wallehog/`; no domain purchase is required. Pages configuration/permissions and production have not been changed. The workflow has not run remotely.
 
@@ -28,7 +28,7 @@ After approval and safe integration, choose **GitHub Actions** in repository Set
 
 ## Hero interaction follow-up
 
-User requested the existing homepage pig to hop when tapped, like the App. Source commit `ad78f6e` on `codex/website-pig-bounce` targets `codex/product-website`; integration is pending the website’s final acceptance, then the website still targets `main`. No push or deployment.
+User requested the existing homepage pig to hop when tapped, like the App. Source commit `ad78f6e` on `codex/website-pig-bounce` targets `codex/product-website`; the approved follow-up is now fast-forward integrated into the website delivery, whose final target is remote `main`.
 
 The character artwork and positioning are unchanged. A labelled native button covers the visible pig, with keyboard focus and Enter/Space activation. Native Web Animations provide a single 420ms, 10px sine-shaped hop, restarting on repeat clicks without stacking. Reduced-motion mode skips movement and cancels an active hop. Without JavaScript the static artwork remains, without a dead button in the tab order. No audio, data writes or dependencies were added.
 
@@ -58,4 +58,4 @@ Browser checks passed in both languages: click/Enter/Space, five consecutive act
 - Android Chrome / iOS Safari / desktop-browser coverage, TalkBack/VoiceOver and real slow-device/network Web Vitals. Browser-size simulation does not replace these checks.
 - After final approval and deployment: public HTTPS, project-subpath URLs, cache/range/content-type behavior and an online download/playback smoke check. Production has not been changed to obtain these results.
 
-Evidence stays in ignored `.buildlog/website/final-qa/`: APK verification, layout matrix, navigation, external links, contrast and resource JSON; before/after poster screenshots. Downloaded APKs remain local. `node --check website/film.js`, source/asset checks and `git diff --check` passed. No App code, package, data or device installation changed. **Stop for CEO final launch approval.**
+Evidence stays in ignored `.buildlog/website/final-qa/`: APK verification, layout matrix, navigation, external links, contrast and resource JSON; before/after poster screenshots. Downloaded APKs remain local. `node --check website/film.js`, source/asset checks and `git diff --check` passed. No App code, package, data or device installation changed. The CEO has authorized controlled launch; continue with public HTTPS acceptance and report any failures.
