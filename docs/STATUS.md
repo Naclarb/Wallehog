@@ -8,7 +8,9 @@ Website is live (2026-11-13): [Chinese](https://naclarb.github.io/Wallehog/) / [
 
 Approved website and pig follow-up are integrated into remote `main`; all website development branches are retained. No force push, destructive reset or unrelated promotional-source publication was used.
 
-Updated: 2026-11-14. Latest task: `codex/website-growth`; integrated into remote `main`.
+English-page video follow-up: owner-requested English film, matching poster and captions deployed as `74ffc39`; [Pages run 43587104588](https://github.com/Naclarb/Wallehog/actions/runs/43587104588) succeeded. Public full playback, pause/resume and asset byte checks passed. Chinese page/film and App/APKs remain unchanged. See [website evidence](WEBSITE.md).
+
+Updated: 2026-11-14. Latest task: `codex/website-english-video`; integrated into remote `main`.
 
 The approved MVP is implemented: precise amount entry, edit/delete/rebind, multiple wishes, first-wish adoption, backups, recovery, pig feedback/sound, language switching and the 2 × 2 Android widget. Unapproved animation proposals and deferred Figma synchronization are outside the 1.0 runtime scope.
 

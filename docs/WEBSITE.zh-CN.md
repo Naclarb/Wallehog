@@ -10,6 +10,8 @@
 
 来源：现有 `marketing/launch-mg-v1/out/english/Wallehog_1.0_English_1080p.mp4`，逐字节复制，7,351,823 字节；SHA-256 为 `d82839b03cffca35a90a602f19740e619afa988e0606b72343f8277c7b2e90b7`。现有导出 QA 记录为 H.264 1920×1080／30fps、42.005 秒、AAC 立体声。负责人本次官网请求授权该用途；较早导出清单的待审／待发布状态属于历史记录。共用配乐、音效及素材许可不变。
 
+验证交付：源提交 `74ffc399d31ae560c9889cf7fa4d4b2c781b5be8` 已快进推送到远端 `main`；[Pages 工作流 43587104588](https://github.com/Naclarb/Wallehog/actions/runs/43587104588) 成功。本地和公开 HTTPS 均完整播放至 42.005 秒，暂停／继续正常，未观察到媒体或控制台错误。英文页 320／390／430／1440px 无水平溢出。两个公开 HTML 和四项新素材均与提交字节一致，包括原英文 MP4 哈希。未添加自动播放。本轮未重复原生全屏和实体设备听音。证据忽略保存在 `.buildlog/website/english-film/`，包括 `online-poster.jpg`、`online-playing.jpg`、`online-assets.json` 和 `workflow.json`。官网继续处于维护模式。
+
 ## 发布后增长修订
 
 CEO 于 2026-11-14 正式批准本轮修订与受控部署。分支 `codex/website-growth` 从重新获取的远端 `main`（`31d0186`）开始；批准提交 `ad036df3239d2cf2f54a285bebb442ff630698f9` 已快进集成并推送到远端 `main`，没有冲突或强制推送。仅纳入审核过的网站文件和成对官网文档；原本地 main 及七个无关提交保持不动。
