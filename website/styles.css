@@ -154,3 +154,19 @@ button:focus-visible,video:focus-visible{outline:3px solid #9b365c;outline-offse
 .hero-pig img{width:100%;height:auto;pointer-events:none}
 .pig-touch:focus-visible{outline:3px solid #9b365c;outline-offset:4px}
 .hero-pig:active img{filter:brightness(.97)}
+
+/* Focused postlaunch copy, install help and external feedback. */
+.positioning{display:block;color:#342b32;font-size:21px;line-height:1.5;font-weight:800;margin-bottom:10px}
+.installation{margin-top:27px;border-top:1px solid #d4b4b8;padding-top:23px}
+.installation h3{font-size:17px}
+.installation ol{padding-left:23px;margin:14px 0 0;color:#57464f;font-size:15px}
+.installation li+li{margin-top:8px}
+.download .installation .fine{margin:14px 0 0}
+.download-visual{display:flex;flex-direction:column;align-items:center;gap:25px;width:180px}
+.qr-link{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-size:12px;line-height:1.6;color:#57464f}
+.download .site-qr{width:148px;height:148px;border-radius:10px;border:8px solid white;background:white}
+.feedback{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:70px;padding:0 0 80px}
+.feedback h2{font-size:clamp(27px,3vw,35px)}
+.feedback p{margin-top:18px;max-width:520px;font-size:16px}
+.feedback .fine{font-size:13px}
+@media(max-width:620px){.positioning{font-size:19px}.download-visual{display:none}.feedback{grid-template-columns:1fr;gap:24px;padding-bottom:60px}.feedback h2{font-size:27px}.feedback .fine{font-size:14px}.feedback .fine a{display:inline-flex;align-items:center;min-height:44px}.installation ol{font-size:15px}}

@@ -4,6 +4,25 @@
 
 The buildless product introduction site lives in `website/`: Simplified Chinese at `/` and English at `/en/`. It provides Android downloads, not a browser version of the app. No App source, device records, database or installation is changed.
 
+## Postlaunch growth revision (local review)
+
+Branch `codex/website-growth` starts at remote `main` (`31d0186`) and targets remote `main` after CEO review. Authorized scope is `website/` and necessary paired website documents. The live site remains unchanged until fresh deployment approval.
+
+The revision emphasizes the approved savings-only positioning and adds three concise Android installation steps. Static desktop QR codes link to the corresponding official language page, never an APK mirror. The approved character, headline, layout, film, App and APKs are unchanged. After CEO acceptance and delivery, the website moves into maintenance mode.
+
+The owner-authorized public feedback form is [Wallehog feedback](https://tally.so/r/7XL0ja), managed in the owner’s Tally workspace. Its bilingual questions cover installation / first-record progress, the biggest obstacle (both required), and optional suggestions. It has no name, email, financial-data or upload field; no respondent login or password is required. Save-for-later is disabled; no tracking or forwarding integration was connected. Feedback goes to Tally, as disclosed beside the link and in the privacy FAQ; no automatic deletion or absolute anonymity is promised. Manage retained responses manually in Tally.
+
+### Local QA — 2026-11-14
+
+- **PASS:** Chinese and English at content widths 320, 390, 430 and 1440px have no horizontal document overflow. Hero, installation and feedback copy were checked; mobile QR codes are hidden. New installation body text is 15px, feedback body 16px and mobile auxiliary text 14px. Download / feedback controls are at least 44px high on mobile. Added text contrast is at least 4.53:1; keyboard focus is visible.
+- **PASS:** both QR codes decoded from browser-rendered desktop screenshots to the official Chinese / English website. Both unchanged official APK links returned HTTP 206, ZIP signatures and expected total lengths (24,142,018 / 59,770,418 bytes). Version / architecture / full hash verification remains the preceding launch evidence; this revision did not redownload the complete APKs or reinstall the App.
+- **PASS:** public Tally URL responds 200 without an authentication cookie. Actual website feedback clicks opened the correct form in a new tab. Two required-choice validations and a successful synthetic submission were observed, followed by its persisted completed response in the owner dashboard. Exclude the one response marked `QA_TEST_DO_NOT_COUNT_20261114` from real-user analysis; it was retained, not silently deleted.
+- **PASS:** static download and feedback links remain visible with JavaScript disabled. Both language links, browser back and all ten FAQ disclosures work. Pig click / keyboard activation retained its hop (observed negative image translation). The unchanged film played manually, paused / resumed and reached 42.005s without error; no console warnings / errors were observed. Film checksum remains the asset-provenance value below. Local linked resources exist and both scripts pass syntax checks.
+- **FAIL:** no unresolved functional failure found in the tested scope.
+- **MANUAL / NOT CERTIFIED:** physical Android installation and touch, Safari / assistive technology, real slow-network performance and native fullscreen were not repeated in this revision. Previous public Edge fullscreen acceptance is recorded below. The Tally form is bilingual in one page; service validation messages currently use Chinese. New production HTTPS acceptance is pending deployment approval.
+
+Evidence is ignored under `.buildlog/website/growth-review/`: `zh-1440-hero.png`, `zh-390-hero.png`, `en-1440-hero.png`, `en-390-hero.png`, language desktop download screenshots, `zh-mobile-download.png`, `zh-mobile-feedback.png`, `form-success.png`, layout / contrast / HTTP results. The change list is the two HTML pages, stylesheet, two static QR SVGs and this bilingual document pair. No new runtime script, SDK, private file, App source or deployment workflow is included. Local review only: do not push, merge to live main or deploy before the CEO approves this revision.
+
 ## CEO review
 
 2026-11-13: the CEO formally accepted the 390px mobile visuals and locked both desktop and mobile layouts. Prelaunch QA is complete within the scope below. **The CEO has now approved controlled production launch.** The brand, character, headline and overall structure are retained.
