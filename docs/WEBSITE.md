@@ -4,6 +4,12 @@
 
 The buildless product introduction site lives in `website/`: Simplified Chinese at `/` and English at `/en/`. It provides Android downloads, not a browser version of the app. No App source, device records, database or installation is changed.
 
+## English video follow-up — 2026-11-14
+
+The owner requested the existing English film on the English website. Branch `codex/website-english-video` starts from freshly fetched remote `main` (`334bc47`) and targets remote `main`. Only the English page uses `assets/wallehog-1.0-en.mp4` and the matching English S02 poster; Chinese HTML, film and captions remain unchanged. The English description, status and separate bilingual caption tracks now match the dollar-denominated fictional fixture. No voice-over, re-encoding or film-source integration was added.
+
+Source: existing `marketing/launch-mg-v1/out/english/Wallehog_1.0_English_1080p.mp4`, copied byte for byte, 7,351,823 bytes; SHA-256 `d82839b03cffca35a90a602f19740e619afa988e0606b72343f8277c7b2e90b7`. Existing export QA records H.264 1920×1080 / 30fps, 42.005s with AAC stereo. The owner's current website request authorizes this use; earlier export manifests marked review/publication pending are historical. Shared music/effects and asset licenses are unchanged.
+
 ## Postlaunch growth revision
 
 CEO approved the revision and controlled deployment on 2026-11-14. Branch `codex/website-growth` started at freshly fetched remote `main` (`31d0186`); approved commit `ad036df3239d2cf2f54a285bebb442ff630698f9` was fast-forward integrated into remote `main` and pushed without conflicts or force. Only the reviewed website files and paired website documents were included; the original local main and its seven unrelated commits remain untouched.
