@@ -147,3 +147,10 @@ button:focus-visible,video:focus-visible{outline:3px solid #9b365c;outline-offse
 .brand,.lang,.text-link,.film-file,.download .fine a,footer a{min-height:44px;display:inline-flex;align-items:center}
 .faq summary,.film-description summary{min-height:44px;padding:7px 0}
 }
+
+/* Keep the existing character position and animate only its image. */
+.hero-pig{line-height:0}
+.pig-touch{position:absolute;left:18%;top:18%;width:64%;height:72%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;touch-action:manipulation;border-radius:42%}
+.hero-pig img{width:100%;height:auto;pointer-events:none}
+.pig-touch:focus-visible{outline:3px solid #9b365c;outline-offset:4px}
+.hero-pig:active img{filter:brightness(.97)}
