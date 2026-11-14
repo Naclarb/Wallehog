@@ -8,6 +8,7 @@
 - Nunito：The Nunito Project Authors，采用 SIL Open Font License 1.1，见 `assets/fonts/OFL-Nunito.txt`。
 - 投币和庆祝音效：项目自制合成声音，不含外部录音。
 - 预览：主应用由 Flutter 渲染，Widget 使用原生 Android 宿主，均采用虚构数据，不含用户记录。中文预览字形使用本地系统字体，不分发这些字体文件。
+- 官网角色：复用宣传工程中由当前 App Painter 导出的同源 `pig-rest.png`，没有重新生成角色。官网原样使用现有 42 秒 `Wallehog_1.0_Final_1080p.mp4`、其中原创合成配乐与音效，以及现有影片静帧作为封面。影片内的 GitHub 标志来自 Primer Octicons，MIT，Copyright (c) 2026 GitHub Inc.；见官网 `assets/LICENSE-Octicons.txt`。
 
 Flutter 与 Dart 依赖各自保留其许可，项目 MIT 许可不替代第三方许可。锁定版本见 `pubspec.lock`，`THIRD_PARTY_NOTICES.txt` 收集已解析依赖源码中的许可文本（包括开发依赖）；Flutter 构建另生成自身许可包。
 

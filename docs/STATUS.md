@@ -2,7 +2,7 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
-Website (2026-11-13): bilingual product introduction implemented on `codex/product-website`, based on remote `main` (`9b41625`), integration target `main`. Local phone/desktop browser checks, language navigation, FAQ, local assets and official download links passed. Review corrections fix the calculator preview backspace glyph and remove its caption in both languages; screenshot rendering passed (1 test). Design review is ongoing. [Website delivery](WEBSITE.md) records the Pages workflow and verification. Integration/publication are pending because the original local `main` includes seven unpublished commits with motion work awaiting review. No app or device changes.
+Website (2026-11-13): CEO conditionally accepted the desktop direction. The first review revision on `codex/product-website` preserves the layout and adds the existing App-derived pig beside the phone, clearer savings/wish copy, a manual-play entrance to the unchanged existing 42-second final movie, and multiple-wish switching copy. Download, media, navigation, bilingual FAQ/keyboard, computed text contrast and responsive checks passed within the scope recorded in [website delivery](WEBSITE.md). Desktop hero, exact 390px mobile full-page and playing-video screenshots are ready for second-round review. **Await CEO review; no push, integration or deployment.** Integration target remains `main`; unrelated unpublished film work is preserved. No App/device changes.
 
 Updated: 2026-11-13. Latest task: `codex/product-website`; integration target: `main` (pending).
 

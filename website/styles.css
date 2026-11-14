@@ -115,3 +115,28 @@ footer{flex-direction:column}
 .button{transition:none}
 .button:hover{transform:none}
 }
+
+/* Review round 1: preserve the existing palette, type and page composition. */
+.hero-pig{position:absolute;z-index:2;left:-24px;bottom:10px;width:242px;pointer-events:none}
+.hero-art .label-bottom{bottom:45px;right:-5px}
+.film-link{color:#93415e}
+.film{display:grid;grid-template-columns:1fr 1.55fr;gap:56px;align-items:center;padding-top:65px}
+.film-copy h2{font-size:36px}
+.film-copy>p:not(.eyebrow){margin-top:18px;font-size:16px}
+.film-copy .eyebrow{margin-bottom:18px}
+.film-description{padding:16px 0 0;border:0}
+.film-description summary{font-size:13px;color:#6e5e67}
+.film-description p{font-size:13px}
+.film-player{position:relative;border-radius:24px;overflow:hidden;background:#f6e9e1;border:1px solid #e8d8d3}
+.film-player video{width:100%;height:auto;aspect-ratio:16/9;display:block}
+.play-film{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #342b32;border-radius:50px;background:#342b32;color:#fffaf7;padding:15px 23px;white-space:nowrap;font:800 14px Nunito,"Microsoft YaHei",system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 25px #342b3230}
+.play-film[hidden]{display:none}
+.play-film span{margin-right:8px}
+button:focus-visible,video:focus-visible{outline:3px solid #9b365c;outline-offset:5px}
+.film-status{margin-top:14px;min-height:21px}
+.film-file{color:#6e5e67}
+@media(max-width:850px){.hero-pig{left:-25px;bottom:0;width:210px}.hero-art .label-bottom{bottom:8px;right:0}.film{gap:30px;grid-template-columns:1fr 1.35fr}.film-copy h2{font-size:30px}}
+@media(max-width:620px){.hero-pig{left:-25px;bottom:-14px;width:210px}.hero-art .label-bottom{bottom:8px;right:0}.film{grid-template-columns:1fr;padding-top:50px;gap:24px}.film-player{border-radius:20px}.film-copy h2{font-size:30px}.film-status{font-size:12px}.hero .actions{gap:16px}}
+
+.film-player:focus-within{outline:3px solid #9b365c;outline-offset:5px}
+@media(max-width:620px){.download h2{font-size:clamp(24px,6.7vw,28px)}}
