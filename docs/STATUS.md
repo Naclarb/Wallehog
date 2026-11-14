@@ -4,7 +4,9 @@
 
 Website (2026-11-13): CEO accepted mobile visuals and locked desktop/mobile layouts. Prelaunch QA on `codex/product-website` verifies complete official APK downloads (version/ABI/checksum/signatures), eight bilingual layout widths, manual video playback, links/navigation/back behavior and basic accessibility/loading. Fixed initial poster-control shading and small mobile support text/touch targets. Native fullscreen did not enter in the available in-app browser and still requires standalone/physical-browser verification. See [QA results and manual checks](WEBSITE.md). **Await final CEO launch approval; no push, integration or deployment.** Target remains `main`; unrelated unpublished work and the ordinary App/device are preserved.
 
-Updated: 2026-11-13. Latest task: `codex/product-website`; integration target: `main` (pending).
+Homepage pig interaction: user-requested click/keyboard hop implemented in `ad78f6e` on `codex/website-pig-bounce`, target `codex/product-website`. Click, rapid retrigger, Enter/Space, reduced motion and phone/desktop bounds passed. Local preview is updated. Integration remains pending final website acceptance; no push/deployment. See [interaction and QA](WEBSITE.md).
+
+Updated: 2026-11-13. Latest task: `codex/website-pig-bounce`; integration target: `codex/product-website` (pending).
 
 The approved MVP is implemented: precise amount entry, edit/delete/rebind, multiple wishes, first-wish adoption, backups, recovery, pig feedback/sound, language switching and the 2 × 2 Android widget. Unapproved animation proposals and deferred Figma synchronization are outside the 1.0 runtime scope.
 

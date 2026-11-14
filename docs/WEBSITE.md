@@ -8,8 +8,8 @@ The buildless product introduction site lives in `website/`: Simplified Chinese 
 
 2026-11-13: the CEO formally accepted the 390px mobile visuals and locked both desktop and mobile layouts. Prelaunch QA is complete within the scope below. **Final launch approval remains pending.** The brand, character, headline and overall structure are retained.
 
-- Hero: keep the original headline, explain manually recorded savings / wish progress / pig encouragement, and display the existing same-source character beside the phone. No new character design or animation was generated.
-- Film: clear 42-second hero link, existing poster, manual play button and native controls. No autoplay. Bilingual text tracks and a readable description support access to the Chinese film; JavaScript only handles play/focus/status. Native controls and the direct file link remain available independently.
+- Hero: keep the original headline, explain manually recorded savings / wish progress / pig encouragement, and display the existing same-source character beside the phone. The existing character art is retained; the user-requested click hop is described below.
+- Film: clear 42-second hero link, existing poster, manual play button and native controls. No autoplay. Bilingual text tracks and a readable description support access to the Chinese film; The film script handles play/focus/status. Native controls and the direct file link remain available independently.
 - Features: explicitly mention multiple wishes and vertical switching; keep the Android widget presentation. Earlier backspace-font correction and caption removal remain.
 
 ## Preview and publication
@@ -25,6 +25,14 @@ After approval and safe integration, choose **GitHub Actions** in repository Set
 - Hero pig: existing promotional `out/stills/pig-rest.png`, exported from the current App Painter identity. SHA-256 `c7933f8a509680b3c7b8b2a492d530ea7a90926009119a53c7116e9604505874`.
 - Movie: existing stage-four `Wallehog_1.0_Final_1080p.mp4`, copied byte for byte as `website/assets/wallehog-1.0.mp4`. 7,162,802 bytes; SHA-256 `47ce095e9ab3357b6526ba3b1e2cfb3eb2408b620667f76d52da0dc05a04d1c9`. 42.005s container, 42.000s H.264 picture, 1920 × 1080 / 30fps, AAC stereo. No second film, edit, re-encode or new audio was created. Its separate film approval/listening record is not changed by website testing.
 - Poster: existing final-film `stills/S02-1080p.png`. No reference images are distributed. Screenshots use fictional data. Fonts are served locally with their OFL notice; the existing embedded GitHub mark's MIT notice is included. See [credits](public/CREDITS.md).
+
+## Hero interaction follow-up
+
+User requested the existing homepage pig to hop when tapped, like the App. Source commit `ad78f6e` on `codex/website-pig-bounce` targets `codex/product-website`; integration is pending the website’s final acceptance, then the website still targets `main`. No push or deployment.
+
+The character artwork and positioning are unchanged. A labelled native button covers the visible pig, with keyboard focus and Enter/Space activation. Native Web Animations provide a single 420ms, 10px sine-shaped hop, restarting on repeat clicks without stacking. Reduced-motion mode skips movement and cancels an active hop. Without JavaScript the static artwork remains, without a dead button in the tab order. No audio, data writes or dependencies were added.
+
+Browser checks passed in both languages: click/Enter/Space, five consecutive activations, return to the resting transform, reduced-motion cancellation, and 320/390/1440px content-width layout and button bounds. JavaScript syntax, local asset links and diff checks passed. Existing fullscreen/manual QA limitations and the final launch gate remain unchanged.
 
 ## Prelaunch QA (2026-11-13)
 
