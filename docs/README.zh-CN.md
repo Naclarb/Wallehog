@@ -2,6 +2,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
+- [产品官网与 Pages 部署](WEBSITE.zh-CN.md)
 - [当前状态、验证与仓库审计](STATUS.zh-CN.md)
 - [产品意图](INTENT.zh-CN.md)
 - [Android Widget 使用与行为](HOME_WIDGET.zh-CN.md)

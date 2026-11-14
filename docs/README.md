@@ -2,6 +2,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
+- [Product website and Pages deployment](WEBSITE.md)
 - [Current status, validation and repository audit](STATUS.md)
 - [Product intent](INTENT.md)
 - [Android widget usage and behavior](HOME_WIDGET.md)

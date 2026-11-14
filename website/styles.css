@@ -1,0 +1,117 @@
+@font-face{font-family:Nunito;src:url("assets/Nunito.ttf") format("truetype");font-display:swap}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:28px}
+body{margin:0;background:#fffaf7;color:#342b32;font-family:Nunito,"Microsoft YaHei",system-ui,sans-serif;line-height:1.75}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid #9b365c;outline-offset:6px}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{line-height:1.23}
+h1{font-size:clamp(42px,5.7vw,76px);letter-spacing:-.045em;font-weight:800}
+h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.035em}
+h3{font-size:22px}
+p{color:#6e5e67}
+.wrap{width:min(1120px,calc(100% - 64px));margin:auto}
+.skip{position:absolute;left:16px;top:-80px;background:white;padding:10px;z-index:9}
+.skip:focus{top:12px}
+header{height:104px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;text-decoration:none;letter-spacing:-1px}
+.brand img{width:44px;height:44px;border-radius:13px}
+nav{display:flex;gap:27px;align-items:center;font-size:14px;font-weight:800}
+nav a{text-decoration:none}
+.lang{border:1px solid #ddcfcf;border-radius:30px;padding:5px 15px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:40px;padding:55px 0 90px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.15em;color:#a24966;margin-bottom:24px;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:#ab486c}
+.lead{font-size:18px;max-width:470px;margin:28px 0 30px}
+.actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#342b32;color:#fffaf7;border:1px solid #342b32;padding:14px 25px;border-radius:100px;font-weight:800;transition:transform .2s,background .2s}
+.button:hover{background:#5f3e50;transform:translateY(-2px)}
+.text-link{font-size:14px;font-weight:800}
+.fine{font-size:12px;line-height:1.7}
+.hero .fine{margin-top:17px}
+.hero-art{position:relative;min-height:610px;display:flex;justify-content:center;align-items:center}
+.halo{position:absolute;width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#f3cfcd 0%,#f7e4dc 53%,#fffaf7 71%)}
+.phone{position:relative;width:252px;padding:7px;border:1px solid #e0d2cf;border-radius:34px;background:#fff;box-shadow:0 30px 70px #684c5625;transform:rotate(5deg)}
+.phone img{border-radius:28px}
+.label{position:absolute;z-index:1;background:#fffdf9;border:1px solid #ead8d7;padding:13px 20px;border-radius:18px;box-shadow:0 12px 30px #684c5610;font-size:14px;font-weight:800}
+.label-top{top:58px;left:0;transform:rotate(-6deg)}
+.label-bottom{bottom:65px;right:0;transform:rotate(-5deg)}
+.label span{color:#ab486c}
+.principles{border-top:1px solid #e9ded9;border-bottom:1px solid #e9ded9;display:flex;justify-content:space-around;gap:20px;padding:21px 0;font-size:14px;font-weight:800;flex-wrap:wrap}
+.section{padding:104px 0}
+.section-head{max-width:600px;margin-bottom:45px}
+.section-head p{margin-top:20px;font-size:17px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.step{border-top:1px solid #d8c6c6;padding-top:21px}
+.number{display:block;color:#a24966;font-size:14px;margin-bottom:25px;font-weight:900}
+.step p{margin-top:14px;font-size:15px}
+.feature{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:90px;margin-top:90px}
+.feature-copy p{margin-top:22px;font-size:17px}
+.feature-copy .eyebrow{margin:0 0 20px}
+.image-panel{background:#f6e9e1;border-radius:40px;min-height:470px;display:flex;align-items:center;justify-content:center;padding:35px;position:relative}
+.entry-img{width:210px;border:6px solid #fff;border-radius:25px;box-shadow:0 12px 35px #684c5618}
+.widget-img{width:240px;filter:drop-shadow(0 16px 18px #684c5620)}
+.caption{font-size:12px;text-align:center;margin-top:15px}
+.privacy{display:grid;grid-template-columns:1fr 1fr;gap:80px;background:#efece3;border-radius:36px;padding:55px}
+.privacy p{margin-top:20px}
+.privacy ul{margin:0;padding-left:22px;color:#5e5956}
+.privacy li+li{margin-top:16px}
+.faq{max-width:800px;margin:auto}
+.faq h2{margin-bottom:35px}
+details{border-bottom:1px solid #e1d3d1;padding:22px 0}
+summary{cursor:pointer;font-size:17px;font-weight:800}
+details p{margin-top:15px;font-size:15px}
+.download{background:#f4d8d9;border-radius:40px;padding:60px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;position:relative}
+.download p{margin:20px 0 25px;max-width:540px}
+.download img{width:180px}
+.download .fine{margin-bottom:0}
+footer{border-top:1px solid #e9ded9;padding:30px 0 40px;display:flex;justify-content:space-between;gap:24px;font-size:12px;color:#6e5e67}
+footer div{display:flex;gap:20px;flex-wrap:wrap}
+footer a{text-decoration:none}
+.bottom-space{padding-bottom:90px}
+@media(max-width:850px){.wrap{width:calc(100% - 40px)}
+nav{gap:16px}
+.hero{gap:20px}
+.hero-art{min-height:520px}
+.phone{width:220px}
+.label{font-size:12px;padding:10px 13px}
+.label-top{top:24px}
+.label-bottom{bottom:26px}
+.feature{gap:40px}
+.privacy{gap:35px;padding:35px}
+.download{padding:40px}
+.download img{width:130px}
+}
+@media(max-width:620px){header{height:85px}
+.brand{font-size:22px}
+.brand img{width:36px;height:36px}
+nav .desktop{display:none}
+nav{gap:12px}
+.hero{grid-template-columns:1fr;padding:35px 0 45px;gap:30px}
+.hero-art{min-height:535px;max-width:370px;width:100%;margin:auto}
+.phone{width:226px}
+.label-top{top:25px;left:0}
+.label-bottom{bottom:30px;right:0}
+.lead{font-size:17px;margin:23px 0}
+.eyebrow{margin-bottom:20px}
+.principles{font-size:12px;gap:12px}
+.section{padding:65px 0}
+.steps{grid-template-columns:1fr;gap:30px}
+.number{margin-bottom:12px}
+.feature{grid-template-columns:1fr;gap:30px;margin-top:60px}
+.feature-copy{order:-1}
+.image-panel{min-height:370px;border-radius:28px;padding:25px}
+.entry-img{width:180px}
+.privacy{grid-template-columns:1fr;gap:25px;padding:30px;border-radius:28px}
+.download{grid-template-columns:1fr;padding:32px;border-radius:28px}
+.download img{display:none}
+.download .actions{gap:15px}
+.download .button{width:100%;font-size:14px}
+footer{flex-direction:column}
+.bottom-space{padding-bottom:60px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+.button{transition:none}
+.button:hover{transform:none}
+}
