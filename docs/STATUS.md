@@ -2,11 +2,13 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
+Website growth optimization is approved, deployed and accepted (2026-11-14). Deployed SHA `ad036df` passed [Pages run 43580989565](https://github.com/Naclarb/Wallehog/actions/runs/43580989565). Both public languages, resources, complete APK hashes, QR codes, unauthenticated Tally access, video, navigation and mobile layouts passed; see [final QA](WEBSITE.md). The QA-marked feedback is non-user data. The website enters maintenance mode; original local-main commits and App/APKs remain unchanged.
+
 Website is live (2026-11-13): [Chinese](https://naclarb.github.io/Wallehog/) / [English](https://naclarb.github.io/Wallehog/en/). CEO-authorized website commit `98e1d93` deployed successfully in [Pages run 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768). Public HTTPS pages and 14 resource hashes, complete official APK downloads, 42-second playback, standalone Edge native fullscreen/exit, bilingual navigation/FAQ, pig interaction and mobile layouts passed. No core online failure observed. Physical-phone/Safari/screen-reader/real-network coverage remains bounded; see [delivery evidence](WEBSITE.md). The seven unrelated local-main commits and original local main are preserved and excluded; App/APKs are unchanged.
 
 Approved website and pig follow-up are integrated into remote `main`; all website development branches are retained. No force push, destructive reset or unrelated promotional-source publication was used.
 
-Updated: 2026-11-13. Latest task: `codex/website-launch`; integration target: remote `main`.
+Updated: 2026-11-14. Latest task: `codex/website-growth`; integrated into remote `main`.
 
 The approved MVP is implemented: precise amount entry, edit/delete/rebind, multiple wishes, first-wish adoption, backups, recovery, pig feedback/sound, language switching and the 2 × 2 Android widget. Unapproved animation proposals and deferred Figma synchronization are outside the 1.0 runtime scope.
 

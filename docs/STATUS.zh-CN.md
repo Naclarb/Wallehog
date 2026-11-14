@@ -2,11 +2,13 @@
 
 [English](STATUS.md) · [简体中文](STATUS.zh-CN.md)
 
+官网增长优化已批准、部署并验收（2026-11-14）。部署 SHA `ad036df` 通过 [Pages 工作流 43580989565](https://github.com/Naclarb/Wallehog/actions/runs/43580989565)。公开双语页面、资源、完整 APK 哈希、二维码、未登录 Tally 访问、视频、导航及手机布局检查通过，见[最终 QA](WEBSITE.zh-CN.md)。QA 标记反馈属于非真实用户数据。官网进入维护模式；原本地 main 提交及 App／APK 均未改动。
+
 官网已上线（2026-11-13）：[中文](https://naclarb.github.io/Wallehog/)／[English](https://naclarb.github.io/Wallehog/en/)。CEO 授权的官网提交 `98e1d93` 已在 [Pages 工作流 43567567768](https://github.com/Naclarb/Wallehog/actions/runs/43567567768) 成功部署。公开 HTTPS 页面与 14 项资源校验、完整官方 APK 下载、42 秒播放、独立 Edge 原生全屏／退出、双语导航／FAQ、小猪互动和手机布局通过。未发现核心线上故障；实体手机／Safari／读屏／真实网络仍有覆盖限制，见[交付证据](WEBSITE.zh-CN.md)。原本地 main 的七个无关提交与原本地 main 已保留并排除，App／APK 不变。
 
 获批官网与小猪补充已集成至远端 `main`，保留官网各开发分支。未使用强制推送、破坏性重置或发布无关宣传源码。
 
-更新：2026-11-13。最新任务：`codex/website-launch`；集成目标：远端 `main`。
+更新：2026-11-14。最新任务：`codex/website-growth`；已集成到远端 `main`。
 
 已批准的 MVP 已实现：精确金额录入、编辑删除改绑、多心愿、首心愿接收、备份、恢复、小猪回应与音效、语言切换，以及 2 × 2 Android Widget。未批准的动画提案和暂缓的 Figma 同步不属于 1.0 运行功能范围。
 

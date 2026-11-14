@@ -4,11 +4,11 @@
 
 The buildless product introduction site lives in `website/`: Simplified Chinese at `/` and English at `/en/`. It provides Android downloads, not a browser version of the app. No App source, device records, database or installation is changed.
 
-## Postlaunch growth revision (local review)
+## Postlaunch growth revision
 
-Branch `codex/website-growth` starts at remote `main` (`31d0186`) and targets remote `main` after CEO review. Authorized scope is `website/` and necessary paired website documents. The live site remains unchanged until fresh deployment approval.
+CEO approved the revision and controlled deployment on 2026-11-14. Branch `codex/website-growth` started at freshly fetched remote `main` (`31d0186`); approved commit `ad036df3239d2cf2f54a285bebb442ff630698f9` was fast-forward integrated into remote `main` and pushed without conflicts or force. Only the reviewed website files and paired website documents were included; the original local main and its seven unrelated commits remain untouched.
 
-The revision emphasizes the approved savings-only positioning and adds three concise Android installation steps. Static desktop QR codes link to the corresponding official language page, never an APK mirror. The approved character, headline, layout, film, App and APKs are unchanged. After CEO acceptance and delivery, the website moves into maintenance mode.
+The revision emphasizes the approved savings-only positioning and adds three concise Android installation steps. Static desktop QR codes link to the corresponding official language page, never an APK mirror. The approved character, headline, layout, film, App and APKs are unchanged. The accepted website now enters maintenance mode.
 
 The owner-authorized public feedback form is [Wallehog feedback](https://tally.so/r/7XL0ja), managed in the owner’s Tally workspace. Its bilingual questions cover installation / first-record progress, the biggest obstacle (both required), and optional suggestions. It has no name, email, financial-data or upload field; no respondent login or password is required. Save-for-later is disabled; no tracking or forwarding integration was connected. Feedback goes to Tally, as disclosed beside the link and in the privacy FAQ; no automatic deletion or absolute anonymity is promised. Manage retained responses manually in Tally.
 
@@ -21,7 +21,19 @@ The owner-authorized public feedback form is [Wallehog feedback](https://tally.s
 - **FAIL:** no unresolved functional failure found in the tested scope.
 - **MANUAL / NOT CERTIFIED:** physical Android installation and touch, Safari / assistive technology, real slow-network performance and native fullscreen were not repeated in this revision. Previous public Edge fullscreen acceptance is recorded below. The Tally form is bilingual in one page; service validation messages currently use Chinese. New production HTTPS acceptance is pending deployment approval.
 
-Evidence is ignored under `.buildlog/website/growth-review/`: `zh-1440-hero.png`, `zh-390-hero.png`, `en-1440-hero.png`, `en-390-hero.png`, language desktop download screenshots, `zh-mobile-download.png`, `zh-mobile-feedback.png`, `form-success.png`, layout / contrast / HTTP results. The change list is the two HTML pages, stylesheet, two static QR SVGs and this bilingual document pair. No new runtime script, SDK, private file, App source or deployment workflow is included. Local review only: do not push, merge to live main or deploy before the CEO approves this revision.
+Evidence is ignored under `.buildlog/website/growth-review/`: `zh-1440-hero.png`, `zh-390-hero.png`, `en-1440-hero.png`, `en-390-hero.png`, language desktop download screenshots, `zh-mobile-download.png`, `zh-mobile-feedback.png`, `form-success.png`, layout / contrast / HTTP results. The change list is the two HTML pages, stylesheet, two static QR SVGs and this bilingual document pair. No new runtime script, SDK, private file, App source or deployment workflow is included. The CEO subsequently approved this revision; see the production acceptance record below.
+
+## Growth deployment and final acceptance — 2026-11-14
+
+[Pages workflow 43580989565](https://github.com/Naclarb/Wallehog/actions/runs/43580989565) completed successfully for deployed SHA `ad036df3239d2cf2f54a285bebb442ff630698f9`. The existing workflow still uploads only `website/`; App code, APKs, domain and workflow configuration were unchanged. Later documentation-only commits do not change the deployed payload.
+
+- **PASS:** both public HTTPS language pages and 16 resources, including the local font, matched approved Git blobs. Both official APKs were downloaded completely and matched the pinned ARM64 / Universal SHA-256 values recorded in STATUS; file sizes remain 24,142,018 / 59,770,418 bytes.
+- **PASS:** online QR codes decoded from browser screenshots to the respective official language pages. Feedback clicks opened the actual Tally URL; a request without login cookies returned 200 and the form questions. Both website languages explicitly disclose third-party Tally processing. The existing QA response remains labelled non-user data and excluded from user analysis; no real response was deleted or new test response added.
+- **PASS:** Chinese and English layout checks at 320 / 390 / 430 / 1440px found no horizontal overflow. Both language links, download anchors, browser back and all ten FAQ items worked. Pig hopping remained visible. Public video played manually, paused / resumed and reached 42.005s without error; no console warning / error was observed.
+- **FAIL:** no unresolved core failure. Command-line verification encountered a transient 403, TLS handshake failure and timeout; subsequent requests and byte/hash checks succeeded without bypassing TLS protections.
+- **MANUAL / unchanged limitations:** physical-phone installation/touch, Safari, assistive technology and real low-end / slow-network performance are not certified. Native fullscreen was not repeated; the prior public Edge verification remains below.
+
+Online evidence is ignored in `.buildlog/website/growth-online/`: `http.json`, `workflow.json`, layout results, `zh-desktop.jpg`, `en-desktop.jpg`, `zh-mobile.jpg`, bilingual download / feedback screenshots and video playback screenshot. Website growth optimization is closed and the site is in maintenance mode. Source branches remain available; the original local-main divergence is preserved for separate reconciliation.
 
 ## CEO review
 
